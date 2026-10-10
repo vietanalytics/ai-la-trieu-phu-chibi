@@ -1,0 +1,1487 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eaf6ff">
+</head>
+<body>
+<title>Ai là triệu phú Chibi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap&subset=vietnamese">
+<style>
+/* Layout: sticker-style cartoon world — sky map home, indigo spotlight stage for play.
+   Deliberately a single bright visual world (kids' game), colors set explicitly. */
+:root{
+  --sky:#8fd0f7; --sky-soft:#e4f4ff; --sky-deep:#2c78bd;
+  --lav:#c3b3f5; --lav-soft:#f1ecff; --lav-deep:#6a52c9;
+  --sun:#ffd451; --sun-deep:#f2a900;
+  --peach:#ffb894; --peach-soft:#fff0e7;
+  --mint:#8ee3c3; --mint-deep:#1f9e74;
+  --berry:#ef5a6f;
+  --ink:#2a2852; --ink-soft:#5b5986; --line:#2a2852;
+  --card:#ffffff; --page:#eaf6ff;
+  --stage1:#211b5c; --stage2:#3c2c8f;
+  --f-display:"Baloo 2","Nunito","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Nunito","Segoe UI",system-ui,sans-serif;
+  --r:20px; --sh:0 5px 0 var(--line);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--page);color:var(--ink)}
+body{font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:0 40px;min-height:100%;
+  background:
+   radial-gradient(circle at 12% 8%, #ffffff 0 40px, transparent 41px),
+   radial-gradient(circle at 88% 4%, #ffffff 0 30px, transparent 31px),
+   linear-gradient(180deg,var(--sky-soft),var(--page) 420px);
+}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;margin:0;text-wrap:balance;color:var(--ink)}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:3px solid var(--sky-deep);outline-offset:3px;border-radius:12px}
+.wrap{max-width:1180px;margin-inline:auto}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-16px;padding:10px 16px;background:rgba(234,246,255,.92);backdrop-filter:blur(8px);border-bottom:2.5px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;background:none;border:0;padding:0}
+.logo b{font-family:var(--f-display);font-weight:800;font-size:1.25rem;line-height:1}
+.logo b span{color:var(--lav-deep)}
+.nav{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.nbtn{border:2.5px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-weight:800;font-size:.9rem;display:inline-flex;align-items:center;gap:6px;box-shadow:0 3px 0 var(--line)}
+.nbtn[aria-pressed="true"],.nbtn.on{background:var(--sun)}
+.nbtn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.nbtn svg{width:18px;height:18px}
+
+/* ---------- generic ---------- */
+.btn{border:3px solid var(--line);border-radius:999px;padding:12px 22px;font-family:var(--f-display);font-weight:800;font-size:1.1rem;box-shadow:var(--sh);background:var(--sun);transition:transform .12s, box-shadow .12s;display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1.1}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 7px 0 var(--line)}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.btn:disabled{opacity:.45;box-shadow:0 3px 0 var(--line)}
+.btn.lav{background:var(--lav)} .btn.mint{background:var(--mint)} .btn.peach{background:var(--peach)} .btn.white{background:var(--card)} .btn.sky{background:var(--sky)}
+.btn.sm{padding:8px 14px;font-size:.95rem;box-shadow:0 3px 0 var(--line)}
+.panel{background:var(--card);border:3px solid var(--line);border-radius:26px;box-shadow:0 6px 0 var(--line);padding:22px}
+.eyebrow{font-family:var(--f-display);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lav-deep)}
+.chip{display:inline-flex;align-items:center;gap:5px;border:2px solid var(--line);border-radius:999px;padding:2px 10px;font-weight:800;font-size:.8rem;background:var(--card);white-space:nowrap}
+.muted{color:var(--ink-soft)}
+.screen{padding-block:22px 10px}
+.notice{border:2.5px dashed var(--lav-deep);background:var(--lav-soft);border-radius:16px;padding:10px 14px;font-weight:700;font-size:.95rem}
+.notice.warn{border-color:var(--berry);background:#ffeef0}
+
+/* ---------- home hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px;align-items:center;padding-block:26px 8px}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:800;letter-spacing:-.01em}
+.hero h1 .c{color:var(--lav-deep);display:inline-block;transform:rotate(-3deg);background:var(--sun);border:3px solid var(--line);border-radius:18px;padding:0 12px;box-shadow:0 5px 0 var(--line);margin-left:4px}
+.hero .lead{font-size:1.15rem;max-width:34em;margin-top:14px;font-weight:600}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+.mc-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:260px}
+.mc-stage .podium{position:absolute;bottom:0;width:78%;height:46px;border-radius:50%;background:var(--lav);border:3px solid var(--line)}
+.mc-stage svg.mc{position:relative;width:min(240px,60vw);height:auto;filter:drop-shadow(0 6px 0 rgba(42,40,82,.15))}
+.bubble{position:relative;background:var(--card);border:3px solid var(--line);border-radius:22px;padding:10px 16px;font-weight:800;font-family:var(--f-display);font-size:1.08rem;box-shadow:0 4px 0 var(--line);max-width:280px}
+.mc-stage .bubble{position:absolute;top:0;right:0}
+.bubble::after{content:"";position:absolute;left:30px;bottom:-14px;width:20px;height:20px;background:var(--card);border-right:3px solid var(--line);border-bottom:3px solid var(--line);transform:rotate(45deg)}
+.statusline{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+/* ---------- map ---------- */
+.map{margin-top:26px;border:3px solid var(--line);border-radius:32px;padding:24px;position:relative;overflow:hidden;box-shadow:0 7px 0 var(--line);
+  background:
+   repeating-linear-gradient(0deg, transparent 0 59px, rgba(44,120,189,.13) 59px 61px),
+   repeating-linear-gradient(90deg, transparent 0 59px, rgba(44,120,189,.13) 59px 61px),
+   #cfeafc;}
+.map-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px;position:relative}
+.map-head h2{font-size:clamp(1.6rem,3.6vw,2.3rem)}
+.compass{width:74px;height:74px;flex:none}
+.regions{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;position:relative}
+.region{background:var(--card);border:3px solid var(--line);border-radius:24px;box-shadow:0 5px 0 var(--line);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0;transition:transform .15s}
+.region:hover{transform:translateY(-3px) rotate(-.4deg)}
+.region .isle{height:96px;border-radius:18px;border:2.5px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.region .isle svg{width:76px;height:76px;position:relative}
+.region .isle::before{content:"";position:absolute;inset:auto -10% -40% -10%;height:70%;border-radius:50%;background:rgba(255,255,255,.45)}
+.region h3{font-size:1.2rem}
+.region .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.region .num{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
+.region.locked{filter:grayscale(.85);opacity:.75}
+.region .btn{width:100%;margin-top:auto}
+
+.home-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:26px}
+.mini-me{display:flex;gap:16px;align-items:center}
+.mini-me svg{width:90px;height:auto;flex:none}
+.xpbar{height:16px;border:2.5px solid var(--line);border-radius:999px;background:var(--sky-soft);overflow:hidden}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--mint),#4fd1a0);border-right:2.5px solid var(--line)}
+
+/* ---------- setup ---------- */
+.setup{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;max-width:900px;margin-inline:auto}
+.step h2{font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.step h2 .n{width:34px;height:34px;border-radius:50%;background:var(--sun);border:2.5px solid var(--line);display:inline-grid;place-items:center;font-size:1.05rem;flex:none}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.mode{border:3px solid var(--line);border-radius:22px;background:var(--card);padding:16px;text-align:left;display:flex;flex-direction:column;gap:6px;box-shadow:0 4px 0 var(--line)}
+.mode h3{font-size:1.25rem}
+.mode[aria-pressed="true"]{background:var(--sun);transform:translateY(-2px)}
+.mode ul{margin:4px 0 0;padding-left:18px;font-size:.92rem;font-weight:600}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.seg button{border:2.5px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-weight:800;box-shadow:0 3px 0 var(--line)}
+.seg button[aria-pressed="true"]{background:var(--lav)}
+.seg button:disabled{opacity:.45}
+.tchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tchip{border:2.5px solid var(--line);border-radius:14px;background:var(--card);padding:6px 10px 6px 6px;font-weight:800;font-size:.92rem;display:inline-flex;align-items:center;gap:6px}
+.tchip svg{width:28px;height:28px;border-radius:9px;border:2px solid var(--line);padding:2px}
+.tchip[aria-pressed="true"]{background:var(--mint)}
+.tchip:disabled{opacity:.4}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.field label{font-weight:800;font-size:.9rem;display:block;margin-bottom:4px}
+select,input[type=text],input[type=password],input[type=email]{font:inherit;font-weight:700;border:2.5px solid var(--line);border-radius:12px;padding:6px 10px;background:var(--card);color:var(--ink)}
+.startbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.poolinfo{font-weight:800;font-size:1.05rem}
+
+/* ---------- stage ---------- */
+.stage{margin-inline:-16px;padding:18px 16px 26px;min-height:calc(100vh - 64px);color:#fff;
+  background:
+   radial-gradient(ellipse 60% 40% at 50% -5%, rgba(255,212,81,.35), transparent 70%),
+   radial-gradient(circle at 20% 30%, rgba(255,255,255,.7) 0 1.5px, transparent 2px),
+   radial-gradient(circle at 70% 18%, rgba(255,255,255,.6) 0 1.5px, transparent 2px),
+   radial-gradient(circle at 85% 60%, rgba(255,255,255,.5) 0 1.5px, transparent 2px),
+   radial-gradient(circle at 35% 75%, rgba(255,255,255,.5) 0 1.5px, transparent 2px),
+   linear-gradient(180deg,var(--stage1),var(--stage2));}
+.stage-grid{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:20px;max-width:1180px;margin-inline:auto}
+.stage-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.stage-top .chip{background:var(--lav-soft);color:var(--ink)}
+.stage-top .chip.lv{background:var(--sun)}
+.stage-top .grow{flex:1}
+.ghost{border:2px solid rgba(255,255,255,.6);background:transparent;color:#fff;border-radius:999px;padding:5px 12px;font-weight:800;font-size:.88rem}
+.ghost:hover{background:rgba(255,255,255,.12)}
+.host{display:flex;align-items:flex-end;gap:12px;margin-bottom:28px;min-height:110px}
+.host svg.mc{width:96px;height:auto;flex:none}
+.host .bubble{color:var(--ink);font-size:1rem;max-width:none}
+.host .bubble::after{left:-12px;bottom:22px;border-right:0;border-bottom:3px solid var(--line);border-left:3px solid var(--line);transform:rotate(45deg)}
+.qcard{background:var(--card);color:var(--ink);border:3px solid var(--line);border-radius:26px;padding:20px 22px;box-shadow:0 6px 0 #120e3a;position:relative}
+.qcard .qno{position:absolute;top:-18px;left:20px;background:var(--peach);border:3px solid var(--line);border-radius:999px;padding:1px 14px;font-family:var(--f-display);font-weight:800}
+.qcard h2{font-size:clamp(1.2rem,2.6vw,1.6rem);font-weight:700;margin-top:6px}
+.timer{height:10px;border-radius:999px;background:var(--sky-soft);border:2px solid var(--line);margin-top:12px;overflow:hidden}
+.timer i{display:block;height:100%;background:var(--mint);transition:width 1s linear}
+.timer.low i{background:var(--berry)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;background:var(--lav-soft);color:var(--ink);border:3px solid var(--line);border-radius:999px;padding:10px 18px 10px 10px;font-weight:700;font-size:1.05rem;box-shadow:0 4px 0 #120e3a;min-height:62px;transition:transform .12s, background .15s}
+.opt:hover:not(:disabled){transform:translateY(-2px)}
+.opt .k{flex:none;width:38px;height:38px;border-radius:50%;background:var(--card);border:2.5px solid var(--line);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:1.1rem}
+.opt .t{min-width:0;overflow-wrap:anywhere}
+.opt.sel{background:var(--sun)}
+.opt.sel .k{background:var(--peach)}
+.opt.pending{animation:pend .5s ease-in-out infinite alternate}
+@keyframes pend{to{background:#ffab4a}}
+.opt.ok{background:var(--mint);animation:none}
+.opt.ok .k{background:#fff}
+.opt.bad{background:#ffb3bd;animation:none}
+.opt.gone{opacity:.25;visibility:visible}
+.opt:disabled{cursor:default}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.actions .sp{flex:1}
+.lifelines{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ll{display:flex;align-items:center;gap:8px;border:2.5px solid #fff;background:rgba(255,255,255,.1);color:#fff;border-radius:16px;padding:6px 12px 6px 6px;font-weight:800;font-size:.92rem}
+.ll .ic{width:36px;height:36px;border-radius:12px;background:var(--card);display:grid;place-items:center;border:2px solid var(--line)}
+.ll .ic svg{width:28px;height:28px}
+.ll:hover:not(:disabled){background:rgba(255,255,255,.22)}
+.ll:disabled{opacity:.35;text-decoration:line-through}
+.llbox{margin-top:14px;background:var(--card);color:var(--ink);border:3px solid var(--line);border-radius:20px;padding:14px 16px}
+.aud{display:flex;gap:14px;align-items:flex-end;height:150px;padding-top:8px}
+.aud .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;font-weight:800;font-variant-numeric:tabular-nums}
+.aud .bar i{display:block;width:100%;max-width:56px;border:2.5px solid var(--line);border-radius:10px 10px 4px 4px;background:var(--sky);transform-origin:bottom;animation:grow .8s cubic-bezier(.3,1.4,.6,1)}
+@keyframes grow{from{transform:scaleY(0)}}
+.owlsay{display:flex;gap:12px;align-items:center}
+.owlsay svg{width:70px;height:70px;flex:none}
+
+.explain{margin-top:18px;background:var(--card);color:var(--ink);border:3px solid var(--line);border-radius:26px;padding:20px 22px;box-shadow:0 6px 0 #120e3a}
+.explain .head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.explain .head svg{width:54px;height:54px;flex:none}
+.explain .verdict{font-family:var(--f-display);font-weight:800;font-size:1.4rem}
+.explain .verdict.ok{color:var(--mint-deep)} .explain .verdict.bad{color:#c7344a}
+.explain .ans{margin-top:10px;font-weight:800;background:var(--mint);border:2.5px solid var(--line);border-radius:14px;padding:8px 12px;display:inline-block}
+.explain .body{margin-top:12px;display:grid;gap:10px;max-width:68ch;font-size:1.05rem}
+.explain .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.explain .actions{margin-top:16px}
+
+.ladder{background:rgba(255,255,255,.08);border:2.5px solid rgba(255,255,255,.5);border-radius:22px;padding:12px;align-self:start;position:sticky;top:76px}
+.ladder h3{color:#fff;font-size:1rem;margin:2px 4px 8px;display:flex;justify-content:space-between}
+.ladder ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column-reverse;gap:3px}
+.ladder li{white-space:nowrap;display:flex;justify-content:space-between;gap:8px;padding:3px 10px;border-radius:10px;font-weight:700;font-size:.9rem;font-variant-numeric:tabular-nums;color:#dcd6ff}
+.ladder li .q{opacity:.8;width:24px}
+.ladder li.safe{color:var(--sun)}
+.ladder li.done{color:var(--mint)}
+.ladder li.cur{background:var(--sun);color:var(--ink);border:2px solid var(--line)}
+.scorebox{background:rgba(255,255,255,.08);border:2.5px solid rgba(255,255,255,.5);border-radius:22px;padding:16px;align-self:start;position:sticky;top:76px;display:grid;gap:10px;text-align:center}
+.scorebox .big{font-family:var(--f-display);font-size:3.2rem;font-weight:800;line-height:1;color:var(--sun);font-variant-numeric:tabular-nums}
+.scorebox .dots{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.scorebox .dots i{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.5)}
+.scorebox .dots i.ok{background:var(--mint)} .scorebox .dots i.bad{background:var(--berry)} .scorebox .dots i.cur{background:var(--sun)}
+.stopconfirm{background:var(--peach-soft);color:var(--ink);border:3px solid var(--line);border-radius:18px;padding:12px 14px;margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:700}
+
+/* ---------- results ---------- */
+.result{max-width:920px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.res-hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center}
+.res-hero svg.mc{width:150px;height:auto}
+.res-hero h1{font-size:clamp(1.8rem,4.6vw,2.8rem)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+.stat{border:2.5px solid var(--line);border-radius:18px;padding:10px 14px;background:var(--sky-soft)}
+.stat b{display:block;font-family:var(--f-display);font-size:1.7rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-weight:700;font-size:.88rem;color:var(--ink-soft)}
+.stat.y{background:#fff5d1} .stat.g{background:#e3fbf1} .stat.r{background:#ffeef0} .stat.l{background:var(--lav-soft)}
+.review{display:grid;gap:12px}
+.rv{border:2.5px solid var(--line);border-radius:18px;padding:14px 16px;background:var(--card)}
+.rv .q{font-weight:800}
+.rv .a{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.rv .a span{border:2px solid var(--line);border-radius:10px;padding:2px 8px;font-weight:700;font-size:.92rem}
+.rv .a .ok{background:var(--mint)} .rv .a .bad{background:#ffb3bd}
+.rv p{font-size:.97rem;color:var(--ink-soft)}
+details summary{cursor:pointer;font-family:var(--f-display);font-weight:800;font-size:1.15rem}
+.newbadges{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- profile ---------- */
+.prof{display:grid;grid-template-columns:320px minmax(0,1fr);gap:18px;align-items:start}
+.avbig{display:flex;justify-content:center;background:radial-gradient(circle at 50% 60%, var(--lav-soft) 0 60%, transparent 61%), var(--sky-soft);border:3px solid var(--line);border-radius:24px;padding:12px}
+.avbig svg{width:200px;height:auto}
+.editor{display:grid;gap:12px;margin-top:14px}
+.editor .lbl{font-weight:800;font-size:.88rem;margin-bottom:4px;display:flex;justify-content:space-between;gap:6px}
+.swatches{display:flex;flex-wrap:wrap;gap:6px}
+.sw{width:32px;height:32px;border-radius:50%;border:2.5px solid var(--line)}
+.sw[aria-pressed="true"]{outline:3px solid var(--sky-deep);outline-offset:2px}
+.opts-s{display:flex;flex-wrap:wrap;gap:6px}
+.opts-s button{border:2px solid var(--line);border-radius:12px;background:var(--card);padding:4px 10px;font-weight:700;font-size:.88rem}
+.opts-s button[aria-pressed="true"]{background:var(--sun)}
+.opts-s button:disabled{opacity:.45}
+.opts-s button .lock{font-size:.75rem;color:var(--ink-soft);margin-left:4px}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.badge{border:2.5px solid var(--line);border-radius:18px;padding:12px;text-align:center;background:var(--card);display:grid;gap:4px;justify-items:center}
+.badge svg{width:56px;height:56px}
+.badge b{font-family:var(--f-display);font-size:1rem;line-height:1.2}
+.badge small{font-size:.8rem;color:var(--ink-soft);font-weight:600}
+.badge.off{filter:grayscale(1);opacity:.5}
+.tbars{display:grid;gap:8px}
+.tbar{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 70px;gap:10px;align-items:center;font-weight:700;font-size:.9rem}
+.tbar .tr{height:14px;border:2px solid var(--line);border-radius:999px;background:var(--sky-soft);overflow:hidden}
+.tbar .tr i{display:block;height:100%;background:var(--lav)}
+.tbar span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.hist{display:grid;gap:6px;font-size:.92rem}
+.hist div{display:flex;justify-content:space-between;gap:10px;border-bottom:2px dashed var(--lav);padding-bottom:6px;flex-wrap:wrap}
+
+/* ---------- social ---------- */
+.soc{max-width:900px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.soc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.soc-card{border:2.5px solid var(--line);border-radius:20px;padding:16px;background:var(--card);display:grid;gap:8px;align-content:start}
+.soc-card h3{font-size:1.15rem}
+.soon{font-size:.8rem;font-weight:800;color:var(--lav-deep)}
+
+/* ---------- accounts ---------- */
+.authwrap{max-width:560px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.authhead{display:flex;align-items:center;gap:14px}
+.authhead > svg{width:84px;height:auto;flex:none}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:16px;border:3px solid var(--line);border-radius:999px;overflow:hidden;background:var(--lav-soft)}
+.tabs button{border:0;background:transparent;padding:9px 10px;font-family:var(--f-display);font-weight:800;font-size:1.02rem}
+.tabs button[aria-selected="true"]{background:var(--sun)}
+.tabs button + button{border-left:3px solid var(--line)}
+.linkbtn{background:none;border:0;padding:4px;font-weight:800;color:var(--sky-deep);text-decoration:underline;text-underline-offset:3px;justify-self:center}
+.sentbox{display:flex;gap:14px;align-items:flex-start;margin-top:16px}
+.sentbox > svg{width:72px;height:auto;flex:none}
+.form input[type=email]{width:100%;font-size:1.05rem;padding:10px 12px}
+.form{display:grid;gap:14px;margin-top:16px}
+.form input[type=text],.form input[type=password]{width:100%;font-size:1.05rem;padding:10px 12px}
+.pwrow{display:flex;gap:8px;align-items:center}
+.pwrow input{flex:1;min-width:0}
+.pwrow .btn{flex:none}
+.check{display:flex;gap:8px;align-items:center;font-weight:700}
+.check input{width:20px;height:20px;accent-color:var(--lav-deep)}
+.hint{display:block;margin-top:4px;font-weight:600;font-size:.82rem}
+.cred{background:#fff5d1;border:3px solid var(--line);border-radius:22px;padding:16px 18px;box-shadow:0 5px 0 var(--line)}
+.credrow{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:2px dashed var(--sun-deep);padding-block:8px;font-weight:700}
+.credrow code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:1.25rem;font-weight:700;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:2px 10px;overflow-wrap:anywhere;user-select:all}
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;align-items:start}
+.acclist{display:grid;gap:10px;margin-top:12px}
+.acc{display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 12px;border:2.5px solid var(--line);border-radius:18px;padding:10px 12px;align-items:center}
+.acc svg{width:56px;height:auto;grid-row:span 2}
+.accinfo{display:grid;gap:1px;font-size:.88rem;font-weight:700;min-width:0}
+.accinfo b{font-family:var(--f-display);font-size:1.1rem}
+.accinfo code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.9rem;color:var(--lav-deep)}
+.accact{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.plist{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;font-weight:600;font-size:.94rem;color:var(--ink-soft)}
+@media (max-width:860px){.pgrid{grid-template-columns:minmax(0,1fr)}}
+
+footer{max-width:1180px;margin:30px auto 0;font-size:.85rem;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.loading{display:grid;place-items:center;min-height:60vh;text-align:center;gap:14px;font-family:var(--f-display);font-weight:700;font-size:1.3rem}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .mc-stage{min-height:230px}
+  .stage-grid{grid-template-columns:1fr}
+  .ladder,.scorebox{position:static;order:-1}
+  .ladder ol{flex-direction:row;overflow-x:auto;padding-bottom:4px}
+  .ladder li{flex-direction:column;align-items:center;min-width:64px;font-size:.78rem;padding:4px 6px}
+  .ladder li .q{width:auto}
+  .scorebox{grid-template-columns:auto 1fr;text-align:left;align-items:center}
+  .scorebox .big{font-size:2.4rem}
+  .home-grid,.prof{grid-template-columns:1fr}
+  .modes{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .topbar{position:static}
+  .nav{flex-wrap:nowrap;overflow-x:auto;margin-left:0;width:100%;padding-bottom:4px}
+  .nbtn{flex:none}
+  .ladder,.scorebox{top:0}
+  .opts{grid-template-columns:1fr}
+  .host svg.mc{width:70px}
+  .res-hero{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
+  .tbar{grid-template-columns:1fr 70px} .tbar .tr{grid-column:1 / -1;grid-row:2}
+  .map{padding:16px}
+  .logo b{font-size:1.05rem}
+}
+html.rm *,html.rm *::before,html.rm *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <button class="logo" id="logoBtn" aria-label="Về bản đồ">
+      <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="34" r="26" fill="#ffd451" stroke="#2a2852" stroke-width="4"/><path d="M32 18l4.5 9.5 10.5 1.3-7.7 7.2 2 10.4L32 41.3l-9.3 5.1 2-10.4-7.7-7.2 10.5-1.3z" fill="#fff" stroke="#2a2852" stroke-width="3" stroke-linejoin="round"/></svg>
+      <b>Ai là triệu phú <span>Chibi</span></b>
+    </button>
+    <nav class="nav" aria-label="Điều hướng">
+      <button class="nbtn" data-go="home">Bản đồ</button>
+      <button class="nbtn" data-go="profile">Hồ sơ</button>
+      <button class="nbtn" data-go="social">Bạn bè</button>
+      <button class="nbtn" data-go="parent">Phụ huynh</button>
+      <button class="nbtn" id="userBtn"></button>
+      <button class="nbtn" id="soundBtn" aria-pressed="true" title="Bật/tắt âm thanh">Âm thanh</button>
+      <button class="nbtn" id="motionBtn" aria-pressed="false" title="Giảm chuyển động">Giảm chuyển động</button>
+    </nav>
+  </div>
+</header>
+
+<main id="app"><div class="loading"><div>Đang mở bản đồ phiêu lưu…</div></div></main>
+<footer id="foot"></footer>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+/* ===================== CONFIG: danh sách ngân hàng câu hỏi =====================
+   Thêm/bớt chủ đề chỉ cần sửa danh sách này và đặt tệp JSON vào thư mục data/.
+   Tệp nào chưa có sẽ tự hiển thị "Sắp mở khóa". */
+const DATA_DIR = 'data/';
+const TOPICS = [
+ {file:'01_Lich_su_chau_Au', name:'Lịch sử châu Âu', place:'Lâu đài hiệp sĩ', icon:'castle', bg:'#d9cdfb'},
+ {file:'02_Lich_su_chau_A', name:'Lịch sử châu Á', place:'Cung điện phương Đông', icon:'pagoda', bg:'#ffd0bd'},
+ {file:'03_Lich_su_chau_Phi_Trung_Dong', name:'Lịch sử châu Phi và Trung Đông', place:'Kim tự tháp sa mạc', icon:'pyramid', bg:'#ffe39a'},
+ {file:'04_Lich_su_chau_My', name:'Lịch sử châu Mỹ', place:'Đền bậc thang rừng rậm', icon:'steps', bg:'#b9eed8'},
+ {file:'05_The_gioi_co_dai', name:'Thế giới cổ đại', place:'Di tích cột đá', icon:'temple', bg:'#e6dccb'},
+ {file:'06_Dia_ly_chau_Au', name:'Địa lý châu Âu', place:'Dãy núi tuyết', icon:'alps', bg:'#c8e6fb'},
+ {file:'07_Dia_ly_chau_A', name:'Địa lý châu Á', place:'Núi lửa và ruộng bậc thang', icon:'fuji', bg:'#ffd6e0'},
+ {file:'08_Dia_ly_chau_Phi', name:'Địa lý châu Phi', place:'Thảo nguyên cây bao báp', icon:'baobab', bg:'#ffe0a8'},
+ {file:'09_Dia_ly_chau_My', name:'Địa lý châu Mỹ', place:'Hẻm núi xương rồng', icon:'cactus', bg:'#ffc9a6'},
+ {file:'10_Dia_ly_Dai_Duong_Nam_Cuc_tu_nhien', name:'Địa lý Đại Dương, Nam Cực và tự nhiên', place:'Đảo băng chim cánh cụt', icon:'ice', bg:'#c6f0f5'},
+ {file:'11_Lich_su_Viet_Nam', name:'Lịch sử Việt Nam', place:'Trống đồng và thành cổ', icon:'drum', bg:'#ffd98a'},
+];
+const PRIZES=[200000,400000,600000,1000000,2000000,3000000,6000000,10000000,14000000,22000000,30000000,40000000,60000000,85000000,150000000];
+const SAFE=[5,10];
+
+/* ===================== helpers ===================== */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>n.toLocaleString('vi-VN');
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const LET=['A','B','C','D'];
+const store={get(k,d){try{const v=localStorage.getItem('chibi_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('chibi_'+k,JSON.stringify(v))}catch(e){}}};
+
+/* ===================== icons ===================== */
+const O='stroke="#2a2852" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"';
+const ICONS={
+ castle:`<rect x="14" y="26" width="36" height="28" fill="#c9cfe6" ${O}/><path d="M10 26V16h6v5h5v-5h6v5h10v-5h6v5h5v-5h6v10z" fill="#e3e7f5" ${O}/><path d="M27 54V44a5 5 0 0 1 10 0v10" fill="#6a52c9" ${O}/><path d="M32 16V4l10 4-10 4" fill="#ef5a6f" ${O}/>`,
+ pagoda:`<path d="M8 22h48l-8-8H16z" fill="#ef5a6f" ${O}/><rect x="18" y="22" width="28" height="10" fill="#ffd451" ${O}/><path d="M12 38h40l-7-6H19z" fill="#ef5a6f" ${O}/><rect x="16" y="38" width="32" height="16" fill="#ffd451" ${O}/><rect x="28" y="44" width="8" height="10" fill="#6a52c9" ${O}/><path d="M32 14V6" ${O}/>`,
+ pyramid:`<circle cx="48" cy="14" r="7" fill="#ffd451" ${O}/><path d="M6 54L28 18l22 36z" fill="#f2c472" ${O}/><path d="M28 18l8 36" ${O}/><path d="M38 54l10-16 10 16z" fill="#e8b25a" ${O}/>`,
+ steps:`<rect x="10" y="44" width="44" height="10" fill="#8ee3c3" ${O}/><rect x="16" y="34" width="32" height="10" fill="#b9eed8" ${O}/><rect x="22" y="24" width="20" height="10" fill="#8ee3c3" ${O}/><rect x="26" y="12" width="12" height="12" fill="#ffd451" ${O}/><path d="M32 54V44" ${O}/>`,
+ temple:`<path d="M8 20L32 8l24 12z" fill="#fff5d1" ${O}/><rect x="10" y="20" width="44" height="6" fill="#e6dccb" ${O}/><path d="M16 26v22M26 26v22M38 26v22M48 26v22" ${O} stroke-width="5"/><rect x="8" y="48" width="48" height="7" fill="#e6dccb" ${O}/>`,
+ alps:`<path d="M4 54L22 22l12 18 8-12 18 26z" fill="#8fd0f7" ${O}/><path d="M17 31l5-9 6 9-3-2-3 3z" fill="#fff" ${O} stroke-width="2.5"/><rect x="40" y="42" width="10" height="9" fill="#ffb894" ${O} stroke-width="2.5"/><path d="M38 43l7-6 7 6" fill="#ef5a6f" ${O} stroke-width="2.5"/>`,
+ fuji:`<circle cx="48" cy="16" r="8" fill="#ef5a6f" ${O}/><path d="M4 54l20-30h16l20 30z" fill="#7a8fd6" ${O}/><path d="M24 24h16l5 8-6-2-4 3-4-3-4 3-5-3z" fill="#fff" ${O} stroke-width="2.5"/>`,
+ baobab:`<path d="M4 54h56" ${O}/><path d="M26 54c2-10 2-20 1-28h10c-1 8-1 18 1 28z" fill="#b07a4f" ${O}/><path d="M16 22c0-8 10-12 16-8 6-6 18-2 16 8 6 2 4 10-2 10-4 4-12 4-14 0-4 4-14 2-14-4-6 0-6-6-2-6z" fill="#8ee3c3" ${O}/>`,
+ cactus:`<path d="M4 54h56" ${O}/><path d="M26 54V18a6 6 0 0 1 12 0v36z" fill="#59c48f" ${O}/><path d="M26 36h-6a4 4 0 0 1-4-4v-8M38 30h6a4 4 0 0 0 4-4v-6" fill="none" ${O} stroke-width="5"/><circle cx="50" cy="12" r="6" fill="#ffd451" ${O}/>`,
+ ice:`<path d="M4 46c6-4 10 4 16 0s10 4 16 0 10 4 16 0 8 2 8 2v8H4z" fill="#8fd0f7" ${O}/><path d="M10 46l10-26 8 8 6-16 12 34z" fill="#fff" ${O}/><ellipse cx="50" cy="38" rx="6" ry="9" fill="#2a2852"/><ellipse cx="50" cy="40" rx="3.5" ry="6" fill="#fff"/><path d="M48 31l2 2 2-2" fill="#ffd451" stroke="#2a2852" stroke-width="1.5"/>`,
+ drum:`<ellipse cx="32" cy="40" rx="26" ry="10" fill="#c9893a" ${O}/><path d="M6 40V30h52v10" fill="#d99b48" ${O}/><ellipse cx="32" cy="30" rx="26" ry="10" fill="#f2c472" ${O}/><path d="M32 22l2 6h6l-5 3 2 6-5-4-5 4 2-6-5-3h6z" fill="#ffd451" stroke="#2a2852" stroke-width="2" stroke-linejoin="round"/><ellipse cx="32" cy="30" rx="18" ry="6.5" fill="none" stroke="#2a2852" stroke-width="1.8" stroke-dasharray="3 3"/>`,
+};
+const icon=(k,bg)=>`<svg viewBox="0 0 64 64" aria-hidden="true"${bg?` style="background:${bg}"`:''}>${ICONS[k]||''}</svg>`;
+const LLICON={
+ half:`<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="#ffd451" stroke="#2a2852" stroke-width="3"/><path d="M20 5v30" stroke="#2a2852" stroke-width="3"/><text x="20" y="25" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="11" fill="#2a2852">50</text></svg>`,
+ aud:`<svg viewBox="0 0 40 40"><rect x="6" y="20" width="7" height="14" rx="2" fill="#8fd0f7" stroke="#2a2852" stroke-width="2.5"/><rect x="16.5" y="8" width="7" height="26" rx="2" fill="#8ee3c3" stroke="#2a2852" stroke-width="2.5"/><rect x="27" y="15" width="7" height="19" rx="2" fill="#ffb894" stroke="#2a2852" stroke-width="2.5"/></svg>`,
+ owl:'',
+ swap:`<svg viewBox="0 0 40 40"><path d="M8 15h20l-5-5M32 25H12l5 5" fill="none" stroke="#2a2852" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+};
+function owlSVG(){return `<svg viewBox="0 0 80 80" aria-hidden="true"><path d="M18 22l6-14 8 10M62 22l-6-14-8 10" fill="#9a7fe0" stroke="#2a2852" stroke-width="3" stroke-linejoin="round"/><ellipse cx="40" cy="46" rx="26" ry="28" fill="#9a7fe0" stroke="#2a2852" stroke-width="3"/><ellipse cx="40" cy="56" rx="15" ry="15" fill="#efe6ff" stroke="#2a2852" stroke-width="2.5"/><circle cx="29" cy="36" r="10" fill="#fff" stroke="#2a2852" stroke-width="3"/><circle cx="51" cy="36" r="10" fill="#fff" stroke="#2a2852" stroke-width="3"/><circle cx="30" cy="37" r="4.5" fill="#2a2852"/><circle cx="50" cy="37" r="4.5" fill="#2a2852"/><circle cx="31.5" cy="35.5" r="1.5" fill="#fff"/><circle cx="51.5" cy="35.5" r="1.5" fill="#fff"/><path d="M39 36h2" stroke="#2a2852" stroke-width="3"/><path d="M36 45l4 6 4-6z" fill="#ffd451" stroke="#2a2852" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 74v4M34 75v3M46 75v3M54 74v4" stroke="#f2a900" stroke-width="3" stroke-linecap="round"/></svg>`}
+LLICON.owl=owlSVG();
+
+/* ===================== Chibi avatar ===================== */
+const HAIRC=['#3b2a26','#8a5a3b','#f2c14e','#e2725b','#7d6bd6','#2f7fc1','#e88fb4'];
+const SKIN=['#ffe3cc','#f6c9a0','#d9a273','#a8704a'];
+const HAIRS=[['short','Tóc ngắn'],['bob','Tóc bob'],['pony','Đuôi ngựa'],['buns','Búi đôi'],['spiky','Tóc dựng']];
+const EYES=[['round','Mắt tròn'],['sparkle','Mắt lấp lánh'],['happy','Mắt cười'],['wink','Nháy mắt']];
+const MOUTHS=[['smile','Mỉm cười'],['grin','Cười tươi'],['wow','Ồ!'],['cool','Tự tin']];
+const OUTFITS=[['explorer','Nhà thám hiểm',1],['knight','Hiệp sĩ',2],['archae','Nhà khảo cổ',3],['wizard','Pháp sư tri thức',4],['astro','Phi hành gia',5]];
+const HATS=[['none','Không mũ',1],['explorer','Mũ thám hiểm',1],['cap','Mũ lưỡi trai',2],['wizard','Mũ pháp sư',4],['helmet','Mũ phi hành',5]];
+const ACCESSORIES=[['glasses','Kính',1],['backpack','Balo',2],['phones','Tai nghe',3]];
+const DEFAULT_AV={hair:'bob',hairColor:'#8a5a3b',skin:'#ffe3cc',eyes:'sparkle',mouth:'grin',outfit:'explorer',hat:'none',glasses:false,backpack:false,phones:false};
+const MC_AV={hair:'buns',hairColor:'#7d6bd6',skin:'#ffe3cc',eyes:'sparkle',mouth:'smile',outfit:'mc',hat:'none'};
+
+function avatarSVG(c,expr,cls){
+  c=Object.assign({},DEFAULT_AV,c);
+  const S='stroke="#2a2852" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"';
+  let eyes=c.eyes, mouth=c.mouth, extra='';
+  if(expr){ // MC expressions
+    ({hello:()=>{eyes='sparkle';mouth='smile'},think:()=>{eyes='up';mouth='small'},nervous:()=>{eyes='round';mouth='wavy';extra=`<path d="M92 40c3 5 4 8 1 10-3 2-6-1-4-4z" fill="#8fd0f7" stroke="#2a2852" stroke-width="2"/>`},
+      surprise:()=>{eyes='big';mouth='wow'},celebrate:()=>{eyes='happy';mouth='grin'},encourage:()=>{eyes='wink';mouth='smile'}}[expr]||(()=>{}))();
+  }
+  const outfits={
+    explorer:['#d9b77a',`<path d="M48 96v30M72 96v30" ${S} stroke-width="2.5"/><rect x="38" y="106" width="9" height="8" rx="2" fill="#c49a5a" ${S} stroke-width="2"/><rect x="73" y="106" width="9" height="8" rx="2" fill="#c49a5a" ${S} stroke-width="2"/>`],
+    knight:['#c9d1e0',`<path d="M60 100l10 4v10c0 6-5 9-10 11-5-2-10-5-10-11v-10z" fill="#6a52c9" ${S} stroke-width="2.5"/><path d="M60 106l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" fill="#ffd451"/>`],
+    archae:['#a8744a',`<path d="M44 94q16 10 32 0l-4 10q-12 6-24 0z" fill="#ef5a6f" ${S} stroke-width="2.5"/><path d="M70 104l6 16" ${S} stroke-width="2.5"/>`],
+    wizard:['#6a52c9',`<path d="M48 108l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z" fill="#ffd451"/><path d="M72 114l1.5 3 3 .5-2 2 .5 3-3-1.5-3 1.5.5-3-2-2 3-.5z" fill="#ffd451"/><path d="M60 94v34" stroke="#ffd451" stroke-width="3"/>`],
+    astro:['#f4f6fb',`<rect x="48" y="102" width="24" height="14" rx="4" fill="#8fd0f7" ${S} stroke-width="2.5"/><circle cx="54" cy="109" r="2.5" fill="#ef5a6f"/><circle cx="62" cy="109" r="2.5" fill="#ffd451"/>`],
+    mc:['#4d8fd9',`<path d="M60 96l-12 8v-12zM60 96l12 8v-12z" fill="#ffd451" ${S} stroke-width="2.5"/><circle cx="60" cy="97" r="3.5" fill="#ef5a6f" ${S} stroke-width="2"/><path d="M60 102v24" ${S} stroke-width="2"/>`],
+  };
+  const [ocol,odet]=outfits[c.outfit]||outfits.explorer;
+  let back='', front='';
+  const hc=c.hairColor;
+  const bangs=`<path d="M22 54Q22 16 60 16Q98 16 98 54Q88 36 74 40Q64 28 54 40Q40 32 22 54Z" fill="${hc}" ${S}/>`;
+  if(c.hair==='bob') back=`<path d="M18 58Q18 12 60 12Q102 12 102 58L102 84Q92 92 84 82L36 82Q28 92 18 84Z" fill="${hc}" ${S}/>`;
+  if(c.hair==='pony') back=`<ellipse cx="102" cy="66" rx="11" ry="24" transform="rotate(-18 102 66)" fill="${hc}" ${S}/>`;
+  if(c.hair==='buns') back=`<circle cx="28" cy="24" r="13" fill="${hc}" ${S}/><circle cx="92" cy="24" r="13" fill="${hc}" ${S}/>`;
+  front = c.hair==='spiky' ? `<path d="M20 56L24 24L37 33L43 10L56 26L64 6L72 26L84 10L88 33L98 24L100 56Q86 36 60 40Q34 36 20 56Z" fill="${hc}" ${S}/>` : bangs;
+  // eyes
+  const L=[46,60],R=[74,60];
+  const roundEye=([x,y],s=1)=>`<ellipse cx="${x}" cy="${y}" rx="${6*s}" ry="${7.5*s}" fill="#2a2852"/><circle cx="${x+2}" cy="${y-3}" r="${2.3*s}" fill="#fff"/>`;
+  const sparkEye=([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="7" ry="8.5" fill="#2a2852"/><circle cx="${x+2.5}" cy="${y-3.5}" r="2.8" fill="#fff"/><circle cx="${x-2.5}" cy="${y+3}" r="1.4" fill="#fff"/>`;
+  const arcEye=([x,y])=>`<path d="M${x-6} ${y+2}Q${x} ${y-7} ${x+6} ${y+2}" fill="none" ${S}/>`;
+  let E;
+  switch(eyes){
+    case 'sparkle':E=sparkEye(L)+sparkEye(R);break;
+    case 'happy':E=arcEye(L)+arcEye(R);break;
+    case 'wink':E=sparkEye(L)+arcEye(R);break;
+    case 'big':E=roundEye(L,1.25)+roundEye(R,1.25);break;
+    case 'up':E=`<ellipse cx="46" cy="60" rx="6" ry="7.5" fill="#2a2852"/><ellipse cx="74" cy="60" rx="6" ry="7.5" fill="#2a2852"/><circle cx="48" cy="55" r="2.6" fill="#fff"/><circle cx="76" cy="55" r="2.6" fill="#fff"/>`;break;
+    default:E=roundEye(L)+roundEye(R);
+  }
+  let M;
+  switch(mouth){
+    case 'grin':M=`<path d="M50 74Q60 90 70 74Z" fill="#8a2f3b" ${S} stroke-width="2.5"/><path d="M55 81q5 4 10 0" fill="#ef7f8f"/>`;break;
+    case 'wow':M=`<ellipse cx="60" cy="79" rx="4.5" ry="5.5" fill="#8a2f3b" ${S} stroke-width="2.5"/>`;break;
+    case 'cool':M=`<path d="M53 78Q62 82 68 75" fill="none" ${S}/>`;break;
+    case 'small':M=`<path d="M56 79h8" ${S}/>`;break;
+    case 'wavy':M=`<path d="M51 79q2.5-3 5 0t5 0 5 0 4 0" fill="none" ${S} stroke-width="2.5"/>`;break;
+    default:M=`<path d="M52 76Q60 84 68 76" fill="none" ${S}/>`;
+  }
+  const glasses=c.glasses?`<circle cx="46" cy="60" r="10" fill="rgba(255,255,255,.25)" ${S} stroke-width="2.5"/><circle cx="74" cy="60" r="10" fill="rgba(255,255,255,.25)" ${S} stroke-width="2.5"/><path d="M56 59h8" ${S} stroke-width="2.5"/>`:'';
+  const bag=c.backpack?`<rect x="22" y="94" width="76" height="34" rx="12" fill="#ef5a6f" ${S}/>`:'';
+  const straps=c.backpack?`<path d="M42 92v34M78 92v34" stroke="#c43b55" stroke-width="5"/>`:'';
+  const phones=c.phones?`<path d="M20 58Q20 8 60 8Q100 8 100 58" fill="none" stroke="#2a2852" stroke-width="6"/><path d="M20 58Q20 8 60 8Q100 8 100 58" fill="none" stroke="#8ee3c3" stroke-width="3"/><rect x="12" y="50" width="14" height="22" rx="6" fill="#8ee3c3" ${S}/><rect x="94" y="50" width="14" height="22" rx="6" fill="#8ee3c3" ${S}/>`:'';
+  const hats={
+    none:'',
+    explorer:`<ellipse cx="60" cy="26" rx="46" ry="9" fill="#c49a5a" ${S}/><path d="M32 26Q32 0 60 0Q88 0 88 26Z" fill="#d9b77a" ${S}/><path d="M33 20h54" stroke="#6a52c9" stroke-width="5"/>`,
+    cap:`<path d="M24 34Q24 4 60 4Q96 4 96 34Z" fill="#4d8fd9" ${S}/><path d="M60 34h44q4 6-4 8H60z" fill="#2c78bd" ${S}/><circle cx="60" cy="5" r="3" fill="#ffd451" ${S} stroke-width="2"/>`,
+    wizard:`<path d="M26 30L64 -18L94 30Z" fill="#6a52c9" ${S}/><ellipse cx="60" cy="30" rx="40" ry="7" fill="#7d6bd6" ${S}/><path d="M62 8l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z" fill="#ffd451"/>`,
+    helmet:'',
+  };
+  const helmet=c.hat==='helmet'?`<circle cx="60" cy="56" r="47" fill="rgba(143,208,247,.22)" ${S}/><path d="M30 34Q44 18 62 18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`:'';
+  const mic=c.outfit==='mc'?`<path d="M92 118l8-22" stroke="#2a2852" stroke-width="5" stroke-linecap="round"/><circle cx="101" cy="92" r="7" fill="#ffd451" ${S}/><circle cx="92" cy="120" r="7" fill="${c.skin}" ${S}/>`:'';
+  const wave = expr==='celebrate'?`<path d="M14 62l-6-18M10 40l-4-2M14 38l1-5M18 41l4-2" ${S} stroke="#f2a900"/>`:'';
+  return `<svg class="${cls||''}" viewBox="-8 -20 136 152" role="img" aria-label="Nhân vật Chibi">
+   ${bag}${back}
+   <path d="M36 128V104Q36 90 60 90Q84 90 84 104V128Z" fill="${ocol}" ${S}/>
+   ${odet}${straps}
+   <rect x="54" y="86" width="12" height="8" fill="${c.skin}"/>
+   <circle cx="60" cy="56" r="38" fill="${c.skin}" ${S}/>
+   <ellipse cx="38" cy="72" rx="6" ry="4" fill="#ff9aa8" opacity=".55"/><ellipse cx="82" cy="72" rx="6" ry="4" fill="#ff9aa8" opacity=".55"/>
+   ${E}${M}${front}${glasses}${phones}${hats[c.hat]||''}${helmet}${mic}${extra}${wave}
+  </svg>`;
+}
+
+/* ===================== Badges ===================== */
+const BADGES=[
+ {id:'first',name:'Bước chân đầu tiên',desc:'Hoàn thành lượt chơi đầu tiên',col:'#8fd0f7',test:p=>p.games>=1},
+ {id:'knight',name:'Hiệp sĩ lịch sử',desc:'Trả lời đúng 30 câu Lịch sử',col:'#c3b3f5',test:p=>fieldCorrect(p,'Lịch sử')>=30},
+ {id:'geo',name:'Nhà địa lý nhí',desc:'Trả lời đúng 30 câu Địa lý',col:'#8ee3c3',test:p=>fieldCorrect(p,'Địa lý')>=30},
+ {id:'archae',name:'Nhà khảo cổ nhí',desc:'Đúng 10 câu Thế giới cổ đại',col:'#e6dccb',test:p=>tc(p,'05_The_gioi_co_dai')>=10},
+ {id:'europe',name:'Nhà thám hiểm châu Âu',desc:'Đúng 10 câu Lịch sử hoặc Địa lý châu Âu',col:'#d9cdfb',test:p=>tc(p,'01_Lich_su_chau_Au')+tc(p,'06_Dia_ly_chau_Au')>=10},
+ {id:'lacHong',name:'Con cháu Lạc Hồng',desc:'Đúng 10 câu Lịch sử Việt Nam',col:'#ffd98a',test:p=>tc(p,'11_Lich_su_Viet_Nam')>=10},
+ {id:'owl',name:'Cú thông thái',desc:'Vượt qua câu 10 Ai là triệu phú',col:'#9a7fe0',test:p=>p.bestMillion>=10},
+ {id:'safe',name:'Chạm mốc an toàn',desc:'Vượt qua câu 5 Ai là triệu phú',col:'#ffd451',test:p=>p.bestMillion>=5},
+ {id:'million',name:'Triệu phú Chibi',desc:'Chinh phục đủ 15 câu',col:'#ffb894',test:p=>p.bestMillion>=15},
+ {id:'perfect',name:'Điểm tuyệt đối',desc:'Đúng 100% một lượt Chơi tự do từ 10 câu',col:'#8ee3c3',test:p=>p.perfect>=1},
+ {id:'globe',name:'Vòng quanh thế giới',desc:'Trả lời đúng ở cả 11 chủ đề',col:'#8fd0f7',test:p=>TOPICS.every(t=>tc(p,t.file)>=1)},
+ {id:'steady',name:'Không bỏ cuộc',desc:'Hoàn thành 10 lượt chơi',col:'#ffb894',test:p=>p.games>=10},
+];
+function tc(p,f){return (p.topics[f]||{}).correct||0}
+function fieldCorrect(p,field){return TOPICS.filter(t=>t.field===field).reduce((s,t)=>s+tc(p,t.file),0)}
+function badgeSVG(b){return `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 40l-6 20 10-5 6 7 2-18M44 40l6 20-10-5-6 7-2-18" fill="#ef5a6f" stroke="#2a2852" stroke-width="2.5" stroke-linejoin="round"/><circle cx="32" cy="28" r="20" fill="${b.col}" stroke="#2a2852" stroke-width="3"/><path d="M32 16l3.5 7.5 8 1-6 5.6 1.6 8L32 34l-7.1 4.1 1.6-8-6-5.6 8-1z" fill="#fff" stroke="#2a2852" stroke-width="2.2" stroke-linejoin="round"/></svg>`}
+
+/* ===================== State ===================== */
+let BANK=[], ISSUES=[];
+/* ===================== Tài khoản (lưu trên thiết bị) =====================
+   ACC = {parent:{salt,hash}|null, users:{username:{salt,hash,profile,createdAt,lastPlayed}}}
+   Mật khẩu & PIN được băm PBKDF2-SHA256 (120.000 vòng) kèm salt riêng, không lưu dạng chữ. */
+const NEWPROFILE=()=>({nick:'Nhà thám hiểm',av:{...DEFAULT_AV},xp:0,stars:0,games:0,answered:0,correct:0,topics:{},bestMillion:0,perfect:0,badges:[],history:[]});
+let ACC=store.get('accounts',null)||{parent:null,users:{}};
+const saveAcc=()=>store.set('accounts',ACC);
+/* Hai chế độ tài khoản:
+   - CLOUD (đã điền config.js): Supabase Auth email + mật khẩu, quên mật khẩu qua email, tiến trình đồng bộ bảng profiles.
+   - LOCAL (chưa cấu hình): tài khoản do phụ huynh tạo, lưu trong trình duyệt. */
+const CFG=window.CHIBI_CONFIG||{};
+const CLOUD=!!(CFG.supabaseUrl&&CFG.supabaseAnonKey);
+let SB=null, CLOUD_USER=null, CLOUD_ERR='', RECOVERY=false, DATA_READY=false;
+let CUR=null;
+if(!CLOUD){try{CUR=localStorage.getItem('chibi_session')||sessionStorage.getItem('chibi_session')}catch(e){}
+  if(CUR&&!ACC.users[CUR])CUR=null;}
+let PROFILE;
+const guestProfile=()=>store.get('profile',null)||NEWPROFILE();
+function loadProfile(){if(CLOUD){if(!CLOUD_USER)PROFILE=guestProfile();return}PROFILE=CUR?ACC.users[CUR].profile:guestProfile()}
+loadProfile();
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const newSalt=()=>hex(crypto.getRandomValues(new Uint8Array(16)));
+async function hashPw(pw,salt){const enc=new TextEncoder();const key=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveBits']);
+  return hex(await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:120000,hash:'SHA-256'},key,256))}
+const W1=['cu','meo','rong','gau','tho','voi','cao','ca','chim','ong','sao','may'];
+const W2=['xanh','tim','vang','hong','cam','bac','mint','nau'];
+const W3=['bien','nui','song','rung','dao','may','gio','nang','trang','sao'];
+const rint=n=>crypto.getRandomValues(new Uint32Array(1))[0]%n;
+const pick=a=>a[rint(a.length)];
+const genPass=()=>`${pick(W1)}-${pick(W2)}-${pick(W3)}-${10+rint(90)}`;
+function genUser(){for(let i=0;i<50;i++){const u=pick(W1)+pick(W2)+(10+rint(90));if(!ACC.users[u])return u}return 'be'+Date.now()%100000}
+const USER_RE=/^[a-z0-9_]{3,16}$/;
+function setSession(u,remember){try{localStorage.removeItem('chibi_session');sessionStorage.removeItem('chibi_session');if(u)(remember?localStorage:sessionStorage).setItem('chibi_session',u)}catch(e){}CUR=u;loadProfile()}
+let PARENT_OK=false, LOGIN_FAILS=0, LOGIN_LOCK=0;
+const PREF=Object.assign({sound:true,rm:matchMedia('(prefers-reduced-motion: reduce)').matches},store.get('pref',{}));
+let G=null; // current game
+let SETUP={mode:'million',scope:'all',topics:new Set(),count:10,min:1,max:15,timer:0};
+let SYNC_T=null, SYNC_STATE='';
+function saveProfile(){
+  if(CLOUD&&CLOUD_USER){store.set('cloud_'+CLOUD_USER.id,PROFILE);clearTimeout(SYNC_T);SYNC_T=setTimeout(pushProfile,700);return}
+  if(CUR&&ACC.users[CUR]){ACC.users[CUR].profile=PROFILE;ACC.users[CUR].lastPlayed=Date.now();saveAcc()}else store.set('profile',PROFILE)}
+const level=xp=>Math.floor(xp/200)+1;
+
+/* ===================== Sound ===================== */
+let AC=null;
+function tone(seq){ if(!PREF.sound)return; try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();let t=AC.currentTime;
+ seq.forEach(([f,d,type])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=type||'triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.02);t+=d*.85});}catch(e){} }
+const SFX={tap:()=>tone([[660,.07]]),lock:()=>tone([[330,.12],[392,.12],[440,.2]]),ok:()=>tone([[523,.12],[659,.12],[784,.25]]),bad:()=>tone([[300,.18,'sawtooth'],[220,.3,'sawtooth']]),win:()=>tone([[523,.1],[659,.1],[784,.1],[1047,.35]]),help:()=>tone([[880,.08],[988,.12]])};
+
+/* ===================== Confetti ===================== */
+function confetti(n=90){ if(PREF.rm)return; const cv=$('#confetti'),ctx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
+ const cols=['#ffd451','#8ee3c3','#c3b3f5','#ffb894','#8fd0f7','#ef5a6f'];
+ const P=Array.from({length:n},()=>({x:innerWidth/2+(Math.random()-.5)*200,y:innerHeight*.35,vx:(Math.random()-.5)*12,vy:-Math.random()*12-4,s:Math.random()*8+5,c:rnd(cols),r:Math.random()*6,vr:(Math.random()-.5)*.3}));
+ let f=0;(function step(){ctx.clearRect(0,0,cv.width,cv.height);P.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);ctx.restore()});if(++f<110)requestAnimationFrame(step);else ctx.clearRect(0,0,cv.width,cv.height)})();}
+
+/* ===================== Data loading & validation ===================== */
+async function loadData(){
+  const seen=new Set();
+  await Promise.all(TOPICS.map(async t=>{
+    t.questions=[];t.status='missing';
+    try{
+      const r=await fetch(DATA_DIR+t.file+'.json');
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      const arr=await r.json();
+      if(!Array.isArray(arr))throw new Error('không phải mảng');
+      t.raw=arr;t.status='ok';
+    }catch(e){t.err=String(e.message||e)}
+  }));
+  // validate in file order so duplicate detection is deterministic
+  TOPICS.forEach(t=>{
+    if(!t.raw)return;
+    t.raw.forEach((q,i)=>{
+      const where=`${t.file} #${i+1}`;
+      const need=['id','cau_hoi','A','B','C','D','dap_an','giai_thich','muc_do'];
+      const miss=need.filter(k=>q[k]===undefined||q[k]===null||String(q[k]).trim()==='');
+      if(miss.length){ISSUES.push(`${where}: thiếu trường ${miss.join(', ')}`);return}
+      const ans=String(q.dap_an).trim().toUpperCase();
+      if(!LET.includes(ans)){ISSUES.push(`${where} (${q.id}): đáp án "${q.dap_an}" ngoài A–D`);return}
+      const opts=LET.map(k=>String(q[k]).trim());
+      if(new Set(opts).size<4){ISSUES.push(`${where} (${q.id}): có phương án trùng nhau`);return}
+      const lv=parseInt(q.muc_do,10);
+      if(!(lv>=1)){ISSUES.push(`${where} (${q.id}): mức độ không hợp lệ`);return}
+      if(seen.has(q.id)){ISSUES.push(`${where}: ID trùng ${q.id}`);return}
+      seen.add(q.id);
+      const item={id:q.id,topic:t.file,chu_de:q.chu_de||t.name,linh_vuc:q.linh_vuc||'',lv,cau_hoi:q.cau_hoi,opts:LET.map(k=>q[k]),ans:LET.indexOf(ans),giai_thich:q.giai_thich};
+      t.questions.push(item);BANK.push(item);
+      if(!t.field&&q.linh_vuc)t.field=q.linh_vuc;
+    });
+    delete t.raw;
+    if(!t.questions.length)t.status='missing';
+  });
+  TOPICS.forEach(t=>{if(!t.field)t.field=/Lich_su|co_dai/.test(t.file)?'Lịch sử':'Địa lý'});
+}
+const avail=()=>TOPICS.filter(t=>t.questions.length);
+const maxLv=()=>BANK.reduce((m,q)=>Math.max(m,q.lv),1);
+
+/* ===================== Routing ===================== */
+let screen='home';
+function go(s,opts){screen=s;window.scrollTo({top:0,behavior:PREF.rm?'auto':'smooth'});
+  document.querySelectorAll('.nav [data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go===s));
+  if(s!=='parent')PARENT_OK=false; // rời Góc phụ huynh là tự khóa lại
+  ({home:renderHome,setup:renderSetup,play:renderPlay,result:renderResult,profile:renderProfile,social:renderSocial,login:renderLogin,parent:renderParent,reset:renderReset}[s])(opts);
+  renderFoot();renderUserBtn();
+}
+const app=()=>$('#app');
+
+/* ===================== HOME ===================== */
+const HELLO=['Sẵn sàng khám phá thế giới chưa?','Hôm nay mình đi đâu nhỉ?','Chọn một vùng đất trên bản đồ nhé!'];
+function renderHome(){
+  const av=avail(), lvl=level(PROFILE.xp), into=PROFILE.xp%200;
+  app().innerHTML=`<div class="wrap screen">
+   <section class="hero">
+     <div>
+       <p class="eyebrow">Lịch sử & Địa lý · 10–13 tuổi</p>
+       <h1 style="margin-top:8px">Ai là triệu phú<span class="c">Chibi</span></h1>
+       <p class="lead">Trả lời 15 câu hỏi từ dễ đến khó, dùng quyền trợ giúp thật khéo, hoặc chơi tự do để luyện tập theo chủ đề em thích.</p>
+       ${CUR?'':`<div class="notice" style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="flex:1;min-width:200px">Em đang chơi thử với tư cách khách. Đăng nhập để lưu avatar, XP và huy hiệu của riêng em.</span><button class="btn sm lav" data-go2="login">Đăng nhập</button></div>`}
+       <div class="cta">
+         <button class="btn" data-quick="million">Chơi Ai là triệu phú</button>
+         <button class="btn lav" data-quick="free">Chơi tự do</button>
+       </div>
+       <div class="statusline">
+         <span class="chip" style="background:var(--mint)">${av.length}/${TOPICS.length} chủ đề khả dụng</span>
+         <span class="chip">${fmt(BANK.length)} câu hỏi</span>
+         <span class="chip" style="background:var(--lav-soft)">Không có bảng xếp hạng: chỉ có em và kiến thức</span>
+       </div>
+     </div>
+     <div class="mc-stage">
+       <div class="podium"></div>
+       ${avatarSVG(MC_AV,'hello','mc')}
+       <div class="bubble">${rnd(HELLO)}</div>
+     </div>
+   </section>
+
+   <section class="map" aria-labelledby="mapTitle">
+     <div class="map-head">
+       <div><p class="eyebrow">Bản đồ phiêu lưu</p><h2 id="mapTitle">Chọn vùng đất để khám phá</h2></div>
+       <svg class="compass" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" fill="#fff" stroke="#2a2852" stroke-width="3"/><path d="M40 10l7 30-7 30-7-30z" fill="#ef5a6f" stroke="#2a2852" stroke-width="2.5" stroke-linejoin="round"/><path d="M40 40l7 0-7 30-7-30z" fill="#c3b3f5" stroke="#2a2852" stroke-width="2.5" stroke-linejoin="round"/><text x="40" y="9" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="10" fill="#2a2852" dy="-1">B</text></svg>
+     </div>
+     <div class="regions">
+       ${TOPICS.map(t=>{const ok=t.questions.length>0;return `<article class="region${ok?'':' locked'}">
+         <div class="isle" style="background:${t.bg}">${icon(t.icon)}</div>
+         <div><h3>${esc(t.name)}</h3><p class="muted" style="font-weight:700;font-size:.9rem">${esc(t.place)}</p></div>
+         <div class="meta"><span class="chip">${esc(t.field)}</span><span class="num">${ok?fmt(t.questions.length)+' câu':'Sắp mở khóa'}</span></div>
+         <button class="btn sm ${ok?'':'white'}" ${ok?`data-topic="${t.file}"`:'disabled'}>${ok?'Khám phá ngay':'Sắp mở khóa'}</button>
+       </article>`}).join('')}
+     </div>
+   </section>
+
+   <section class="home-grid">
+     <div class="panel">
+       <p class="eyebrow">Hành trang của em</p>
+       <div class="mini-me" style="margin-top:8px">
+         ${avatarSVG(PROFILE.av)}
+         <div style="flex:1;min-width:0;display:grid;gap:6px">
+           <h3 style="font-size:1.35rem">${esc(PROFILE.nick)}</h3>
+           <div style="font-weight:800">Cấp ${lvl} · ${fmt(PROFILE.xp)} XP · ${PROFILE.stars} sao</div>
+           <div class="xpbar" aria-label="Tiến độ lên cấp"><i style="width:${into/2}%"></i></div>
+           <div class="muted" style="font-weight:700;font-size:.88rem">${PROFILE.badges.length}/${BADGES.length} huy hiệu · còn ${200-into} XP để lên cấp</div>
+         </div>
+       </div>
+       <div class="row" style="margin-top:12px"><button class="btn sm white" data-go2="profile">Sửa avatar & xem hồ sơ</button></div>
+     </div>
+     <div class="panel">
+       <p class="eyebrow">Hai cách chơi</p>
+       <div style="display:grid;gap:10px;margin-top:8px;font-weight:600">
+         <p><b>Ai là triệu phú Chibi:</b> 15 câu khó dần, 4 quyền trợ giúp, mốc an toàn ở câu 5 và câu 10. Trả lời sai là dừng lượt.</p>
+         <p><b>Chơi tự do:</b> chọn số câu, độ khó và đồng hồ. Mỗi câu đúng được 1 điểm, sai vẫn chơi tiếp đến hết.</p>
+         <p class="muted" style="font-size:.92rem">Sau mỗi câu đều có “Góc khám phá: Bạn có biết?” để đọc lời giải thích.</p>
+       </div>
+     </div>
+   </section>
+  </div>`;
+  app().querySelectorAll('[data-quick]').forEach(b=>b.onclick=()=>{SFX.tap();SETUP.mode=b.dataset.quick;SETUP.scope='all';SETUP.topics=new Set();go('setup')});
+  app().querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>{SFX.tap();SETUP.scope='topics';SETUP.topics=new Set([b.dataset.topic]);go('setup')});
+  app().querySelectorAll('[data-go2]').forEach(b=>b.onclick=()=>go(b.dataset.go2));
+}
+
+/* ===================== SETUP ===================== */
+function poolFor(cfg){
+  const set=cfg.scope==='all'?null:cfg.topics;
+  return BANK.filter(q=>!set||set.has(q.topic));
+}
+function renderSetup(){
+  const av=avail(), ML=maxLv();
+  if(SETUP.max>ML)SETUP.max=ML;
+  // drop selections of missing topics
+  SETUP.topics=new Set([...SETUP.topics].filter(f=>av.some(t=>t.file===f)));
+  const pool=poolFor(SETUP);
+  const fpool=pool.filter(q=>q.lv>=SETUP.min&&q.lv<=SETUP.max);
+  const isFree=SETUP.mode==='free';
+  let warn='', can=true;
+  if(SETUP.scope==='topics'&&!SETUP.topics.size){warn='Hãy chọn ít nhất một chủ đề, hoặc chọn “Tất cả chủ đề”.';can=false}
+  else if(isFree){
+    if(SETUP.min>SETUP.max){warn='Mức độ “từ” đang lớn hơn mức “đến”. Hãy đổi lại khoảng độ khó.';can=false}
+    else if(!fpool.length){warn='Không có câu nào khớp phạm vi và độ khó này. Hãy mở rộng khoảng độ khó hoặc thêm chủ đề.';can=false}
+    else if(SETUP.count!=='all'&&fpool.length<SETUP.count){warn=`Chỉ có ${fpool.length} câu phù hợp, chưa đủ ${SETUP.count} câu. Hãy chọn ít câu hơn, “Toàn bộ”, hoặc mở rộng phạm vi.`;can=false}
+  } else if(pool.length<15){warn=`Phạm vi này chỉ có ${pool.length} câu, chưa đủ 15 câu cho Ai là triệu phú. Hãy thêm chủ đề.`;can=false}
+  const nQ=isFree?(SETUP.count==='all'?fpool.length:SETUP.count):15;
+  app().innerHTML=`<div class="wrap screen"><div class="setup">
+   <div class="row" style="justify-content:space-between">
+     <div><p class="eyebrow">Chuẩn bị lên đường</p><h1 style="font-size:clamp(1.8rem,4vw,2.4rem)">Thiết lập lượt chơi</h1></div>
+     <button class="btn sm white" id="back">Về bản đồ</button>
+   </div>
+   ${av.length<TOPICS.length?`<div class="notice">Hiện có ${av.length}/${TOPICS.length} chủ đề khả dụng. Khi nạp thêm tệp câu hỏi, nguồn câu sẽ tự mở rộng.</div>`:''}
+   <section class="panel step">
+     <h2><span class="n">1</span>Chọn chế độ chơi</h2>
+     <div class="modes">
+       <button class="mode" data-mode="million" aria-pressed="${SETUP.mode==='million'}">
+         <h3>Ai là triệu phú Chibi</h3>
+         <ul><li>15 câu, khó dần theo từng câu</li><li>50:50, Khán giả nhí, Hỏi cú thông thái, Đổi câu</li><li>Mốc an toàn ở câu 5 và câu 10</li></ul>
+       </button>
+       <button class="mode" data-mode="free" aria-pressed="${isFree}">
+         <h3>Chơi tự do</h3>
+         <ul><li>Đúng 1 câu = 1 điểm</li><li>Sai vẫn chơi tiếp, cuối lượt ôn câu sai</li><li>Tự chọn số câu, độ khó, đồng hồ</li></ul>
+       </button>
+     </div>
+   </section>
+   <section class="panel step">
+     <h2><span class="n">2</span>Chọn phạm vi câu hỏi</h2>
+     <div class="seg" role="group" aria-label="Phạm vi">
+       <button data-scope="topics" aria-pressed="${SETUP.scope==='topics'}">Theo chủ đề</button>
+       <button data-scope="all" aria-pressed="${SETUP.scope==='all'}">Tất cả chủ đề</button>
+     </div>
+     ${SETUP.scope==='topics'?`<div class="tchips">${TOPICS.map(t=>{const ok=t.questions.length>0;return `<button class="tchip" ${ok?`data-t="${t.file}"`:'disabled'} aria-pressed="${SETUP.topics.has(t.file)}">${icon(t.icon,t.bg)}${esc(t.name)}${ok?'':' · Sắp mở khóa'}</button>`}).join('')}</div>
+       <div class="row" style="margin-top:10px"><button class="btn sm white" id="allHist">Chọn mọi chủ đề Lịch sử</button><button class="btn sm white" id="allGeo">Chọn mọi chủ đề Địa lý</button><button class="btn sm white" id="clearT">Bỏ chọn</button></div>`
+       :`<p class="muted" style="margin-top:10px;font-weight:700">Câu hỏi được trộn ngẫu nhiên từ ${av.length} chủ đề. Mỗi câu đều có nhãn chủ đề.</p>`}
+   </section>
+   ${isFree?`<section class="panel step">
+     <h2><span class="n">3</span>Tùy chỉnh chơi tự do</h2>
+     <div class="field" style="margin-top:12px"><label>Số câu</label>
+       <div class="seg" style="margin-top:0">${[10,20,30,50,'all'].map(n=>`<button data-count="${n}" aria-pressed="${SETUP.count===n}">${n==='all'?'Toàn bộ ('+fpool.length+')':n+' câu'}</button>`).join('')}</div></div>
+     <div class="row" style="margin-top:14px">
+       <div class="field"><label for="minLv">Độ khó từ mức</label><select id="minLv">${Array.from({length:ML},(_,i)=>`<option ${SETUP.min===i+1?'selected':''}>${i+1}</option>`).join('')}</select></div>
+       <div class="field"><label for="maxLv">đến mức</label><select id="maxLv">${Array.from({length:ML},(_,i)=>`<option ${SETUP.max===i+1?'selected':''}>${i+1}</option>`).join('')}</select></div>
+       <div class="field"><label for="timer">Đồng hồ mỗi câu</label><select id="timer">${[[0,'Tắt'],[20,'20 giây'],[30,'30 giây'],[45,'45 giây']].map(([v,l])=>`<option value="${v}" ${SETUP.timer===v?'selected':''}>${l}</option>`).join('')}</select></div>
+     </div>
+     <p class="muted" style="margin-top:10px;font-size:.9rem;font-weight:600">Mức 1 là dễ nhất, mức ${ML} là khó nhất. Câu được rút ngẫu nhiên, không lặp, và xếp từ dễ đến khó.</p>
+   </section>`:''}
+   <section class="panel startbar">
+     <div><div class="poolinfo">${can?`Sẵn sàng: ${nQ} câu`:'Chưa thể bắt đầu'}</div><div class="muted" style="font-weight:700;font-size:.92rem">${(isFree?fpool:pool).length} câu phù hợp trong kho</div></div>
+     <button class="btn" id="start" ${can?'':'disabled'}>Bắt đầu phiêu lưu</button>
+     ${warn?`<div class="notice warn" style="flex-basis:100%">${warn}</div>`:''}
+   </section>
+  </div></div>`;
+  const R=()=>renderSetup();
+  $('#back').onclick=()=>go('home');
+  app().querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{SFX.tap();SETUP.mode=b.dataset.mode;R()});
+  app().querySelectorAll('[data-scope]').forEach(b=>b.onclick=()=>{SFX.tap();SETUP.scope=b.dataset.scope;R()});
+  app().querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{SFX.tap();const f=b.dataset.t;SETUP.topics.has(f)?SETUP.topics.delete(f):SETUP.topics.add(f);R()});
+  app().querySelectorAll('[data-count]').forEach(b=>b.onclick=()=>{SFX.tap();SETUP.count=b.dataset.count==='all'?'all':+b.dataset.count;R()});
+  const ah=$('#allHist'),ag=$('#allGeo'),ct=$('#clearT');
+  if(ah)ah.onclick=()=>{av.filter(t=>t.field==='Lịch sử').forEach(t=>SETUP.topics.add(t.file));R()};
+  if(ag)ag.onclick=()=>{av.filter(t=>t.field==='Địa lý').forEach(t=>SETUP.topics.add(t.file));R()};
+  if(ct)ct.onclick=()=>{SETUP.topics.clear();R()};
+  if($('#minLv'))$('#minLv').onchange=e=>{SETUP.min=+e.target.value;R()};
+  if($('#maxLv'))$('#maxLv').onchange=e=>{SETUP.max=+e.target.value;R()};
+  if($('#timer'))$('#timer').onchange=e=>{SETUP.timer=+e.target.value};
+  $('#start').onclick=()=>startGame();
+}
+
+/* ===================== GAME ===================== */
+function pickMillion(pool){
+  // câu i dùng mức độ gần nhất với mục tiêu; ưu tiên đúng mức, không lặp ID
+  const ML=maxLv(); const used=new Set(); const out=[];
+  for(let i=1;i<=15;i++){
+    const target=Math.max(1,Math.round(1+(i-1)*(ML-1)/14));
+    let q=null;
+    for(let d=0;d<ML&&!q;d++){
+      for(const lv of d?[target+d,target-d]:[target]){
+        const c=shuffle(pool.filter(x=>x.lv===lv&&!used.has(x.id)));
+        if(c.length){q=c[0];break}
+      }
+    }
+    if(!q)return null;
+    used.add(q.id);out.push(q);
+  }
+  return out;
+}
+function pickFree(pool,cfg){
+  const f=pool.filter(q=>q.lv>=cfg.min&&q.lv<=cfg.max);
+  const n=cfg.count==='all'?f.length:cfg.count;
+  return shuffle(f).slice(0,n).sort((a,b)=>a.lv-b.lv);
+}
+function startGame(customQs){
+  const cfg={...SETUP,topics:new Set(SETUP.topics)};
+  const pool=poolFor(cfg);
+  let qs = customQs || (cfg.mode==='million'?pickMillion(pool):pickFree(pool,cfg));
+  if(!qs||!qs.length){go('setup');return}
+  SFX.lock();
+  G={cfg,mode:customQs?'free':cfg.mode,pool,qs,idx:0,sel:null,locked:false,revealed:false,used:new Set(qs.map(q=>q.id)),
+     ll:{half:false,aud:false,owl:false,swap:false},hidden:new Set(),llbox:'',log:[],start:Date.now(),timeLeft:0,tick:null,stopAsk:false,review:!!customQs};
+  if(customQs)G.cfg.timer=0;
+  go('play');
+}
+const LINES={
+ ask:['Câu này thú vị đấy!','Đọc kỹ đề nhé, không cần vội!','Em nghĩ đáp án nào?','Hãy tin vào trí nhớ của mình!'],
+ think:['Hmm… để xem nào!','Em chắc chắn chưa?','Nhấn “Chốt đáp án” khi em sẵn sàng!'],
+ nervous:['Hồi hộp quá…','Đáp án đúng là…'],
+ ok:['Chính xác! Tuyệt vời!','Đúng rồi! Giỏi quá!','Xuất sắc luôn!'],
+ bad:['Tiếc quá! Cùng tìm hiểu đáp án nhé!','Không sao, mình học thêm một điều mới!'],
+ time:['Hết giờ rồi! Cùng xem đáp án nhé!'],
+};
+function curQ(){return G.qs[G.idx]}
+function renderPlay(){
+  const q=curQ(), t=TOPICS.find(x=>x.file===q.topic), M=G.mode==='million', n=G.qs.length;
+  const expr = G.revealed?(G.lastOk?'celebrate':'encourage'):G.locked?'nervous':G.sel!==null?'think':'hello';
+  const line = G.line || rnd(LINES.ask);
+  app().innerHTML=`<div class="stage"><div class="stage-grid">
+    <div style="min-width:0">
+      <div class="stage-top">
+        <span class="chip">${icon(t.icon,t.bg).replace('<svg','<svg style="width:20px;height:20px;border-radius:6px"')} ${esc(q.chu_de)}</span>
+        <span class="chip lv">Mức ${q.lv}</span>
+        ${G.review?'<span class="chip" style="background:var(--peach)">Ôn câu sai</span>':''}
+        <span class="grow"></span>
+        <button class="ghost" id="quit">Thoát lượt</button>
+      </div>
+      <div class="host">${avatarSVG(MC_AV,expr,'mc')}<div class="bubble" aria-live="polite">${esc(line)}</div></div>
+      <div class="qcard">
+        <span class="qno">Câu ${G.idx+1}/${n}${M?' · '+fmt(PRIZES[G.idx]):''}</span>
+        <h2>${esc(q.cau_hoi)}</h2>
+        ${G.cfg.timer&&!M?`<div class="timer${G.timeLeft<=5?' low':''}" aria-label="Thời gian còn lại"><i id="tbar" style="width:${G.timeLeft/G.cfg.timer*100}%"></i></div><div style="font-weight:800;font-size:.85rem;margin-top:4px" id="tnum">${G.timeLeft} giây</div>`:''}
+        <div class="opts" role="group" aria-label="Các phương án">
+          ${q.opts.map((o,i)=>{let c='opt';if(G.sel===i)c+=' sel';if(G.locked&&!G.revealed&&G.sel===i)c+=' pending';
+            if(G.revealed){if(i===q.ans)c+=' ok';else if(G.sel===i)c+=' bad'}
+            if(G.hidden.has(i))c+=' gone';
+            const dis=G.locked||G.hidden.has(i);
+            return `<button class="${c}" data-o="${i}" ${dis?'disabled':''} aria-pressed="${G.sel===i}"><span class="k">${LET[i]}</span><span class="t">${G.hidden.has(i)?'':esc(o)}</span></button>`}).join('')}
+        </div>
+      </div>
+      ${G.revealed?explainHTML(q):`
+        <div class="actions">
+          <button class="btn" id="lock" ${G.sel===null||G.locked?'disabled':''}>Chốt đáp án</button>
+          ${!M?`<button class="btn white sm" id="skip" ${G.locked?'disabled':''}>Bỏ qua câu này</button>`:''}
+          <span class="sp"></span>
+          ${M&&G.idx>0?`<button class="ghost" id="stop" ${G.locked?'disabled':''}>Dừng cuộc chơi</button>`:''}
+        </div>
+        ${G.stopAsk?`<div class="stopconfirm">Dừng ở đây và nhận ${fmt(PRIZES[G.idx-1])} điểm thưởng?<span style="flex:1"></span><button class="btn sm peach" id="stopYes">Dừng và nhận thưởng</button><button class="btn sm white" id="stopNo">Chơi tiếp</button></div>`:''}
+        ${M?`<div class="lifelines" aria-label="Quyền trợ giúp">
+          ${[['half','50:50'],['aud','Khán giả nhí'],['owl','Hỏi cú thông thái'],['swap','Đổi câu']].map(([k,l])=>`<button class="ll" data-ll="${k}" ${G.ll[k]||G.locked?'disabled':''}><span class="ic">${LLICON[k]}</span>${l}</button>`).join('')}
+        </div>`:''}
+        ${G.llbox?`<div class="llbox" aria-live="polite">${G.llbox}</div>`:''}
+      `}
+    </div>
+    ${M?ladderHTML():scoreHTML()}
+  </div></div>`;
+  bindPlay();
+}
+function ladderHTML(){
+  return `<aside class="ladder" aria-label="Thang điểm thưởng của lượt này"><h3><span>Thang thưởng</span><span style="font-weight:600;font-size:.8rem;opacity:.8">lượt này</span></h3><ol>
+   ${PRIZES.map((p,i)=>{let c=[];if(SAFE.includes(i+1))c.push('safe');if(i<G.idx||(i===G.idx&&G.revealed&&G.lastOk))c.push('done');if(i===G.idx)c.push('cur');
+     return `<li class="${c.join(' ')}"><span class="q">${i+1}</span><span>${fmt(p)}${SAFE.includes(i+1)?' ★':''}</span></li>`}).join('')}
+  </ol><p style="color:#dcd6ff;font-size:.78rem;margin-top:8px;font-weight:600">★ Mốc an toàn. Điểm thưởng là giả lập.</p></aside>`;
+}
+function scoreHTML(){
+  const ok=G.log.filter(l=>l.ok).length;
+  return `<aside class="scorebox" aria-label="Điểm của lượt này"><div><div style="font-weight:800;color:#dcd6ff">Điểm</div><div class="big">${ok}</div></div>
+   <div style="display:grid;gap:8px"><div style="font-weight:700;color:#fff">${ok} đúng · ${G.log.length-ok} sai/bỏ qua</div>
+   ${G.qs.length<=60?`<div class="dots">${G.qs.map((_,i)=>{const l=G.log[i];return `<i class="${l?(l.ok?'ok':'bad'):(i===G.idx?'cur':'')}"></i>`}).join('')}</div>`:`<div style="color:#dcd6ff;font-weight:700">Câu ${G.idx+1}/${G.qs.length}</div>`}</div></aside>`;
+}
+function paras(txt){
+  const s=String(txt).split(/(?<=[.!?…])\s+(?=[\p{Lu}"“(])/u);
+  const out=[];for(let i=0;i<s.length;i+=2)out.push(s.slice(i,i+2).join(' '));
+  return out.map(p=>`<p>${esc(p)}</p>`).join('');
+}
+function explainHTML(q){
+  const M=G.mode==='million', last=G.idx===G.qs.length-1;
+  const verdict=G.timeout?'Hết giờ!':G.sel===null?'Em đã bỏ qua câu này':G.lastOk?'Chính xác!':'Chưa đúng rồi!';
+  let btn;
+  if(M&&!G.lastOk)btn=`<button class="btn" id="next">Xem kết quả</button>`;
+  else if(last)btn=`<button class="btn" id="next">Đã hiểu! Xem kết quả</button>`;
+  else btn=`<button class="btn" id="next">Đã hiểu! Đi tiếp thôi!</button>`;
+  return `<section class="explain" aria-live="polite">
+    <div class="head">${owlSVG()}<div><p class="eyebrow">Góc khám phá: Bạn có biết?</p><div class="verdict ${G.lastOk?'ok':'bad'}">${verdict}</div></div></div>
+    <div class="ans">Đáp án đúng: ${LET[q.ans]}. ${esc(q.opts[q.ans])}</div>
+    <div class="body">${paras(q.giai_thich)}</div>
+    <div class="meta"><span class="chip">${esc(q.chu_de)}</span><span class="chip">${esc(q.linh_vuc)}</span><span class="chip">Mức độ ${q.lv}</span><span class="chip muted">${esc(q.id)}</span></div>
+    ${M&&G.lastOk&&SAFE.includes(G.idx+1)?`<div class="notice" style="margin-top:12px">Em đã chạm mốc an toàn ${fmt(PRIZES[G.idx])} điểm thưởng!</div>`:''}
+    <div class="actions">${btn}</div>
+  </section>`;
+}
+function bindPlay(){
+  app().querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>select(+b.dataset.o));
+  const on=(id,f)=>{const e=$('#'+id);if(e)e.onclick=f};
+  on('lock',lockIn);
+  on('skip',()=>{G.sel=null;lockIn(true)});
+  on('next',next);
+  on('quit',()=>{stopTimer();G=null;go('home')});
+  on('stop',()=>{G.stopAsk=true;renderPlay()});
+  on('stopNo',()=>{G.stopAsk=false;renderPlay()});
+  on('stopYes',()=>finish('stop'));
+  app().querySelectorAll('[data-ll]').forEach(b=>b.onclick=()=>useLL(b.dataset.ll));
+  if(G.cfg.timer&&G.mode==='free'&&!G.locked&&!G.tick)startTimer();
+}
+function select(i){if(!G||G.locked||G.hidden.has(i))return;SFX.tap();G.sel=i;G.line=rnd(LINES.think);renderPlay();const b=app().querySelector('#lock');if(b)b.focus({preventScroll:true})}
+function startTimer(){G.timeLeft=G.cfg.timer;G.tick=setInterval(()=>{G.timeLeft--;const tb=$('#tbar'),tn=$('#tnum');if(tb){tb.style.width=(G.timeLeft/G.cfg.timer*100)+'%';tb.parentNode.classList.toggle('low',G.timeLeft<=5)}if(tn)tn.textContent=G.timeLeft+' giây';
+  if(G.timeLeft<=0){stopTimer();G.timeout=true;G.sel=null;lockIn(true)}},1000)}
+function stopTimer(){if(G&&G.tick){clearInterval(G.tick);G.tick=null}}
+function lockIn(skip){
+  if(G.locked)return; if(!skip&&G.sel===null)return;
+  stopTimer();G.locked=true;G.stopAsk=false;G.line=rnd(LINES.nervous);SFX.lock();renderPlay();
+  const wait=skip?250:(PREF.rm?500:1600);
+  setTimeout(()=>{
+    const q=curQ();G.lastOk=G.sel===q.ans;G.revealed=true;
+    G.log.push({q,sel:G.sel,ok:G.lastOk,timeout:!!G.timeout});
+    G.line=G.timeout?LINES.time[0]:G.lastOk?rnd(LINES.ok):rnd(LINES.bad);
+    if(G.lastOk){SFX.ok();confetti(G.mode==='million'&&G.idx===14?200:50)}else SFX.bad();
+    renderPlay();
+    const n=$('#next');if(n)n.focus({preventScroll:true});
+  },wait);
+}
+function next(){
+  const M=G.mode==='million';
+  if(M&&!G.lastOk)return finish('wrong');
+  if(G.idx===G.qs.length-1)return finish(M?'win':'done');
+  G.idx++;Object.assign(G,{sel:null,locked:false,revealed:false,hidden:new Set(),llbox:'',line:null,timeout:false});
+  renderPlay();window.scrollTo({top:0,behavior:'auto'});
+}
+/* ---------- lifelines ---------- */
+function useLL(k){
+  if(G.ll[k]||G.locked)return;
+  const q=curQ();
+  const p=Math.max(.3,.9-(q.lv-1)*(.55/Math.max(1,maxLv()-1))); // xác suất "đúng" giảm theo độ khó
+  if(k==='half'){
+    const wrong=shuffle([0,1,2,3].filter(i=>i!==q.ans&&!G.hidden.has(i))).slice(0,2);
+    wrong.forEach(i=>G.hidden.add(i));if(wrong.includes(G.sel))G.sel=null;
+    G.llbox=`<b>50:50</b> đã ẩn hai đáp án sai. Còn lại hai lựa chọn!`;G.line='Còn hai đáp án thôi!';
+  }
+  if(k==='aud'){
+    const live=[0,1,2,3].filter(i=>!G.hidden.has(i));
+    const top=Math.random()<p?q.ans:rnd(live.filter(i=>i!==q.ans));
+    const w={};live.forEach(i=>w[i]=Math.random()*20+5);w[top]+=40+Math.random()*30;
+    if(top!==q.ans)w[q.ans]+=15; // khán giả vẫn có một phần nghĩ đúng
+    const tot=Object.values(w).reduce((a,b)=>a+b,0);const pct=[0,0,0,0];live.forEach(i=>pct[i]=Math.round(w[i]/tot*100));
+    const diff=100-pct.reduce((a,b)=>a+b,0);pct[top]+=diff;
+    G.llbox=`<b>Khán giả nhí bình chọn</b> <span class="muted" style="font-size:.85rem">(mô phỏng, câu càng khó khán giả càng phân vân)</span>
+      <div class="aud">${pct.map((v,i)=>`<div class="bar"><span>${G.hidden.has(i)?'–':v+'%'}</span><i style="height:${Math.max(3,Math.round(v*1.05))}px"></i><span>${LET[i]}</span></div>`).join('')}</div>`;
+    G.line='Cùng xem các bạn khán giả nghĩ gì!';
+  }
+  if(k==='owl'){
+    const live=[0,1,2,3].filter(i=>!G.hidden.has(i));
+    const right=Math.random()<Math.min(.95,p+.05);
+    const pick=right?q.ans:rnd(live.filter(i=>i!==q.ans));
+    const conf=p>.75?'Bác khá chắc chắn':p>.5?'Bác nghĩ là':'Câu này khó đấy, bác chỉ đoán thôi';
+    G.llbox=`<div class="owlsay">${owlSVG()}<div><b>Cú thông thái nói:</b> “${conf}: đáp án <b>${LET[pick]}. ${esc(q.opts[pick])}</b>. Nhưng em hãy tự suy nghĩ thêm nhé!”<div class="muted" style="font-size:.82rem;margin-top:4px">Gợi ý của cú không phải lúc nào cũng đúng.</div></div></div>`;
+    G.line='Cú thông thái đã lên tiếng!';
+  }
+  if(k==='swap'){
+    const cands=lv=>G.pool.filter(x=>!G.used.has(x.id)&&x.lv===lv);
+    let rep=null;
+    for(let d=0;d<=2&&!rep;d++){for(const lv of d?[q.lv+d,q.lv-d]:[q.lv]){
+      const same=shuffle(cands(lv).filter(x=>x.topic===q.topic));const any=shuffle(cands(lv));
+      rep=same[0]||(d===0?any[0]:null)||rep;if(rep)break}}
+    if(!rep){G.llbox='Không còn câu tương đương để đổi trong phạm vi này. Quyền “Đổi câu” vẫn được giữ lại.';renderPlay();return}
+    G.used.add(rep.id);G.qs[G.idx]=rep;G.hidden=new Set();G.sel=null;
+    G.llbox=`<b>Đổi câu</b> thành công! Đây là câu mới cùng độ khó.`;G.line='Một câu hỏi mới toanh!';
+  }
+  G.ll[k]=true;SFX.help();renderPlay();
+}
+
+/* ---------- finish ---------- */
+function finish(reason){
+  stopTimer();
+  const M=G.mode==='million', log=G.log, ok=log.filter(l=>l.ok).length;
+  let passed=0,prize=0;
+  if(M){passed=log.filter(l=>l.ok).length;
+    if(reason==='wrong')prize=passed>=10?PRIZES[9]:passed>=5?PRIZES[4]:0;
+    else prize=passed?PRIZES[passed-1]:0;}
+  // XP & stats
+  let xp=M?passed*15+(reason==='win'?100:0):ok*10;
+  let stars=0;
+  if(M)stars=passed>=15?3:passed>=10?2:passed>=5?1:0;
+  else{const r=log.length?ok/log.length:0;stars=r>=.9?3:r>=.7?2:r>=.5?1:0}
+  const before=new Set(PROFILE.badges);
+  PROFILE.xp+=xp;PROFILE.stars+=stars;PROFILE.games++;
+  log.forEach(l=>{PROFILE.answered++;if(l.ok)PROFILE.correct++;const T=PROFILE.topics[l.q.topic]||(PROFILE.topics[l.q.topic]={answered:0,correct:0});T.answered++;if(l.ok)T.correct++});
+  if(M)PROFILE.bestMillion=Math.max(PROFILE.bestMillion,passed);
+  if(!M&&log.length>=10&&ok===log.length)PROFILE.perfect++;
+  BADGES.forEach(b=>{if(!before.has(b.id)&&b.test(PROFILE))PROFILE.badges.push(b.id)});
+  const fresh=PROFILE.badges.filter(b=>!before.has(b));
+  const secs=Math.round((Date.now()-G.start)/1000);
+  PROFILE.history.unshift({at:Date.now(),mode:G.review?'review':G.mode,scope:G.cfg.scope==='all'?'Tất cả chủ đề':[...G.cfg.topics].map(f=>TOPICS.find(t=>t.file===f).name).join(', '),ok,n:log.length,passed,prize,reason});
+  PROFILE.history=PROFILE.history.slice(0,30);
+  saveProfile();
+  const R={reason,M,log,ok,passed,prize,xp,stars,fresh,secs,cfg:G.cfg,review:G.review};
+  if(reason==='win'||(!M&&log.length&&ok/log.length>=.7)){SFX.win();confetti(160)}
+  G=null;go('result',R);
+}
+
+/* ===================== RESULT ===================== */
+let LAST=null;
+function renderResult(R){
+  R=R||LAST;LAST=R;if(!R){go('home');return}
+  const wrongs=R.log.filter(l=>!l.ok);
+  const mm=s=>`${Math.floor(s/60)} phút ${s%60} giây`;
+  let title,sub,expr;
+  if(R.M){
+    if(R.reason==='win'){title='Triệu phú Chibi!';sub='Em đã vượt qua cả 15 câu hỏi. Thật đáng tự hào!';expr='celebrate'}
+    else if(R.reason==='stop'){title='Dừng cuộc chơi khôn ngoan!';sub=`Em quyết định dừng sau ${R.passed} câu và mang về toàn bộ điểm thưởng.`;expr='hello'}
+    else{title=R.passed>=5?'Đã chạm mốc an toàn!':'Hành trình còn dài!';sub=`Em trả lời đúng ${R.passed} câu trước khi dừng ở câu ${R.passed+1}.`;expr='encourage'}
+  }else{const pct=R.log.length?Math.round(R.ok/R.log.length*100):0;
+    title=pct>=90?'Xuất sắc!':pct>=70?'Làm tốt lắm!':pct>=50?'Cố lên một chút nữa!':'Mỗi câu sai là một điều mới học được!';
+    sub=`Em được ${R.ok} điểm: đúng ${R.ok}/${R.log.length} câu.`;expr=pct>=70?'celebrate':'encourage'}
+  const pct=R.log.length?Math.round(R.ok/R.log.length*100):0;
+  app().innerHTML=`<div class="wrap screen"><div class="result">
+   <section class="panel res-hero">
+     ${avatarSVG(MC_AV,expr,'mc')}
+     <div><p class="eyebrow">${R.M?'Ai là triệu phú Chibi':R.review?'Ôn câu sai':'Chơi tự do'} · Kết quả lượt chơi</p><h1>${title}</h1><p style="font-weight:700;margin-top:6px">${sub}</p>
+      <div class="stats">
+       ${R.M?`<div class="stat y"><b>${fmt(R.prize)}</b><span>điểm thưởng giả lập</span></div>
+              <div class="stat g"><b>${R.passed}/15</b><span>câu đã vượt qua</span></div>
+              <div class="stat l"><b>${R.reason==='win'?'Chiến thắng':R.reason==='stop'?'Dừng':'Trả lời sai'}</b><span>cách kết thúc</span></div>`
+            :`<div class="stat y"><b>${R.ok} điểm</b><span>= số câu đúng</span></div>
+              <div class="stat g"><b>${R.ok}</b><span>câu đúng</span></div>
+              <div class="stat r"><b>${wrongs.length}</b><span>câu sai hoặc bỏ qua</span></div>
+              <div class="stat l"><b>${pct}%</b><span>tỷ lệ chính xác</span></div>
+              <div class="stat"><b style="font-size:1.2rem">${mm(R.secs)}</b><span>thời gian</span></div>`}
+       <div class="stat"><b>+${R.xp} XP</b><span>${'★'.repeat(R.stars)||'0'} sao nhận được</span></div>
+      </div></div>
+   </section>
+   ${R.fresh.length?`<section class="panel"><p class="eyebrow">Huy hiệu mới</p><div class="newbadges" style="margin-top:10px">${R.fresh.map(id=>{const b=BADGES.find(x=>x.id===id);return `<div class="badge" style="min-width:150px">${badgeSVG(b)}<b>${b.name}</b><small>${b.desc}</small></div>`}).join('')}</div></section>`:''}
+   <section class="panel row">
+     <button class="btn" id="again">Chơi lại</button>
+     ${wrongs.length?`<button class="btn peach" id="redo">Ôn ${wrongs.length} câu sai</button>`:''}
+     <button class="btn lav" id="change">Đổi chủ đề</button>
+     <button class="btn white" id="home">Về bản đồ</button>
+   </section>
+   ${wrongs.length?`<section class="panel"><details open><summary>Xem lại câu sai (${wrongs.length})</summary><div class="review" style="margin-top:12px">${wrongs.map(rvHTML).join('')}</div></details></section>`:''}
+   ${R.log.some(l=>l.ok)?`<section class="panel"><details><summary>Xem lại câu đúng (${R.ok})</summary><div class="review" style="margin-top:12px">${R.log.filter(l=>l.ok).map(rvHTML).join('')}</div></details></section>`:''}
+  </div></div>`;
+  $('#again').onclick=()=>{SETUP={...R.cfg,topics:new Set(R.cfg.topics)};if(R.review)SETUP.mode='free';startGame()};
+  if($('#redo'))$('#redo').onclick=()=>{SETUP={...R.cfg,topics:new Set(R.cfg.topics)};startGame(wrongs.map(l=>l.q))};
+  $('#change').onclick=()=>go('setup');
+  $('#home').onclick=()=>go('home');
+}
+function rvHTML(l){const q=l.q;return `<article class="rv"><div class="row" style="gap:6px;margin-bottom:6px"><span class="chip">${esc(q.chu_de)}</span><span class="chip">Mức ${q.lv}</span></div>
+  <div class="q">${esc(q.cau_hoi)}</div>
+  <div class="a">${l.sel!==null&&l.sel!==q.ans?`<span class="bad">Em chọn: ${LET[l.sel]}. ${esc(q.opts[l.sel])}</span>`:''}${l.sel===null?`<span class="bad">${l.timeout?'Hết giờ':'Bỏ qua'}</span>`:''}<span class="ok">Đáp án: ${LET[q.ans]}. ${esc(q.opts[q.ans])}</span></div>
+  <p>${esc(q.giai_thich)}</p></article>`}
+
+/* ===================== PROFILE ===================== */
+let resetAsk=false;
+function renderProfile(){
+  const P=PROFILE, L=level(P.xp), acc=P.answered?Math.round(P.correct/P.answered*100):0;
+  const tStats=TOPICS.map(t=>({t,s:P.topics[t.file]||{answered:0,correct:0}}));
+  const best=tStats.filter(x=>x.s.answered>=5).sort((a,b)=>b.s.correct/b.s.answered-a.s.correct/a.s.answered)[0];
+  const opt=(list,key,unlockIdx)=>list.map(([v,l,lv])=>{const lock=lv&&L<lv;return `<button data-k="${key}" data-v="${v}" aria-pressed="${P.av[key]===v}" ${lock?'disabled':''}>${l}${lock?`<span class="lock">cấp ${lv}</span>`:''}</button>`}).join('');
+  app().innerHTML=`<div class="wrap screen">
+   <div class="row" style="justify-content:space-between;margin-bottom:16px"><div><p class="eyebrow">Hồ sơ trên thiết bị này</p><h1 style="font-size:clamp(1.8rem,4vw,2.4rem)">Góc của ${esc(P.nick)}</h1></div><button class="btn sm white" id="back">Về bản đồ</button></div>
+   <div class="prof">
+    <section class="panel">
+      <div class="avbig">${avatarSVG(P.av)}</div>
+      <div class="editor">
+        <div class="field"><label for="nick">Biệt danh</label><input type="text" id="nick" maxlength="16" value="${esc(P.nick)}" style="width:100%"><div class="muted" style="font-size:.8rem;font-weight:600;margin-top:4px">Dùng biệt danh vui, không ghi tên thật, trường lớp hay số điện thoại.</div></div>
+        <div><div class="lbl">Kiểu tóc</div><div class="opts-s">${opt(HAIRS,'hair')}</div></div>
+        <div><div class="lbl">Màu tóc</div><div class="swatches">${HAIRC.map(c=>`<button class="sw" style="background:${c}" data-k="hairColor" data-v="${c}" aria-pressed="${P.av.hairColor===c}" aria-label="Màu tóc ${c}"></button>`).join('')}</div></div>
+        <div><div class="lbl">Màu da</div><div class="swatches">${SKIN.map(c=>`<button class="sw" style="background:${c}" data-k="skin" data-v="${c}" aria-pressed="${P.av.skin===c}" aria-label="Màu da ${c}"></button>`).join('')}</div></div>
+        <div><div class="lbl">Đôi mắt</div><div class="opts-s">${opt(EYES,'eyes')}</div></div>
+        <div><div class="lbl">Biểu cảm</div><div class="opts-s">${opt(MOUTHS,'mouth')}</div></div>
+        <div><div class="lbl"><span>Trang phục</span><span class="muted">mở khóa theo cấp</span></div><div class="opts-s">${opt(OUTFITS,'outfit')}</div></div>
+        <div><div class="lbl">Mũ</div><div class="opts-s">${opt(HATS,'hat')}</div></div>
+        <div><div class="lbl">Phụ kiện</div><div class="opts-s">${ACCESSORIES.map(([k,l,lv])=>{const lock=L<lv;return `<button data-acc="${k}" aria-pressed="${!!P.av[k]}" ${lock?'disabled':''}>${l}${lock?`<span class="lock">cấp ${lv}</span>`:''}</button>`}).join('')}</div></div>
+        <p class="muted" style="font-size:.82rem;font-weight:600">Phụ kiện mở khóa bằng XP khi em chơi. Không có mua bán hay rương ngẫu nhiên.</p>
+      </div>
+    </section>
+    <div style="display:grid;gap:18px;min-width:0">
+     <section class="panel">
+       <div class="stats" style="margin-top:0">
+         <div class="stat l"><b>Cấp ${L}</b><span>${fmt(P.xp)} XP</span></div>
+         <div class="stat y"><b>${P.stars}</b><span>sao</span></div>
+         <div class="stat"><b>${fmt(P.answered)}</b><span>câu đã làm</span></div>
+         <div class="stat g"><b>${acc}%</b><span>tỷ lệ đúng</span></div>
+         <div class="stat r"><b>${P.bestMillion}/15</b><span>câu xa nhất ở Triệu phú</span></div>
+       </div>
+       <div class="xpbar" style="margin-top:14px"><i style="width:${(P.xp%200)/2}%"></i></div>
+       <p class="muted" style="font-weight:700;font-size:.88rem;margin-top:6px">Còn ${200-P.xp%200} XP để lên cấp ${L+1}${best?` · Chủ đề giỏi nhất: ${esc(best.t.name)}`:''}</p>
+     </section>
+     <section class="panel"><h2 style="font-size:1.3rem;margin-bottom:12px">Bộ sưu tập huy hiệu</h2>
+       <div class="badges">${BADGES.map(b=>`<div class="badge ${P.badges.includes(b.id)?'':'off'}">${badgeSVG(b)}<b>${b.name}</b><small>${b.desc}</small></div>`).join('')}</div></section>
+     <section class="panel"><h2 style="font-size:1.3rem;margin-bottom:12px">Tiến bộ theo chủ đề</h2>
+       <div class="tbars">${tStats.map(({t,s})=>`<div class="tbar"><span>${esc(t.name)}</span><span class="tr"><i style="width:${s.answered?s.correct/s.answered*100:0}%"></i></span><span>${s.correct}/${s.answered}</span></div>`).join('')}</div></section>
+     <section class="panel"><h2 style="font-size:1.3rem;margin-bottom:12px">Lịch sử học tập</h2>
+       ${P.history.length?`<div class="hist">${P.history.map(h=>`<div><span><b>${h.mode==='million'?'Ai là triệu phú':h.mode==='review'?'Ôn câu sai':'Chơi tự do'}</b> · ${esc(h.scope)}</span><span style="font-weight:800">${h.mode==='million'?`${h.passed}/15 câu · ${fmt(h.prize)}`:`${h.ok}/${h.n} điểm`}</span><span class="muted">${new Date(h.at).toLocaleDateString('vi-VN')}</span></div>`).join('')}</div>`:'<p class="muted" style="font-weight:700">Chưa có lượt chơi nào. Hãy bắt đầu từ bản đồ nhé!</p>'}
+     </section>
+     <section class="panel"><h2 style="font-size:1.1rem">${CUR?`Tài khoản: ${esc(CUR)}`:'Em đang chơi với tư cách khách'}</h2>
+       <p class="muted" style="font-weight:600;font-size:.92rem;margin-top:6px">${CUR?(CLOUD?`Tiến trình được đồng bộ, em đăng nhập ở máy nào cũng thấy. ${SYNC_STATE?esc(SYNC_STATE)+'.':''}`:'Tiến trình được lưu riêng cho tài khoản này trên máy này. Quên mật khẩu? Nhờ bố mẹ đặt lại trong Góc phụ huynh.'):'Tiến trình khách chỉ lưu tạm trên máy này. Hãy đăng nhập để có hồ sơ riêng.'}</p>
+       <div class="row" style="margin-top:10px">${CUR?`<button class="btn sm lav" id="logout2">Đăng xuất</button>${CLOUD?'<button class="btn sm white" id="chgPw">Đổi mật khẩu</button>':''}`:'<button class="btn sm lav" id="login2">Đăng nhập</button>'}${resetAsk?`<span style="font-weight:800">Xóa toàn bộ tiến trình trên máy này?</span><button class="btn sm peach" id="resetYes">Xóa</button><button class="btn sm white" id="resetNo">Giữ lại</button>`:`<button class="btn sm white" id="reset">Xóa tiến trình</button>`}</div>
+     </section>
+    </div>
+   </div></div>`;
+  $('#back').onclick=()=>go('home');
+  $('#nick').oninput=e=>{P.nick=e.target.value.trim()||'Nhà thám hiểm';saveProfile()};
+  $('#nick').onchange=()=>renderProfile();
+  app().querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{SFX.tap();P.av[b.dataset.k]=b.dataset.v;saveProfile();renderProfile()});
+  app().querySelectorAll('[data-acc]').forEach(b=>b.onclick=()=>{SFX.tap();P.av[b.dataset.acc]=!P.av[b.dataset.acc];saveProfile();renderProfile()});
+  const on=(id,f)=>{const e=$('#'+id);if(e)e.onclick=f};
+  on('reset',()=>{resetAsk=true;renderProfile()});
+  on('resetNo',()=>{resetAsk=false;renderProfile()});
+  on('resetYes',()=>{resetAsk=false;PROFILE=NEWPROFILE();saveProfile();renderProfile()});
+  on('logout2',logout);
+  on('login2',()=>go('login'));
+  on('chgPw',()=>go('reset'));
+}
+
+/* ===================== SOCIAL (giai đoạn sau) ===================== */
+function renderSocial(){
+  app().innerHTML=`<div class="wrap screen"><div class="soc">
+   <div class="row" style="justify-content:space-between"><div><p class="eyebrow">Bạn bè & thi đấu</p><h1 style="font-size:clamp(1.8rem,4vw,2.4rem)">Chơi cùng bạn bè</h1></div><button class="btn sm white" id="back">Về bản đồ</button></div>
+   <div class="notice">Kết bạn và thi đấu giữa các máy khác nhau cần máy chủ chấm điểm, nên <b>chưa khả dụng</b> trong phiên bản này. Em vẫn có thể chơi cả hai chế độ ngay bây giờ.</div>
+   <div class="soc-grid">
+     <div class="soc-card"><span class="soon">Chưa khả dụng</span><h3>Đấu 1 vs 1</h3><p class="muted" style="font-weight:600">Hai bạn nhận cùng bộ câu, mỗi câu 20 giây. Đúng 100 điểm, cộng tối đa 50 điểm tốc độ.</p><button class="btn sm white" disabled>Chưa khả dụng</button></div>
+     <div class="soc-card"><span class="soon">Chưa khả dụng</span><h3>Phòng nhóm 2–6 người</h3><p class="muted" style="font-weight:600">Chủ phòng tạo mã riêng, chọn chế độ, phạm vi chủ đề, độ khó và số câu.</p><button class="btn sm white" disabled>Chưa khả dụng</button></div>
+     <div class="soc-card"><span class="soon">Chưa khả dụng</span><h3>Thử thách bạn bè</h3><p class="muted" style="font-weight:600">Chơi trước một bộ đề rồi gửi cho bạn; so kết quả khi cả hai chơi xong.</p><button class="btn sm white" disabled>Chưa khả dụng</button></div>
+     <div class="soc-card"><span class="soon">Chưa khả dụng</span><h3>Kết bạn bằng mã riêng</h3><p class="muted" style="font-weight:600">Không có tìm kiếm người lạ, không có chat tự do: chỉ câu chào và biểu cảm có sẵn.</p><button class="btn sm white" disabled>Chưa khả dụng</button></div>
+   </div>
+   <div class="panel"><h2 style="font-size:1.2rem">Ở đây không có bảng xếp hạng</h2><p style="font-weight:600;margin-top:6px">Ai là triệu phú Chibi không xếp hạng người chơi. Mỗi trận chỉ hiển thị kết quả của chính trận đó, để em học vì tò mò chứ không vì áp lực.</p></div>
+  </div></div>`;
+  $('#back').onclick=()=>go('home');
+}
+
+/* ===================== ĐĂNG NHẬP ===================== */
+function renderUserBtn(){const b=$('#userBtn');if(!b)return;
+  b.innerHTML=CUR?`${avatarSVG(PROFILE.av).replace('<svg','<svg style="width:22px;height:22px"')}${esc(PROFILE.nick)}`:'Đăng nhập';
+  b.title=CUR?'Hồ sơ của '+CUR:'Đăng nhập';b.onclick=()=>{if(G){stopTimer();G=null}go(CUR?'profile':'login')}}
+function logout(){
+  if(CLOUD){clearTimeout(SYNC_T);if(CLOUD_USER)pushProfile();(SB?SB.auth.signOut():Promise.resolve()).catch(()=>{}).finally(()=>{CLOUD_USER=null;CUR=null;loadProfile();go('home')});return}
+  setSession(null);SFX.tap();go('home')}
+
+/* ===================== CLOUD AUTH (Supabase, như app 0.1%) ===================== */
+async function pushProfile(){
+  if(!SB||!CLOUD_USER)return;
+  const {error}=await SB.from('profiles').upsert({id:CLOUD_USER.id,nickname:PROFILE.nick,data:PROFILE,updated_at:new Date().toISOString()});
+  SYNC_STATE=error?'Chưa đồng bộ được, sẽ thử lại khi em chơi tiếp':'Đã đồng bộ';
+}
+async function cloudLogin(user){
+  CLOUD_USER={id:user.id,email:user.email};CUR=user.email;
+  let prof=null;
+  try{const {data,error}=await SB.from('profiles').select('data').eq('id',user.id).maybeSingle();if(error)throw error;prof=data&&data.data}
+  catch(e){prof=store.get('cloud_'+user.id,null);SYNC_STATE='Đang dùng bản lưu trên máy, chưa kết nối được máy chủ'}
+  if(!prof){ // tài khoản mới: chuyển tiến trình khách (nếu có) vào tài khoản
+    const g=store.get('profile',null);prof=g&&g.games>0?g:NEWPROFILE();if(g&&g.games>0)store.set('profile',NEWPROFILE());
+    const nn=user.user_metadata&&user.user_metadata.nickname;if(nn)prof.nick=nn;
+    PROFILE=Object.assign(NEWPROFILE(),prof);await pushProfile();
+  }else PROFILE=Object.assign(NEWPROFILE(),prof);
+  store.set('cloud_'+user.id,PROFILE);
+}
+async function initCloud(){
+  if(!CLOUD)return;
+  if(!window.supabase||!window.supabase.createClient){CLOUD_ERR='Không tải được thư viện đăng nhập. Kiểm tra kết nối mạng rồi tải lại trang.';return}
+  if(/type=recovery/.test(location.hash+location.search))RECOVERY=true; // đọc trước khi thư viện xóa token khỏi URL
+  try{
+    SB=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+    SB.auth.onAuthStateChange((ev,session)=>{
+      if(ev==='PASSWORD_RECOVERY'){RECOVERY=true;if(session)CLOUD_USER={id:session.user.id,email:session.user.email};if(DATA_READY)go('reset')}
+    });
+    const {data:{session}}=await SB.auth.getSession();
+    if(session&&RECOVERY)CLOUD_USER={id:session.user.id,email:session.user.email};
+    else if(session)await cloudLogin(session.user);
+  }catch(e){CLOUD_ERR='Không kết nối được máy chủ đăng nhập: '+(e.message||e)}
+}
+function viErr(e){
+  const m=String((e&&e.message)||e||'');const c=(e&&(e.code||e.status))||'';
+  if(/Invalid login credentials/i.test(m))return 'Email hoặc mật khẩu chưa đúng.';
+  if(/Email not confirmed/i.test(m))return 'Email này chưa được xác nhận. Hãy mở email xác nhận và bấm vào liên kết trước khi đăng nhập.';
+  if(/already registered|already been registered|user_already_exists/i.test(m+c))return 'Email này đã có tài khoản. Hãy đăng nhập, hoặc dùng “Quên mật khẩu?”.';
+  if(/rate limit|over_email_send_rate_limit|429/i.test(m+c))return 'Đã gửi email quá nhiều lần. Hãy đợi vài phút rồi thử lại.';
+  if(/Password should be at least|weak_password/i.test(m+c))return 'Mật khẩu cần ít nhất 6 ký tự.';
+  if(/same_password|should be different/i.test(m+c))return 'Mật khẩu mới phải khác mật khẩu cũ.';
+  if(/valid email|email_address_invalid|Unable to validate email/i.test(m+c))return 'Địa chỉ email chưa hợp lệ.';
+  if(/fetch|network/i.test(m))return 'Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.';
+  return m||'Có lỗi xảy ra, hãy thử lại.';
+}
+let AUTH_TAB='in';
+function renderCloudLogin(){
+  if(CLOUD_USER&&!RECOVERY){go('profile');return}
+  const T=AUTH_TAB;
+  const tabs=`<div class="tabs" role="tablist"><button role="tab" data-tab="in" aria-selected="${T==='in'}">Đăng nhập</button><button role="tab" data-tab="up" aria-selected="${T==='up'}">Tạo tài khoản</button></div>`;
+  let body='';
+  if(T==='in')body=`<form id="authForm" class="form" novalidate>
+     <div class="field"><label for="ae">Email</label><input type="email" id="ae" autocomplete="email" autocapitalize="none" spellcheck="false" required></div>
+     <div class="field"><label for="ap">Mật khẩu</label><div class="pwrow"><input type="password" id="ap" autocomplete="current-password" required><button type="button" class="btn sm white" data-show="ap">Hiện</button></div></div>
+     <div id="aerr" class="notice warn" hidden></div>
+     <button class="btn" type="submit" id="abtn">Đăng nhập</button>
+     <button type="button" class="linkbtn" id="toForgot">Quên mật khẩu?</button></form>`;
+  if(T==='up')body=`<form id="authForm" class="form" novalidate>
+     <div class="field"><label for="an">Biệt danh của bé</label><input type="text" id="an" maxlength="16" placeholder="Ví dụ: Cú Nhỏ" required><small class="muted hint">Không dùng tên thật, trường lớp hay ngày sinh.</small></div>
+     <div class="field"><label for="ae">Email của bố mẹ</label><input type="email" id="ae" autocomplete="email" autocapitalize="none" spellcheck="false" required><small class="muted hint">Email này dùng để xác nhận tài khoản và lấy lại mật khẩu. Nhiều con dùng chung một Gmail? Thêm “+tên” trước @, ví dụ <b>bome+be1@gmail.com</b>: thư vẫn về cùng hộp thư.</small></div>
+     <div class="field"><label for="ap">Mật khẩu</label><div class="pwrow"><input type="password" id="ap" autocomplete="new-password" required><button type="button" class="btn sm white" data-show="ap">Hiện</button></div><small class="muted hint">Ít nhất 6 ký tự.</small></div>
+     <div class="field"><label for="ap2">Nhập lại mật khẩu</label><input type="password" id="ap2" autocomplete="new-password" required></div>
+     <label class="check"><input type="checkbox" id="aok"> Tôi là phụ huynh và đồng ý tạo tài khoản này cho con</label>
+     <div id="aerr" class="notice warn" hidden></div>
+     <button class="btn" type="submit" id="abtn">Tạo tài khoản</button></form>`;
+  if(T==='forgot')body=`<form id="authForm" class="form" novalidate>
+     <p style="font-weight:600">Nhập email đã đăng ký. Chúng tôi sẽ gửi một liên kết để đặt mật khẩu mới.</p>
+     <div class="field"><label for="ae">Email đã đăng ký</label><input type="email" id="ae" autocomplete="email" autocapitalize="none" spellcheck="false" required></div>
+     <div id="aerr" class="notice warn" hidden></div>
+     <button class="btn" type="submit" id="abtn">Gửi liên kết đặt lại mật khẩu</button>
+     <button type="button" class="linkbtn" data-tab="in">Quay lại đăng nhập</button></form>`;
+  if(T==='sent'||T==='confirm')body=`<div class="sentbox">${owlSVG()}<div><h2 style="font-size:1.3rem">${T==='sent'?'Kiểm tra hộp thư nhé!':'Gần xong rồi!'}</h2>
+     <p style="font-weight:600;margin-top:6px">${T==='sent'?`Nếu <b>${esc(AUTH_EMAIL)}</b> đã đăng ký, một email chứa liên kết đặt lại mật khẩu vừa được gửi tới. Mở email và bấm vào liên kết để tạo mật khẩu mới.`
+       :`Một email xác nhận vừa được gửi tới <b>${esc(AUTH_EMAIL)}</b>. Mở email và bấm vào liên kết để kích hoạt tài khoản, sau đó quay lại đăng nhập.`}</p>
+     <p class="muted" style="font-weight:600;margin-top:6px;font-size:.9rem">Không thấy thư? Xem trong mục Spam hoặc Quảng cáo, và đợi 1–2 phút.</p>
+     <button class="btn sm" data-tab="in" style="margin-top:12px">Về trang đăng nhập</button></div></div>`;
+  app().innerHTML=`<div class="wrap screen"><div class="authwrap"><section class="panel">
+     <div class="authhead">${avatarSVG(MC_AV,'hello','mc')}<div><p class="eyebrow">Chào nhà thám hiểm</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">${T==='forgot'||T==='sent'?'Quên mật khẩu':T==='up'||T==='confirm'?'Tạo tài khoản':'Đăng nhập'}</h1></div></div>
+     ${CLOUD_ERR?`<div class="notice warn" style="margin-top:12px">${esc(CLOUD_ERR)}</div>`:''}
+     ${T==='in'||T==='up'?tabs:''}${body}
+     ${T==='in'||T==='up'?'<div class="row" style="margin-top:16px"><button class="btn sm white" id="guest">Chơi thử không cần tài khoản</button></div>':''}
+   </section></div></div>`;
+  app().querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{AUTH_TAB=b.dataset.tab;renderCloudLogin()});
+  app().querySelectorAll('[data-show]').forEach(b=>b.onclick=()=>{const p=$('#'+b.dataset.show);p.type=p.type==='password'?'text':'password';b.textContent=p.type==='password'?'Hiện':'Ẩn'});
+  const on=(id,f)=>{const x=$('#'+id);if(x)x.onclick=f};
+  on('guest',()=>go('home'));on('toForgot',()=>{AUTH_TAB='forgot';renderCloudLogin()});
+  const f=$('#authForm');if(!f)return;
+  const first=f.querySelector('input');if(first)first.focus();
+  const err=m=>{const x=$('#aerr');x.textContent=m;x.hidden=!m};
+  f.onsubmit=async e=>{e.preventDefault();err('');
+    if(!SB){err(CLOUD_ERR||'Chưa kết nối được máy chủ đăng nhập.');return}
+    const email=$('#ae').value.trim().toLowerCase();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err('Địa chỉ email chưa hợp lệ.');return}
+    const btn=$('#abtn'),label=btn.textContent;btn.disabled=true;btn.textContent='Đang xử lý…';
+    const done=()=>{btn.disabled=false;btn.textContent=label};
+    try{
+      if(T==='in'){
+        const pw=$('#ap').value;if(!pw){done();err('Hãy nhập mật khẩu.');return}
+        const {data,error}=await SB.auth.signInWithPassword({email,password:pw});if(error)throw error;
+        await cloudLogin(data.user);SFX.ok();go('home');
+      }else if(T==='up'){
+        const nick=$('#an').value.trim(),pw=$('#ap').value,pw2=$('#ap2').value;
+        if(!nick){done();err('Hãy đặt một biệt danh cho bé.');return}
+        if(pw.length<6){done();err('Mật khẩu cần ít nhất 6 ký tự.');return}
+        if(pw!==pw2){done();err('Hai lần nhập mật khẩu chưa khớp.');return}
+        if(!$('#aok').checked){done();err('Cần phụ huynh đồng ý trước khi tạo tài khoản.');return}
+        const {data,error}=await SB.auth.signUp({email,password:pw,options:{data:{nickname:nick},emailRedirectTo:location.origin+location.pathname}});
+        if(error)throw error;
+        if(data.user&&Array.isArray(data.user.identities)&&data.user.identities.length===0)throw new Error('User already registered');
+        AUTH_EMAIL=email;
+        if(data.session){await cloudLogin(data.user);SFX.ok();go('home')}else{AUTH_TAB='confirm';renderCloudLogin()}
+      }else if(T==='forgot'){
+        const {error}=await SB.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+        if(error)throw error;
+        AUTH_EMAIL=email;AUTH_TAB='sent';renderCloudLogin();
+      }
+    }catch(ex){done();SFX.bad();err(viErr(ex))}
+  };
+}
+let AUTH_EMAIL='';
+function renderReset(){
+  if(!CLOUD){go('login');return}
+  app().innerHTML=`<div class="wrap screen"><div class="authwrap"><section class="panel">
+    <div class="authhead">${owlSVG()}<div><p class="eyebrow">${RECOVERY?'Lấy lại mật khẩu':'Bảo mật tài khoản'}</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">Đặt mật khẩu mới</h1></div></div>
+    ${CLOUD_USER?`<p style="font-weight:600;margin-top:10px">Tài khoản: <b>${esc(CLOUD_USER.email)}</b></p>`:''}
+    ${!CLOUD_USER&&!RECOVERY?`<div class="notice warn" style="margin-top:12px">Liên kết đặt lại mật khẩu đã hết hạn hoặc đã được dùng. Hãy yêu cầu một liên kết mới.</div><button class="btn sm" id="again" style="margin-top:12px">Gửi lại liên kết</button>`:`
+    <form id="rsForm" class="form" novalidate>
+      <div class="field"><label for="r1">Mật khẩu mới</label><div class="pwrow"><input type="password" id="r1" autocomplete="new-password"><button type="button" class="btn sm white" id="r1s">Hiện</button></div><small class="muted hint">Ít nhất 6 ký tự.</small></div>
+      <div class="field"><label for="r2">Nhập lại mật khẩu mới</label><input type="password" id="r2" autocomplete="new-password"></div>
+      <div id="rerr" class="notice warn" hidden></div><div id="rok" class="notice" hidden></div>
+      <button class="btn" type="submit" id="rbtn">Lưu mật khẩu mới</button>
+    </form>`}
+  </section></div></div>`;
+  const a=$('#again');if(a)a.onclick=()=>{AUTH_TAB='forgot';go('login')};
+  const s=$('#r1s');if(s)s.onclick=()=>{const p=$('#r1');p.type=p.type==='password'?'text':'password';s.textContent=p.type==='password'?'Hiện':'Ẩn'};
+  const f=$('#rsForm');if(!f)return;$('#r1').focus();
+  f.onsubmit=async e=>{e.preventDefault();const err=m=>{const x=$('#rerr');x.textContent=m;x.hidden=!m};err('');
+    const p1=$('#r1').value,p2=$('#r2').value;
+    if(p1.length<6){err('Mật khẩu cần ít nhất 6 ký tự.');return}
+    if(p1!==p2){err('Hai lần nhập mật khẩu chưa khớp.');return}
+    const b=$('#rbtn');b.disabled=true;b.textContent='Đang lưu…';
+    try{const {data,error}=await SB.auth.updateUser({password:p1});if(error)throw error;
+      RECOVERY=false;try{history.replaceState(null,'',location.pathname)}catch(_){}
+      await cloudLogin(data.user);SFX.ok();
+      const ok=$('#rok');ok.textContent='Đã đổi mật khẩu! Đang đưa em về bản đồ…';ok.hidden=false;setTimeout(()=>go('home'),1400);
+    }catch(ex){b.disabled=false;b.textContent='Lưu mật khẩu mới';err(viErr(ex))}};
+}
+
+function renderLogin(){
+  if(CLOUD){renderCloudLogin();return}
+  if(CUR){go('profile');return}
+  const n=Object.keys(ACC.users).length;
+  app().innerHTML=`<div class="wrap screen"><div class="authwrap">
+   <section class="panel">
+     <div class="authhead">${avatarSVG(MC_AV,'hello','mc')}<div><p class="eyebrow">Chào nhà thám hiểm</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">Đăng nhập</h1></div></div>
+     ${n?'':`<div class="notice" style="margin-top:14px">Máy này chưa có tài khoản nào. Bố mẹ hãy vào <b>Góc phụ huynh</b> để tạo tài khoản cho con.</div>`}
+     <form id="loginForm" class="form" autocomplete="on" novalidate>
+       <div class="field"><label for="lu">Tên đăng nhập</label><input type="text" id="lu" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="16" required></div>
+       <div class="field"><label for="lp">Mật khẩu</label><div class="pwrow"><input type="password" id="lp" autocomplete="current-password" maxlength="40" required><button type="button" class="btn sm white" id="showPw">Hiện</button></div></div>
+       <label class="check"><input type="checkbox" id="lr" checked> Ghi nhớ đăng nhập trên máy này</label>
+       <div id="lerr" class="notice warn" hidden></div>
+       <button class="btn" type="submit" id="lbtn">Đăng nhập</button>
+     </form>
+     <div class="row" style="margin-top:16px;justify-content:space-between">
+       <button class="btn sm white" id="guest">Chơi thử không cần tài khoản</button>
+       <button class="btn sm white" id="toParent">Quên mật khẩu? Nhờ phụ huynh</button>
+     </div>
+   </section>
+  </div></div>`;
+  $('#showPw').onclick=()=>{const p=$('#lp');p.type=p.type==='password'?'text':'password';$('#showPw').textContent=p.type==='password'?'Hiện':'Ẩn'};
+  $('#guest').onclick=()=>go('home');
+  $('#toParent').onclick=()=>go('parent');
+  $('#lu').focus();
+  $('#loginForm').onsubmit=async e=>{e.preventDefault();
+    const err=m=>{const x=$('#lerr');x.textContent=m;x.hidden=!m};
+    if(Date.now()<LOGIN_LOCK){err(`Em đã nhập sai nhiều lần. Hãy thử lại sau ${Math.ceil((LOGIN_LOCK-Date.now())/1000)} giây.`);return}
+    const u=$('#lu').value.trim().toLowerCase(), p=$('#lp').value;
+    if(!u||!p){err('Hãy nhập cả tên đăng nhập và mật khẩu.');return}
+    $('#lbtn').disabled=true;$('#lbtn').textContent='Đang kiểm tra…';
+    const acc=ACC.users[u]; const ok=acc&&(await hashPw(p,acc.salt))===acc.hash;
+    if(!ok){LOGIN_FAILS++;if(LOGIN_FAILS>=5){LOGIN_LOCK=Date.now()+30000;LOGIN_FAILS=0}
+      $('#lbtn').disabled=false;$('#lbtn').textContent='Đăng nhập';SFX.bad();
+      err('Tên đăng nhập hoặc mật khẩu chưa đúng. Kiểm tra lại chữ thường, dấu gạch ngang và chữ số nhé.');return}
+    LOGIN_FAILS=0;setSession(u,$('#lr').checked);SFX.ok();go('home');
+  };
+}
+
+/* ===================== GÓC PHỤ HUYNH ===================== */
+let PSTATE={card:null,del:null,forgot:false,pinChange:false};
+function credCard(c){return `<div class="cred" aria-live="polite"><p class="eyebrow">${c.title}</p>
+  <div class="credrow"><span>Tên đăng nhập</span><code>${esc(c.u)}</code></div>
+  <div class="credrow"><span>Mật khẩu</span><code>${esc(c.p)}</code></div>
+  <div class="row" style="margin-top:10px"><button class="btn sm" id="copyCred">Sao chép</button><button class="btn sm white" id="closeCred">Đã ghi lại</button><span id="copyMsg" class="muted" style="font-weight:700"></span></div>
+  <p class="muted" style="font-size:.85rem;font-weight:600;margin-top:8px">Hãy ghi lại ngay. Vì lý do an toàn, mật khẩu sẽ không hiển thị lại. Nếu quên, bố mẹ có thể đặt lại.</p></div>`}
+function renderParent(){
+  const R=()=>renderParent();
+  const shell=inner=>{app().innerHTML=`<div class="wrap screen"><div class="authwrap" style="max-width:${PARENT_OK?'980px':'560px'}">
+    <div class="row" style="justify-content:space-between"><div><p class="eyebrow">Dành cho bố mẹ</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">Góc phụ huynh</h1></div><button class="btn sm white" id="back">Về bản đồ</button></div>${inner}</div></div>`;
+    $('#back').onclick=()=>go('home')};
+  const errBox='<div id="perr" class="notice warn" hidden></div>';
+  const perr=m=>{const x=$('#perr');if(x){x.textContent=m;x.hidden=!m}};
+  // 1) chưa có PIN
+  if(!ACC.parent){
+    shell(`<section class="panel"><h2 style="font-size:1.3rem">Tạo mã PIN phụ huynh</h2>
+      <p class="muted" style="font-weight:600;margin-top:6px">Mã PIN giúp chỉ bố mẹ mới tạo, đặt lại mật khẩu hoặc xóa tài khoản của con. Dùng 4–8 chữ số, đừng chia sẻ với con.</p>
+      <form id="pinForm" class="form" novalidate>
+        <div class="field"><label for="pin1">Mã PIN mới</label><input type="password" id="pin1" inputmode="numeric" autocomplete="new-password" maxlength="8"></div>
+        <div class="field"><label for="pin2">Nhập lại mã PIN</label><input type="password" id="pin2" inputmode="numeric" autocomplete="new-password" maxlength="8"></div>
+        ${errBox}<button class="btn" type="submit">Lưu mã PIN</button></form></section>`);
+    $('#pin1').focus();
+    $('#pinForm').onsubmit=async e=>{e.preventDefault();const a=$('#pin1').value,b=$('#pin2').value;
+      if(!/^\d{4,8}$/.test(a)){perr('Mã PIN cần 4–8 chữ số.');return}
+      if(a!==b){perr('Hai lần nhập mã PIN chưa khớp.');return}
+      const salt=newSalt();ACC.parent={salt,hash:await hashPw(a,salt)};saveAcc();PARENT_OK=true;R()};
+    return;
+  }
+  // 2) đã có PIN, chưa mở khóa
+  if(!PARENT_OK){
+    shell(`<section class="panel"><h2 style="font-size:1.3rem">Nhập mã PIN phụ huynh</h2>
+      <form id="pinForm" class="form" novalidate>
+        <div class="field"><label for="pin">Mã PIN</label><input type="password" id="pin" inputmode="numeric" autocomplete="current-password" maxlength="8"></div>
+        ${errBox}<button class="btn" type="submit">Mở Góc phụ huynh</button></form>
+      <div style="margin-top:16px">${PSTATE.forgot?`<div class="notice warn" style="display:grid;gap:10px">Máy không thể khôi phục mã PIN đã quên. Cách duy nhất là xóa mã PIN cùng <b>toàn bộ ${Object.keys(ACC.users).length} tài khoản</b> trên máy này rồi tạo lại từ đầu.
+        <div class="row"><button class="btn sm peach" id="wipe">Xóa mã PIN và mọi tài khoản</button><button class="btn sm white" id="noWipe">Giữ nguyên</button></div></div>`
+        :`<button class="btn sm white" id="forgot">Quên mã PIN?</button>`}</div></section>`);
+    $('#pin').focus();
+    $('#pinForm').onsubmit=async e=>{e.preventDefault();
+      if(Date.now()<LOGIN_LOCK){perr(`Nhập sai nhiều lần. Thử lại sau ${Math.ceil((LOGIN_LOCK-Date.now())/1000)} giây.`);return}
+      const ok=(await hashPw($('#pin').value,ACC.parent.salt))===ACC.parent.hash;
+      if(!ok){LOGIN_FAILS++;if(LOGIN_FAILS>=5){LOGIN_LOCK=Date.now()+30000;LOGIN_FAILS=0}perr('Mã PIN chưa đúng.');return}
+      LOGIN_FAILS=0;PARENT_OK=true;R()};
+    const on=(id,f)=>{const x=$('#'+id);if(x)x.onclick=f};
+    on('forgot',()=>{PSTATE.forgot=true;R()});on('noWipe',()=>{PSTATE.forgot=false;R()});
+    on('wipe',()=>{ACC={parent:null,users:{}};saveAcc();setSession(null);PSTATE.forgot=false;R()});
+    return;
+  }
+  // 3) bảng điều khiển
+  const users=Object.entries(ACC.users).sort((a,b)=>a[1].createdAt-b[1].createdAt);
+  const guestHas=(store.get('profile',null)||{}).games>0;
+  const d=t=>t?new Date(t).toLocaleDateString('vi-VN'):'chưa chơi';
+  shell(`
+   ${PSTATE.card?credCard(PSTATE.card):''}
+   <div class="pgrid">
+    <section class="panel">
+      <h2 style="font-size:1.3rem">Tạo tài khoản cho con</h2>
+      <form id="newForm" class="form" novalidate>
+        <div class="field"><label for="nu">Tên đăng nhập</label><div class="pwrow"><input type="text" id="nu" autocapitalize="none" spellcheck="false" maxlength="16" value="${genUser()}"><button type="button" class="btn sm white" id="sugU">Gợi ý khác</button></div>
+          <small class="muted hint">3–16 ký tự: chữ thường không dấu, số, dấu gạch dưới. Không dùng tên thật hay ngày sinh.</small></div>
+        <div class="field"><label for="nn">Biệt danh hiển thị</label><input type="text" id="nn" maxlength="16" placeholder="Ví dụ: Cú Nhỏ"></div>
+        <div class="field"><label for="np">Mật khẩu</label><div class="pwrow"><input type="text" id="np" maxlength="40" value="${genPass()}" spellcheck="false" autocomplete="new-password"><button type="button" class="btn sm white" id="sugP">Tạo mật khẩu khác</button></div>
+          <small class="muted hint">Ít nhất 6 ký tự. Mật khẩu gợi ý dễ nhớ cho trẻ, có thể tự sửa.</small></div>
+        ${guestHas?'<label class="check"><input type="checkbox" id="ng"> Chuyển tiến trình chơi khách hiện có vào tài khoản này</label>':''}
+        ${errBox}
+        <button class="btn" type="submit">Tạo tài khoản</button>
+      </form>
+    </section>
+    <section class="panel">
+      <div class="row" style="justify-content:space-between"><h2 style="font-size:1.3rem">Tài khoản trên máy này (${users.length})</h2></div>
+      ${users.length?`<div class="acclist">${users.map(([u,a])=>{const P=a.profile,acc=P.answered?Math.round(P.correct/P.answered*100):0;return `<article class="acc">
+        ${avatarSVG(P.av)}
+        <div class="accinfo"><b>${esc(P.nick)}</b><code>${esc(u)}</code>
+          <span class="muted">Cấp ${level(P.xp)} · ${fmt(P.answered)} câu · đúng ${acc}% · ${P.badges.length} huy hiệu</span>
+          <span class="muted">Tạo ${d(a.createdAt)} · chơi gần nhất ${d(a.lastPlayed)}</span></div>
+        <div class="accact">${PSTATE.del===u?`<span style="font-weight:800">Xóa vĩnh viễn?</span><button class="btn sm peach" data-delyes="${u}">Xóa</button><button class="btn sm white" data-delno="1">Không</button>`
+          :`<button class="btn sm white" data-reset="${u}">Đặt lại mật khẩu</button><button class="btn sm white" data-del="${u}">Xóa</button>`}</div>
+      </article>`}).join('')}</div>`:'<p class="muted" style="font-weight:700;margin-top:10px">Chưa có tài khoản nào. Tạo tài khoản đầu tiên ở khung bên cạnh.</p>'}
+    </section>
+   </div>
+   <section class="panel">
+     <h2 style="font-size:1.1rem">Bảo mật & quyền riêng tư</h2>
+     <ul class="plist">
+       <li>Tài khoản và tiến trình chỉ lưu trong trình duyệt của máy này, không gửi lên máy chủ nào. Trên máy hoặc trình duyệt khác cần tạo lại tài khoản.</li>
+       <li>Mật khẩu và mã PIN được mã hóa một chiều; ngay cả bố mẹ cũng không xem lại được, chỉ đặt lại được.</li>
+       <li>Xóa dữ liệu trình duyệt sẽ xóa luôn các tài khoản này.</li>
+     </ul>
+     <div class="row" style="margin-top:12px">
+       ${PSTATE.pinChange?`<form id="pinChg" class="row" novalidate><div class="field"><label for="pc1">Mã PIN mới (4–8 số)</label><input type="password" id="pc1" inputmode="numeric" maxlength="8"></div><button class="btn sm" type="submit">Lưu</button><button class="btn sm white" type="button" id="pcNo">Hủy</button></form>`
+       :'<button class="btn sm white" id="pinChange">Đổi mã PIN</button>'}
+       <button class="btn sm lav" id="lockP">Khóa Góc phụ huynh</button>
+     </div>
+   </section>`);
+  const on=(id,f)=>{const x=$('#'+id);if(x)x.onclick=f};
+  on('sugU',()=>{$('#nu').value=genUser()});
+  on('sugP',()=>{$('#np').value=genPass()});
+  on('closeCred',()=>{PSTATE.card=null;R()});
+  on('copyCred',async()=>{const c=PSTATE.card;const t=`Ai là triệu phú Chibi\nTên đăng nhập: ${c.u}\nMật khẩu: ${c.p}`;
+    try{await navigator.clipboard.writeText(t);$('#copyMsg').textContent='Đã sao chép'}catch(e){$('#copyMsg').textContent='Không sao chép được, hãy chép tay'}});
+  on('lockP',()=>{PARENT_OK=false;PSTATE={card:null,del:null,forgot:false,pinChange:false};go('home')});
+  on('pinChange',()=>{PSTATE.pinChange=true;R()});
+  on('pcNo',()=>{PSTATE.pinChange=false;R()});
+  const pc=$('#pinChg');if(pc)pc.onsubmit=async e=>{e.preventDefault();const v=$('#pc1').value;if(!/^\d{4,8}$/.test(v)){$('#pc1').focus();return}
+    const salt=newSalt();ACC.parent={salt,hash:await hashPw(v,salt)};saveAcc();PSTATE.pinChange=false;R()};
+  app().querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{PSTATE.del=b.dataset.del;R()});
+  app().querySelectorAll('[data-delno]').forEach(b=>b.onclick=()=>{PSTATE.del=null;R()});
+  app().querySelectorAll('[data-delyes]').forEach(b=>b.onclick=()=>{const u=b.dataset.delyes;delete ACC.users[u];saveAcc();if(CUR===u)setSession(null);PSTATE.del=null;R()});
+  app().querySelectorAll('[data-reset]').forEach(b=>b.onclick=async()=>{const u=b.dataset.reset,p=genPass(),salt=newSalt();
+    ACC.users[u].salt=salt;ACC.users[u].hash=await hashPw(p,salt);saveAcc();PSTATE.card={title:'Mật khẩu mới đã được đặt',u,p};R();window.scrollTo({top:0})});
+  $('#newForm').onsubmit=async e=>{e.preventDefault();
+    const u=$('#nu').value.trim().toLowerCase(), p=$('#np').value, nick=$('#nn').value.trim();
+    if(!USER_RE.test(u)){perr('Tên đăng nhập cần 3–16 ký tự gồm chữ thường không dấu, số hoặc dấu gạch dưới.');return}
+    if(ACC.users[u]){perr('Tên đăng nhập này đã có trên máy. Hãy chọn tên khác.');return}
+    if(p.length<6){perr('Mật khẩu cần ít nhất 6 ký tự.');return}
+    const salt=newSalt();
+    let prof=NEWPROFILE();
+    if($('#ng')&&$('#ng').checked){prof=store.get('profile',null)||prof;store.set('profile',NEWPROFILE())}
+    if(nick)prof.nick=nick; else if(prof.nick==='Nhà thám hiểm')prof.nick=u;
+    ACC.users[u]={salt,hash:await hashPw(p,salt),profile:prof,createdAt:Date.now(),lastPlayed:0};saveAcc();
+    if(!CUR)loadProfile();
+    PSTATE.card={title:'Đã tạo tài khoản',u,p};SFX.ok();R();window.scrollTo({top:0})};
+}
+
+function renderFoot(){
+  $('#foot').innerHTML=`<span>Câu hỏi lấy nguyên văn từ ${avail().length} ngân hàng câu hỏi (${fmt(BANK.length)} câu).${ISSUES.length?` Bỏ qua ${ISSUES.length} bản ghi lỗi.`:' Dữ liệu hợp lệ.'}</span><span>Phím tắt khi chơi: A–D hoặc 1–4 để chọn, Enter để chốt / đi tiếp.</span>`;
+  if(ISSUES.length)console.warn('Vấn đề dữ liệu:',ISSUES);
+}
+
+/* ===================== global controls ===================== */
+function applyPref(){document.documentElement.classList.toggle('rm',PREF.rm);$('#soundBtn').setAttribute('aria-pressed',PREF.sound);$('#soundBtn').textContent=PREF.sound?'Âm thanh: bật':'Âm thanh: tắt';$('#motionBtn').setAttribute('aria-pressed',PREF.rm);store.set('pref',PREF)}
+$('#soundBtn').onclick=()=>{PREF.sound=!PREF.sound;applyPref();SFX.tap()};
+$('#motionBtn').onclick=()=>{PREF.rm=!PREF.rm;applyPref()};
+$('#logoBtn').onclick=()=>{if(G){stopTimer();G=null}go('home')};
+document.querySelectorAll('.nav [data-go]').forEach(b=>b.onclick=()=>{if(G){stopTimer();G=null}go(b.dataset.go)});
+document.addEventListener('keydown',e=>{
+  if(screen!=='play'||!G||e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;
+  const k=e.key.toUpperCase();const map={A:0,B:1,C:2,D:3,'1':0,'2':1,'3':2,'4':3};
+  if(k in map&&!G.locked){select(map[k]);e.preventDefault()}
+  else if(e.key==='Enter'){const n=$('#next')||$('#lock');if(n&&!n.disabled&&document.activeElement!==n){n.click();e.preventDefault()}}
+});
+applyPref();
+if(CLOUD){const pb=document.querySelector('.nav [data-go="parent"]');if(pb)pb.hidden=true}
+Promise.all([loadData(),initCloud()]).then(()=>{DATA_READY=true;go(RECOVERY?'reset':'home')}).catch(e=>{app().innerHTML=`<div class="wrap screen"><div class="notice warn">Không tải được dữ liệu câu hỏi: ${esc(e.message)}</div></div>`});
+</script>
+
+</body>
+</html>
