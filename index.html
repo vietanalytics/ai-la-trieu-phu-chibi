@@ -292,19 +292,6 @@ details summary{cursor:pointer;font-family:var(--f-display);font-weight:800;font
 .check{display:flex;gap:8px;align-items:center;font-weight:700}
 .check input{width:20px;height:20px;accent-color:var(--lav-deep)}
 .hint{display:block;margin-top:4px;font-weight:600;font-size:.82rem}
-.cred{background:#fff5d1;border:3px solid var(--line);border-radius:22px;padding:16px 18px;box-shadow:0 5px 0 var(--line)}
-.credrow{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:2px dashed var(--sun-deep);padding-block:8px;font-weight:700}
-.credrow code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:1.25rem;font-weight:700;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:2px 10px;overflow-wrap:anywhere;user-select:all}
-.pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;align-items:start}
-.acclist{display:grid;gap:10px;margin-top:12px}
-.acc{display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 12px;border:2.5px solid var(--line);border-radius:18px;padding:10px 12px;align-items:center}
-.acc svg{width:56px;height:auto;grid-row:span 2}
-.accinfo{display:grid;gap:1px;font-size:.88rem;font-weight:700;min-width:0}
-.accinfo b{font-family:var(--f-display);font-size:1.1rem}
-.accinfo code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.9rem;color:var(--lav-deep)}
-.accact{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.plist{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;font-weight:600;font-size:.94rem;color:var(--ink-soft)}
-@media (max-width:860px){.pgrid{grid-template-columns:minmax(0,1fr)}}
 
 footer{max-width:1180px;margin:30px auto 0;font-size:.85rem;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
 
@@ -314,7 +301,8 @@ footer{max-width:1180px;margin:30px auto 0;font-size:.85rem;color:var(--ink-soft
 @media (max-width:860px){
   .hero{grid-template-columns:1fr}
   .mc-stage{min-height:230px}
-  .stage-grid{grid-template-columns:1fr}
+  .stage-grid{grid-template-columns:minmax(0,1fr)}
+  .ladder,.scorebox{min-width:0}
   .ladder,.scorebox{position:static;order:-1}
   .ladder ol{flex-direction:row;overflow-x:auto;padding-bottom:4px}
   .ladder li{flex-direction:column;align-items:center;min-width:64px;font-size:.78rem;padding:4px 6px}
@@ -336,6 +324,175 @@ footer{max-width:1180px;margin:30px auto 0;font-size:.85rem;color:var(--ink-soft
   .map{padding:16px}
   .logo b{font-size:1.05rem}
 }
+
+/* ===== Khối không viền: dùng nền & bóng mềm thay cho đường viền ===== */
+:root{--soft:0 10px 30px rgba(42,40,82,.09),0 2px 6px rgba(42,40,82,.05);--soft-lg:0 16px 40px rgba(42,40,82,.12),0 3px 8px rgba(42,40,82,.06);--deep:0 14px 34px rgba(8,4,40,.38)}
+.panel,.region,.region .isle,.map,.mode,.tchip,.qcard,.explain,.llbox,.stat,.rv,.avbig,.badge,.soc-card,.stopconfirm,.notice,.bubble,.ladder,.scorebox,.hero h1 .c,.mc-stage .podium,.chip,.xpbar,.timer,.tbar .tr,.step h2 .n,.qcard .qno,.explain .ans,.tabs,.ll .ic,.opt .k,.aud .bar i{border:0!important}
+.bubble::after{border:0!important}
+.panel{box-shadow:var(--soft);border-radius:28px}
+.region{box-shadow:var(--soft)}
+.region:hover{box-shadow:var(--soft-lg)}
+.map{box-shadow:none;border-radius:32px;background:
+   repeating-linear-gradient(0deg, transparent 0 59px, rgba(44,120,189,.10) 59px 61px),
+   repeating-linear-gradient(90deg, transparent 0 59px, rgba(44,120,189,.10) 59px 61px),
+   #d3ecfc}
+.mode{box-shadow:var(--soft);background:var(--card)}
+.mode[aria-pressed="true"]{background:var(--sun);box-shadow:0 0 0 3px var(--sun-deep) inset,var(--soft)}
+.tchip{background:var(--sky-soft)}
+.tchip svg{border:0}
+.qcard,.explain{box-shadow:var(--deep)}
+.bubble,.stopconfirm{box-shadow:var(--soft)}
+.stat{background:var(--sky-soft)}
+.rv{background:var(--sky-soft);border-radius:20px}
+.badge{background:var(--sky-soft)}
+.soc-card{box-shadow:var(--soft)}
+.notice{background:var(--lav-soft)} .notice.warn{background:#ffe3e7;color:#8a1f32}
+.chip{background:var(--sky-soft)}
+.xpbar,.tbar .tr{background:#dceefc} .xpbar i{border-right:0}
+.timer{background:#e3e0f7}
+.topbar{border-bottom:0;box-shadow:0 2px 14px rgba(42,40,82,.08)}
+.hero h1 .c{box-shadow:0 6px 0 var(--sun-deep)}
+.mc-stage .podium{background:var(--lav);opacity:.85}
+.ladder,.scorebox{background:rgba(255,255,255,.09)}
+.tabs{background:var(--lav-soft);padding:4px;gap:4px}
+.tabs button{border-radius:999px}
+.tabs button + button{border-left:0}
+.tabs button[aria-selected="true"]{box-shadow:0 2px 6px rgba(42,40,82,.15)}
+.qcard .qno{box-shadow:0 3px 8px rgba(8,4,40,.25)}
+.explain .ans{background:var(--mint)}
+.ll .ic{box-shadow:0 2px 6px rgba(8,4,40,.25)}
+.authhead h1{font-size:clamp(1.6rem,4vw,2.2rem)}
+.guestbtn{margin-top:16px;width:100%}
+.devnote{font-size:.82rem;font-weight:600;margin-top:14px}
+button,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+/* ===== Thanh điều hướng ===== */
+.nbtn.icon{padding:5px 8px}
+.nbtn .lbl{display:none}
+.nbtn.user{max-width:180px;overflow:hidden}
+.nbtn.user .lbl{display:inline;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tabbar{display:none}
+.ladder li .short{display:none}
+
+/* ===== Điện thoại ===== */
+@media (max-width:700px){
+  body{font-size:15.5px;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .topbar{position:sticky;top:env(safe-area-inset-top,0px);padding:8px 16px}
+  .topbar .wrap{flex-wrap:nowrap;gap:8px}
+  .logo svg{width:28px;height:28px}
+  .logo b{font-size:1rem;white-space:nowrap}
+  .nav{margin-left:auto;flex-wrap:nowrap;overflow:visible;width:auto;padding:0;gap:6px}
+  .nbtn.wide{display:none}
+  .nbtn{box-shadow:none;border-width:2px;padding:6px 8px}
+  .nbtn.user .lbl{display:none}
+  .nbtn.user{padding:4px 6px}
+  .logo{min-width:0;flex:1 1 auto}
+  .logo b{overflow:hidden;text-overflow:ellipsis}
+  .nav{flex:none}
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);box-shadow:0 -4px 18px rgba(42,40,82,.10);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+  .tabbar button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:800;font-size:.75rem;color:var(--ink-soft);padding:6px 2px;border-radius:14px;min-height:52px;justify-content:center}
+  .tabbar button.on{color:var(--lav-deep);background:var(--lav-soft)}
+  .tabbar .ti{display:grid;place-items:center}
+  body[data-screen="play"] .tabbar{display:none}
+  body[data-screen="play"]{padding-bottom:0}
+
+  .screen{padding-block:16px 8px}
+  .panel{padding:18px 16px;border-radius:24px}
+  .btn{font-size:1.02rem;padding:12px 18px}
+  .btn.sm{font-size:.9rem;padding:8px 12px}
+
+  /* trang chủ */
+  .hero{padding-block:10px 0;gap:6px}
+  .hero > div:first-child{order:2}
+  .hero h1{font-size:clamp(2rem,9.5vw,2.6rem)}
+  .hero .lead{font-size:1rem;margin-top:10px}
+  .hero .cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .hero .cta .btn{padding:12px 10px}
+  .statusline{gap:6px;margin-top:14px}
+  .statusline .chip:last-child{white-space:normal}
+  .mc-stage{order:1;min-height:0;flex-direction:column;align-items:center;padding-top:4px}
+  .mc-stage .bubble{position:relative;top:auto;right:auto;margin-bottom:14px;font-size:.98rem;align-self:center;order:-1}
+  .mc-stage .bubble::after{left:50%;margin-left:-10px}
+  .mc-stage svg.mc{width:118px}
+  .mc-stage .podium{width:56%;height:26px}
+  .map{margin-top:18px;padding:16px 12px;border-radius:24px}
+  .map-head{margin-bottom:14px}
+  .compass{width:52px;height:52px}
+  .regions{grid-template-columns:1fr 1fr;gap:10px}
+  .region{padding:10px;gap:8px;border-radius:20px}
+  .region .isle{height:70px;border-radius:14px}
+  .region .isle svg{width:54px;height:54px}
+  .region h3{font-size:.95rem;line-height:1.2}
+  .region .muted{display:none}
+  .region .meta{flex-direction:column;align-items:flex-start;gap:4px}
+  .region .meta .chip{display:none}
+  .region .num{font-size:.85rem}
+  .region .btn{padding:8px 6px;font-size:.85rem}
+  .home-grid{margin-top:18px;gap:14px}
+  .mini-me svg{width:70px}
+
+  /* thiết lập */
+  .setup{gap:14px}
+  .step h2{font-size:1.2rem}
+  .mode{padding:14px}
+  .tchips{gap:6px}
+  .tchip{font-size:.85rem;padding:5px 8px 5px 5px}
+  .startbar .btn{width:100%}
+
+  /* màn chơi */
+  .stage{padding:12px 12px 20px;min-height:100vh}
+  .stage-grid{gap:12px}
+  .stage-top{margin-bottom:8px;gap:6px}
+  .stage-top .chip{font-size:.75rem;max-width:62vw;overflow:hidden;text-overflow:ellipsis}
+  .ladder{padding:8px;border-radius:16px}
+  .ladder h3{display:none}
+  .ladder p{display:none}
+  .ladder ol{gap:4px;scrollbar-width:none}
+  .ladder ol::-webkit-scrollbar{display:none}
+  .ladder li{min-width:54px;font-size:.8rem}
+  .ladder li .full{display:none}
+  .ladder li .short{display:inline}
+  #foot span:last-child{display:none}
+  .scorebox{padding:10px 12px;border-radius:16px;gap:12px}
+  .scorebox .big{font-size:2rem}
+  .host{min-height:0;margin-bottom:22px;gap:8px}
+  .host svg.mc{width:58px}
+  .host .bubble{font-size:.9rem;padding:8px 12px}
+  .qcard{padding:18px 14px 14px;border-radius:22px}
+  .qcard .qno{font-size:.85rem;left:14px;top:-14px}
+  .qcard h2{font-size:1.12rem;line-height:1.35}
+  .opts{grid-template-columns:1fr;gap:10px;margin-top:14px}
+  .opt{min-height:54px;font-size:1rem;padding:8px 14px 8px 8px;gap:10px}
+  .opt .k{width:34px;height:34px}
+  .actions{margin-top:14px;gap:10px}
+  .actions #lock{flex:1 1 100%}
+  .actions .sp{display:none}
+  .lifelines{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .ll{font-size:.82rem;padding:5px 8px 5px 5px;border-width:2px}
+  .ll .ic{width:30px;height:30px}
+  .ll .ic svg{width:24px;height:24px}
+  .aud{height:120px;gap:8px}
+  .explain{padding:18px 14px;border-radius:22px}
+  .explain .head svg{width:44px;height:44px}
+  .explain .verdict{font-size:1.25rem}
+  .explain .body{font-size:1rem}
+  .explain .actions .btn{width:100%}
+
+  /* kết quả & hồ sơ */
+  .res-hero svg.mc{width:110px}
+  .stats{grid-template-columns:1fr 1fr;gap:8px}
+  .stat b{font-size:1.35rem}
+  .result .row .btn{flex:1 1 calc(50% - 8px)}
+  .avbig svg{width:160px}
+  .badges{grid-template-columns:1fr 1fr;gap:8px}
+  .badge svg{width:44px;height:44px}
+  footer{margin-top:20px;font-size:.78rem}
+  .authhead > svg{width:64px}
+}
+@media (max-width:360px){
+  .logo b span{display:none}
+  .regions{grid-template-columns:1fr}
+}
 html.rm *,html.rm *::before,html.rm *::after{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
@@ -347,17 +504,22 @@ html.rm *,html.rm *::before,html.rm *::after{animation:none!important;transition
       <b>Ai là triệu phú <span>Chibi</span></b>
     </button>
     <nav class="nav" aria-label="Điều hướng">
-      <button class="nbtn" data-go="home">Bản đồ</button>
-      <button class="nbtn" data-go="profile">Hồ sơ</button>
-      <button class="nbtn" data-go="social">Bạn bè</button>
-      <button class="nbtn" data-go="parent">Phụ huynh</button>
-      <button class="nbtn" id="userBtn"></button>
-      <button class="nbtn" id="soundBtn" aria-pressed="true" title="Bật/tắt âm thanh">Âm thanh</button>
-      <button class="nbtn" id="motionBtn" aria-pressed="false" title="Giảm chuyển động">Giảm chuyển động</button>
+      <button class="nbtn wide" data-go="home">Bản đồ</button>
+      <button class="nbtn wide" data-go="setup">Chơi ngay</button>
+      <button class="nbtn wide" data-go="social">Bạn bè</button>
+      <button class="nbtn icon" id="soundBtn" aria-pressed="true" title="Bật/tắt âm thanh"></button>
+      <button class="nbtn icon" id="motionBtn" aria-pressed="false" title="Giảm chuyển động"></button>
+      <button class="nbtn user" id="userBtn"></button>
     </nav>
   </div>
 </header>
 
+<nav class="tabbar" aria-label="Điều hướng nhanh">
+  <button data-go="home"><span class="ti" data-ico="map"></span>Bản đồ</button>
+  <button data-go="setup"><span class="ti" data-ico="play"></span>Chơi</button>
+  <button data-go="profile"><span class="ti" data-ico="user"></span>Hồ sơ</button>
+  <button data-go="social"><span class="ti" data-ico="friends"></span>Bạn bè</button>
+</nav>
 <main id="app"><div class="loading"><div>Đang mở bản đồ phiêu lưu…</div></div></main>
 <footer id="foot"></footer>
 <canvas id="confetti" aria-hidden="true"></canvas>
@@ -392,6 +554,17 @@ const fmt=n=>n.toLocaleString('vi-VN');
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 const LET=['A','B','C','D'];
+const SI=(d)=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICO={
+  map:SI('<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>'),
+  play:SI('<circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z" fill="currentColor"/>'),
+  user:SI('<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/>'),
+  friends:SI('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.5-5 6.5-5s5.7 1.5 6.5 5"/><circle cx="17" cy="9" r="2.8"/><path d="M17 14.5c2.4 0 4 1.4 4.6 4"/>'),
+  soundOn:SI('<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>'),
+  soundOff:SI('<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="m17 9 5 6M22 9l-5 6"/>'),
+  motion:SI('<path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/>'),
+  still:SI('<path d="M4 12h16"/>'),
+};
 const store={get(k,d){try{const v=localStorage.getItem('chibi_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('chibi_'+k,JSON.stringify(v))}catch(e){}}};
 
 /* ===================== icons ===================== */
@@ -524,46 +697,34 @@ function badgeSVG(b){return `<svg viewBox="0 0 64 64" aria-hidden="true"><path d
 
 /* ===================== State ===================== */
 let BANK=[], ISSUES=[];
-/* ===================== Tài khoản (lưu trên thiết bị) =====================
-   ACC = {parent:{salt,hash}|null, users:{username:{salt,hash,profile,createdAt,lastPlayed}}}
-   Mật khẩu & PIN được băm PBKDF2-SHA256 (120.000 vòng) kèm salt riêng, không lưu dạng chữ. */
+/* ===================== Tài khoản: tạo & đăng nhập bằng email + mật khẩu =====================
+   CLOUD (config.js có Supabase): Supabase Auth — email xác nhận, lấy lại mật khẩu qua email, đồng bộ bảng profiles.
+   LOCAL (config.js để trống, ví dụ bản xem thử): tài khoản email lưu trong trình duyệt, mật khẩu băm PBKDF2,
+   chưa gửi được email. Giao diện hai chế độ giống hệt nhau. */
 const NEWPROFILE=()=>({nick:'Nhà thám hiểm',av:{...DEFAULT_AV},xp:0,stars:0,games:0,answered:0,correct:0,topics:{},bestMillion:0,perfect:0,badges:[],history:[]});
-let ACC=store.get('accounts',null)||{parent:null,users:{}};
-const saveAcc=()=>store.set('accounts',ACC);
-/* Hai chế độ tài khoản:
-   - CLOUD (đã điền config.js): Supabase Auth email + mật khẩu, quên mật khẩu qua email, tiến trình đồng bộ bảng profiles.
-   - LOCAL (chưa cấu hình): tài khoản do phụ huynh tạo, lưu trong trình duyệt. */
 const CFG=window.CHIBI_CONFIG||{};
 const CLOUD=!!(CFG.supabaseUrl&&CFG.supabaseAnonKey);
-let SB=null, CLOUD_USER=null, CLOUD_ERR='', RECOVERY=false, DATA_READY=false;
-let CUR=null;
-if(!CLOUD){try{CUR=localStorage.getItem('chibi_session')||sessionStorage.getItem('chibi_session')}catch(e){}
-  if(CUR&&!ACC.users[CUR])CUR=null;}
+let SB=null, USER=null, CLOUD_ERR='', RECOVERY=false, DATA_READY=false;
+let CUR=null; // email đang đăng nhập; null = khách
+let LACC=store.get('local_users',null)||{}; // {email:{salt,hash,nick,profile,createdAt,lastPlayed}}
+const saveLacc=()=>store.set('local_users',LACC);
 let PROFILE;
 const guestProfile=()=>store.get('profile',null)||NEWPROFILE();
-function loadProfile(){if(CLOUD){if(!CLOUD_USER)PROFILE=guestProfile();return}PROFILE=CUR?ACC.users[CUR].profile:guestProfile()}
+function loadProfile(){PROFILE=guestProfile()}
 loadProfile();
 const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
 const newSalt=()=>hex(crypto.getRandomValues(new Uint8Array(16)));
 async function hashPw(pw,salt){const enc=new TextEncoder();const key=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveBits']);
   return hex(await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:120000,hash:'SHA-256'},key,256))}
-const W1=['cu','meo','rong','gau','tho','voi','cao','ca','chim','ong','sao','may'];
-const W2=['xanh','tim','vang','hong','cam','bac','mint','nau'];
-const W3=['bien','nui','song','rung','dao','may','gio','nang','trang','sao'];
-const rint=n=>crypto.getRandomValues(new Uint32Array(1))[0]%n;
-const pick=a=>a[rint(a.length)];
-const genPass=()=>`${pick(W1)}-${pick(W2)}-${pick(W3)}-${10+rint(90)}`;
-function genUser(){for(let i=0;i<50;i++){const u=pick(W1)+pick(W2)+(10+rint(90));if(!ACC.users[u])return u}return 'be'+Date.now()%100000}
-const USER_RE=/^[a-z0-9_]{3,16}$/;
-function setSession(u,remember){try{localStorage.removeItem('chibi_session');sessionStorage.removeItem('chibi_session');if(u)(remember?localStorage:sessionStorage).setItem('chibi_session',u)}catch(e){}CUR=u;loadProfile()}
-let PARENT_OK=false, LOGIN_FAILS=0, LOGIN_LOCK=0;
+let LOGIN_FAILS=0, LOGIN_LOCK=0;
 const PREF=Object.assign({sound:true,rm:matchMedia('(prefers-reduced-motion: reduce)').matches},store.get('pref',{}));
 let G=null; // current game
 let SETUP={mode:'million',scope:'all',topics:new Set(),count:10,min:1,max:15,timer:0};
-let SYNC_T=null, SYNC_STATE='';
 function saveProfile(){
-  if(CLOUD&&CLOUD_USER){store.set('cloud_'+CLOUD_USER.id,PROFILE);clearTimeout(SYNC_T);SYNC_T=setTimeout(pushProfile,700);return}
-  if(CUR&&ACC.users[CUR]){ACC.users[CUR].profile=PROFILE;ACC.users[CUR].lastPlayed=Date.now();saveAcc()}else store.set('profile',PROFILE)}
+  if(!USER){store.set('profile',PROFILE);return}
+  if(CLOUD){store.set('cloud_'+USER.id,PROFILE);clearTimeout(SYNC_T);SYNC_T=setTimeout(pushProfile,700);return}
+  const a=LACC[USER.email];if(a){a.profile=PROFILE;a.lastPlayed=Date.now();saveLacc()}
+}
 const level=xp=>Math.floor(xp/200)+1;
 
 /* ===================== Sound ===================== */
@@ -622,9 +783,9 @@ const maxLv=()=>BANK.reduce((m,q)=>Math.max(m,q.lv),1);
 /* ===================== Routing ===================== */
 let screen='home';
 function go(s,opts){screen=s;window.scrollTo({top:0,behavior:PREF.rm?'auto':'smooth'});
-  document.querySelectorAll('.nav [data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go===s));
-  if(s!=='parent')PARENT_OK=false; // rời Góc phụ huynh là tự khóa lại
-  ({home:renderHome,setup:renderSetup,play:renderPlay,result:renderResult,profile:renderProfile,social:renderSocial,login:renderLogin,parent:renderParent,reset:renderReset}[s])(opts);
+  document.querySelectorAll('[data-go]').forEach(b=>{const on=b.dataset.go===s||(b.dataset.go==='setup'&&(s==='play'||s==='result'))||(b.dataset.go==='profile'&&(s==='login'||s==='reset'));b.classList.toggle('on',on);if(b.closest('.tabbar,.nav'))b.setAttribute('aria-current',on?'page':'false')});
+  document.body.dataset.screen=s;
+  ({home:renderHome,setup:renderSetup,play:renderPlay,result:renderResult,profile:renderProfile,social:renderSocial,login:renderLogin,reset:renderReset}[s])(opts);
   renderFoot();renderUserBtn();
 }
 const app=()=>$('#app');
@@ -639,7 +800,7 @@ function renderHome(){
        <p class="eyebrow">Lịch sử & Địa lý · 10–13 tuổi</p>
        <h1 style="margin-top:8px">Ai là triệu phú<span class="c">Chibi</span></h1>
        <p class="lead">Trả lời 15 câu hỏi từ dễ đến khó, dùng quyền trợ giúp thật khéo, hoặc chơi tự do để luyện tập theo chủ đề em thích.</p>
-       ${CUR?'':`<div class="notice" style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="flex:1;min-width:200px">Em đang chơi thử với tư cách khách. Đăng nhập để lưu avatar, XP và huy hiệu của riêng em.</span><button class="btn sm lav" data-go2="login">Đăng nhập</button></div>`}
+       ${CUR?'':`<div class="notice" style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="flex:1;min-width:200px">Em đang chơi thử với tư cách khách. Đăng nhập để lưu avatar, XP và huy hiệu của riêng em.</span><button class="btn sm lav" data-go2="login">Đăng nhập / Tạo tài khoản</button></div>`}
        <div class="cta">
          <button class="btn" data-quick="million">Chơi Ai là triệu phú</button>
          <button class="btn lav" data-quick="free">Chơi tự do</button>
@@ -698,7 +859,7 @@ function renderHome(){
   </div>`;
   app().querySelectorAll('[data-quick]').forEach(b=>b.onclick=()=>{SFX.tap();SETUP.mode=b.dataset.quick;SETUP.scope='all';SETUP.topics=new Set();go('setup')});
   app().querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>{SFX.tap();SETUP.scope='topics';SETUP.topics=new Set([b.dataset.topic]);go('setup')});
-  app().querySelectorAll('[data-go2]').forEach(b=>b.onclick=()=>go(b.dataset.go2));
+  app().querySelectorAll('[data-go2]').forEach(b=>b.onclick=()=>{AUTH_TAB='in';go(b.dataset.go2)});
 }
 
 /* ===================== SETUP ===================== */
@@ -870,11 +1031,13 @@ function renderPlay(){
     ${M?ladderHTML():scoreHTML()}
   </div></div>`;
   bindPlay();
+  const ol=app().querySelector('.ladder ol'),cur=app().querySelector('.ladder li.cur');
+  if(ol&&cur&&ol.scrollWidth>ol.clientWidth)ol.scrollLeft=cur.offsetLeft-ol.offsetLeft-ol.clientWidth/2+cur.clientWidth/2;
 }
 function ladderHTML(){
   return `<aside class="ladder" aria-label="Thang điểm thưởng của lượt này"><h3><span>Thang thưởng</span><span style="font-weight:600;font-size:.8rem;opacity:.8">lượt này</span></h3><ol>
    ${PRIZES.map((p,i)=>{let c=[];if(SAFE.includes(i+1))c.push('safe');if(i<G.idx||(i===G.idx&&G.revealed&&G.lastOk))c.push('done');if(i===G.idx)c.push('cur');
-     return `<li class="${c.join(' ')}"><span class="q">${i+1}</span><span>${fmt(p)}${SAFE.includes(i+1)?' ★':''}</span></li>`}).join('')}
+     return `<li class="${c.join(' ')}"><span class="q">${i+1}</span><span class="full">${fmt(p)}${SAFE.includes(i+1)?' ★':''}</span><span class="short">${p<1e6?p/1000+'K':p/1e6+' Tr'}${SAFE.includes(i+1)?'★':''}</span></li>`}).join('')}
   </ol><p style="color:#dcd6ff;font-size:.78rem;margin-top:8px;font-weight:600">★ Mốc an toàn. Điểm thưởng là giả lập.</p></aside>`;
 }
 function scoreHTML(){
@@ -1108,8 +1271,8 @@ function renderProfile(){
        ${P.history.length?`<div class="hist">${P.history.map(h=>`<div><span><b>${h.mode==='million'?'Ai là triệu phú':h.mode==='review'?'Ôn câu sai':'Chơi tự do'}</b> · ${esc(h.scope)}</span><span style="font-weight:800">${h.mode==='million'?`${h.passed}/15 câu · ${fmt(h.prize)}`:`${h.ok}/${h.n} điểm`}</span><span class="muted">${new Date(h.at).toLocaleDateString('vi-VN')}</span></div>`).join('')}</div>`:'<p class="muted" style="font-weight:700">Chưa có lượt chơi nào. Hãy bắt đầu từ bản đồ nhé!</p>'}
      </section>
      <section class="panel"><h2 style="font-size:1.1rem">${CUR?`Tài khoản: ${esc(CUR)}`:'Em đang chơi với tư cách khách'}</h2>
-       <p class="muted" style="font-weight:600;font-size:.92rem;margin-top:6px">${CUR?(CLOUD?`Tiến trình được đồng bộ, em đăng nhập ở máy nào cũng thấy. ${SYNC_STATE?esc(SYNC_STATE)+'.':''}`:'Tiến trình được lưu riêng cho tài khoản này trên máy này. Quên mật khẩu? Nhờ bố mẹ đặt lại trong Góc phụ huynh.'):'Tiến trình khách chỉ lưu tạm trên máy này. Hãy đăng nhập để có hồ sơ riêng.'}</p>
-       <div class="row" style="margin-top:10px">${CUR?`<button class="btn sm lav" id="logout2">Đăng xuất</button>${CLOUD?'<button class="btn sm white" id="chgPw">Đổi mật khẩu</button>':''}`:'<button class="btn sm lav" id="login2">Đăng nhập</button>'}${resetAsk?`<span style="font-weight:800">Xóa toàn bộ tiến trình trên máy này?</span><button class="btn sm peach" id="resetYes">Xóa</button><button class="btn sm white" id="resetNo">Giữ lại</button>`:`<button class="btn sm white" id="reset">Xóa tiến trình</button>`}</div>
+       <p class="muted" style="font-weight:600;font-size:.92rem;margin-top:6px">${CUR?(CLOUD?`Tiến trình được đồng bộ, em đăng nhập ở máy nào cũng thấy. ${SYNC_STATE?esc(SYNC_STATE)+'.':''}`:'Tiến trình được lưu riêng cho tài khoản này trên máy này.'):'Tiến trình khách chỉ lưu tạm trên máy này. Hãy đăng nhập để có hồ sơ riêng.'}</p>
+       <div class="row" style="margin-top:10px">${CUR?`<button class="btn sm lav" id="logout2">Đăng xuất</button><button class="btn sm white" id="chgPw">Đổi mật khẩu</button>`:'<button class="btn sm lav" id="login2">Đăng nhập</button>'}${resetAsk?`<span style="font-weight:800">Xóa toàn bộ tiến trình trên máy này?</span><button class="btn sm peach" id="resetYes">Xóa</button><button class="btn sm white" id="resetNo">Giữ lại</button>`:`<button class="btn sm white" id="reset">Xóa tiến trình</button>`}</div>
      </section>
     </div>
    </div></div>`;
@@ -1123,7 +1286,7 @@ function renderProfile(){
   on('resetNo',()=>{resetAsk=false;renderProfile()});
   on('resetYes',()=>{resetAsk=false;PROFILE=NEWPROFILE();saveProfile();renderProfile()});
   on('logout2',logout);
-  on('login2',()=>go('login'));
+  on('login2',()=>{AUTH_TAB='in';go('login')});
   on('chgPw',()=>go('reset'));
 }
 
@@ -1145,48 +1308,108 @@ function renderSocial(){
 
 /* ===================== ĐĂNG NHẬP ===================== */
 function renderUserBtn(){const b=$('#userBtn');if(!b)return;
-  b.innerHTML=CUR?`${avatarSVG(PROFILE.av).replace('<svg','<svg style="width:22px;height:22px"')}${esc(PROFILE.nick)}`:'Đăng nhập';
-  b.title=CUR?'Hồ sơ của '+CUR:'Đăng nhập';b.onclick=()=>{if(G){stopTimer();G=null}go(CUR?'profile':'login')}}
+  b.innerHTML=CUR?`${avatarSVG(PROFILE.av).replace('<svg','<svg style="width:22px;height:22px"')}<span class="lbl">${esc(PROFILE.nick)}</span>`:`${ICO.user}<span class="lbl">Đăng nhập</span>`;
+  b.title=CUR?'Hồ sơ của '+PROFILE.nick:'Đăng nhập';b.onclick=()=>{if(G){stopTimer();G=null}if(!CUR)AUTH_TAB='in';go(CUR?'profile':'login')}}
 function logout(){
-  if(CLOUD){clearTimeout(SYNC_T);if(CLOUD_USER)pushProfile();(SB?SB.auth.signOut():Promise.resolve()).catch(()=>{}).finally(()=>{CLOUD_USER=null;CUR=null;loadProfile();go('home')});return}
-  setSession(null);SFX.tap();go('home')}
+  clearTimeout(SYNC_T);if(CLOUD&&USER)pushProfile();
+  AUTH.signOut().catch(()=>{}).finally(()=>{USER=null;CUR=null;loadProfile();SFX.tap();go('home')});
+}
+/* Hồ sơ của tài khoản mới: chuyển tiến trình chơi khách (nếu có) vào tài khoản */
+function freshProfile(nick){
+  const g=store.get('profile',null);let prof=NEWPROFILE();
+  if(g&&g.games>0){prof=Object.assign(NEWPROFILE(),g);store.set('profile',NEWPROFILE())}
+  if(nick)prof.nick=nick;return prof;
+}
+function setUser(id,email,prof){USER={id,email};CUR=email;PROFILE=Object.assign(NEWPROFILE(),prof)}
 
-/* ===================== CLOUD AUTH (Supabase, như app 0.1%) ===================== */
+/* ---------- Supabase ---------- */
+let SYNC_T=null, SYNC_STATE='';
 async function pushProfile(){
-  if(!SB||!CLOUD_USER)return;
-  const {error}=await SB.from('profiles').upsert({id:CLOUD_USER.id,nickname:PROFILE.nick,data:PROFILE,updated_at:new Date().toISOString()});
+  if(!SB||!USER)return;
+  const {error}=await SB.from('profiles').upsert({id:USER.id,nickname:PROFILE.nick,data:PROFILE,updated_at:new Date().toISOString()});
   SYNC_STATE=error?'Chưa đồng bộ được, sẽ thử lại khi em chơi tiếp':'Đã đồng bộ';
 }
 async function cloudLogin(user){
-  CLOUD_USER={id:user.id,email:user.email};CUR=user.email;
   let prof=null;
   try{const {data,error}=await SB.from('profiles').select('data').eq('id',user.id).maybeSingle();if(error)throw error;prof=data&&data.data}
   catch(e){prof=store.get('cloud_'+user.id,null);SYNC_STATE='Đang dùng bản lưu trên máy, chưa kết nối được máy chủ'}
-  if(!prof){ // tài khoản mới: chuyển tiến trình khách (nếu có) vào tài khoản
-    const g=store.get('profile',null);prof=g&&g.games>0?g:NEWPROFILE();if(g&&g.games>0)store.set('profile',NEWPROFILE());
-    const nn=user.user_metadata&&user.user_metadata.nickname;if(nn)prof.nick=nn;
-    PROFILE=Object.assign(NEWPROFILE(),prof);await pushProfile();
-  }else PROFILE=Object.assign(NEWPROFILE(),prof);
+  const isNew=!prof;
+  if(isNew)prof=freshProfile(user.user_metadata&&user.user_metadata.nickname);
+  setUser(user.id,user.email,prof);
+  if(isNew)await pushProfile();
   store.set('cloud_'+user.id,PROFILE);
 }
-async function initCloud(){
-  if(!CLOUD)return;
+async function initAuth(){
+  if(!CLOUD){ // khôi phục phiên tài khoản trên máy
+    let e=null;try{e=localStorage.getItem('chibi_session')}catch(_){}
+    if(e&&LACC[e])setUser('local:'+e,e,LACC[e].profile);
+    return;
+  }
   if(!window.supabase||!window.supabase.createClient){CLOUD_ERR='Không tải được thư viện đăng nhập. Kiểm tra kết nối mạng rồi tải lại trang.';return}
   if(/type=recovery/.test(location.hash+location.search))RECOVERY=true; // đọc trước khi thư viện xóa token khỏi URL
   try{
     SB=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
     SB.auth.onAuthStateChange((ev,session)=>{
-      if(ev==='PASSWORD_RECOVERY'){RECOVERY=true;if(session)CLOUD_USER={id:session.user.id,email:session.user.email};if(DATA_READY)go('reset')}
+      if(ev==='PASSWORD_RECOVERY'){RECOVERY=true;if(session&&!USER)USER={id:session.user.id,email:session.user.email};if(DATA_READY)go('reset')}
     });
     const {data:{session}}=await SB.auth.getSession();
-    if(session&&RECOVERY)CLOUD_USER={id:session.user.id,email:session.user.email};
+    if(session&&RECOVERY)USER={id:session.user.id,email:session.user.email};
     else if(session)await cloudLogin(session.user);
   }catch(e){CLOUD_ERR='Không kết nối được máy chủ đăng nhập: '+(e.message||e)}
 }
+
+/* ---------- Một bộ thao tác chung cho cả hai chế độ ---------- */
+const redirect=()=>location.origin+location.pathname;
+const AUTH={
+  async signIn(email,pw){
+    if(Date.now()<LOGIN_LOCK)throw new Error('LOCKED');
+    if(CLOUD){
+      const {data,error}=await SB.auth.signInWithPassword({email,password:pw});
+      if(error){if(/Invalid login/i.test(error.message))bumpFail();throw error}
+      LOGIN_FAILS=0;await cloudLogin(data.user);return;
+    }
+    const a=LACC[email];
+    if(!a||(await hashPw(pw,a.salt))!==a.hash){bumpFail();throw new Error('Invalid login credentials')}
+    LOGIN_FAILS=0;try{localStorage.setItem('chibi_session',email)}catch(_){}
+    setUser('local:'+email,email,a.profile);
+  },
+  async signUp(email,pw,nick){ // trả về true nếu cần xác nhận email
+    if(CLOUD){
+      const {data,error}=await SB.auth.signUp({email,password:pw,options:{data:{nickname:nick},emailRedirectTo:redirect()}});
+      if(error)throw error;
+      if(data.user&&Array.isArray(data.user.identities)&&data.user.identities.length===0)throw new Error('User already registered');
+      if(data.session){await cloudLogin(data.user);return false}
+      return true;
+    }
+    if(LACC[email])throw new Error('User already registered');
+    const salt=newSalt();
+    LACC[email]={salt,hash:await hashPw(pw,salt),profile:freshProfile(nick),createdAt:Date.now(),lastPlayed:0};saveLacc();
+    try{localStorage.setItem('chibi_session',email)}catch(_){}
+    setUser('local:'+email,email,LACC[email].profile);return false;
+  },
+  async forgot(email){
+    if(!CLOUD)throw new Error('NO_EMAIL_SERVER');
+    const {error}=await SB.auth.resetPasswordForEmail(email,{redirectTo:redirect()});if(error)throw error;
+  },
+  async updatePassword(pw){
+    if(CLOUD){const {data,error}=await SB.auth.updateUser({password:pw});if(error)throw error;await cloudLogin(data.user);return}
+    const a=LACC[CUR];if(!a)throw new Error('Không tìm thấy tài khoản');
+    if((await hashPw(pw,a.salt))===a.hash)throw new Error('same_password');
+    a.salt=newSalt();a.hash=await hashPw(pw,a.salt);saveLacc();
+  },
+  async signOut(){
+    if(CLOUD&&SB){await SB.auth.signOut();return}
+    try{localStorage.removeItem('chibi_session')}catch(_){}
+  },
+};
+function bumpFail(){LOGIN_FAILS++;if(LOGIN_FAILS>=5){LOGIN_LOCK=Date.now()+30000;LOGIN_FAILS=0}}
 function viErr(e){
-  const m=String((e&&e.message)||e||'');const c=(e&&(e.code||e.status))||'';
+  const m=String((e&&e.message)||e||'');const c=String((e&&(e.code||e.status))||'');
+  if(m==='LOCKED')return `Nhập sai nhiều lần. Hãy thử lại sau ${Math.max(1,Math.ceil((LOGIN_LOCK-Date.now())/1000))} giây.`;
+  if(m==='NO_EMAIL_SERVER')return 'Bản này chưa kết nối máy chủ email nên chưa gửi được liên kết đặt lại mật khẩu.';
   if(/Invalid login credentials/i.test(m))return 'Email hoặc mật khẩu chưa đúng.';
   if(/Email not confirmed/i.test(m))return 'Email này chưa được xác nhận. Hãy mở email xác nhận và bấm vào liên kết trước khi đăng nhập.';
+  if(/not authorized|email_address_not_authorized/i.test(m+c))return 'Hệ thống chưa gửi được email tới địa chỉ này (máy chủ email chưa được cài đặt). Hãy báo người quản lý website.';
   if(/already registered|already been registered|user_already_exists/i.test(m+c))return 'Email này đã có tài khoản. Hãy đăng nhập, hoặc dùng “Quên mật khẩu?”.';
   if(/rate limit|over_email_send_rate_limit|429/i.test(m+c))return 'Đã gửi email quá nhiều lần. Hãy đợi vài phút rồi thử lại.';
   if(/Password should be at least|weak_password/i.test(m+c))return 'Mật khẩu cần ít nhất 6 ký tự.';
@@ -1195,270 +1418,110 @@ function viErr(e){
   if(/fetch|network/i.test(m))return 'Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.';
   return m||'Có lỗi xảy ra, hãy thử lại.';
 }
-let AUTH_TAB='in';
-function renderCloudLogin(){
-  if(CLOUD_USER&&!RECOVERY){go('profile');return}
+
+/* ---------- Màn hình đăng nhập / tạo tài khoản / quên mật khẩu ---------- */
+let AUTH_TAB='in', AUTH_EMAIL='';
+function renderLogin(){
+  if(USER&&!RECOVERY){go('profile');return}
   const T=AUTH_TAB;
   const tabs=`<div class="tabs" role="tablist"><button role="tab" data-tab="in" aria-selected="${T==='in'}">Đăng nhập</button><button role="tab" data-tab="up" aria-selected="${T==='up'}">Tạo tài khoản</button></div>`;
+  const pw=(id,ac,lbl,hint)=>`<div class="field"><label for="${id}">${lbl}</label><div class="pwrow"><input type="password" id="${id}" autocomplete="${ac}" required><button type="button" class="btn sm white" data-show="${id}">Hiện</button></div>${hint?`<small class="muted hint">${hint}</small>`:''}</div>`;
+  const emailField=(lbl,hint)=>`<div class="field"><label for="ae">${lbl}</label><input type="email" id="ae" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" required value="${esc(AUTH_EMAIL)}">${hint?`<small class="muted hint">${hint}</small>`:''}</div>`;
   let body='';
   if(T==='in')body=`<form id="authForm" class="form" novalidate>
-     <div class="field"><label for="ae">Email</label><input type="email" id="ae" autocomplete="email" autocapitalize="none" spellcheck="false" required></div>
-     <div class="field"><label for="ap">Mật khẩu</label><div class="pwrow"><input type="password" id="ap" autocomplete="current-password" required><button type="button" class="btn sm white" data-show="ap">Hiện</button></div></div>
+     ${emailField('Email')}
+     ${pw('ap','current-password','Mật khẩu')}
      <div id="aerr" class="notice warn" hidden></div>
      <button class="btn" type="submit" id="abtn">Đăng nhập</button>
      <button type="button" class="linkbtn" id="toForgot">Quên mật khẩu?</button></form>`;
   if(T==='up')body=`<form id="authForm" class="form" novalidate>
      <div class="field"><label for="an">Biệt danh của bé</label><input type="text" id="an" maxlength="16" placeholder="Ví dụ: Cú Nhỏ" required><small class="muted hint">Không dùng tên thật, trường lớp hay ngày sinh.</small></div>
-     <div class="field"><label for="ae">Email của bố mẹ</label><input type="email" id="ae" autocomplete="email" autocapitalize="none" spellcheck="false" required><small class="muted hint">Email này dùng để xác nhận tài khoản và lấy lại mật khẩu. Nhiều con dùng chung một Gmail? Thêm “+tên” trước @, ví dụ <b>bome+be1@gmail.com</b>: thư vẫn về cùng hộp thư.</small></div>
-     <div class="field"><label for="ap">Mật khẩu</label><div class="pwrow"><input type="password" id="ap" autocomplete="new-password" required><button type="button" class="btn sm white" data-show="ap">Hiện</button></div><small class="muted hint">Ít nhất 6 ký tự.</small></div>
+     ${emailField('Email của bố mẹ','Dùng để đăng nhập và lấy lại mật khẩu. Nhiều con dùng chung một Gmail? Thêm “+tên” trước @, ví dụ <b>bome+be1@gmail.com</b>.')}
+     ${pw('ap','new-password','Mật khẩu','Ít nhất 6 ký tự.')}
      <div class="field"><label for="ap2">Nhập lại mật khẩu</label><input type="password" id="ap2" autocomplete="new-password" required></div>
      <label class="check"><input type="checkbox" id="aok"> Tôi là phụ huynh và đồng ý tạo tài khoản này cho con</label>
      <div id="aerr" class="notice warn" hidden></div>
      <button class="btn" type="submit" id="abtn">Tạo tài khoản</button></form>`;
   if(T==='forgot')body=`<form id="authForm" class="form" novalidate>
      <p style="font-weight:600">Nhập email đã đăng ký. Chúng tôi sẽ gửi một liên kết để đặt mật khẩu mới.</p>
-     <div class="field"><label for="ae">Email đã đăng ký</label><input type="email" id="ae" autocomplete="email" autocapitalize="none" spellcheck="false" required></div>
+     ${emailField('Email đã đăng ký')}
      <div id="aerr" class="notice warn" hidden></div>
      <button class="btn" type="submit" id="abtn">Gửi liên kết đặt lại mật khẩu</button>
      <button type="button" class="linkbtn" data-tab="in">Quay lại đăng nhập</button></form>`;
-  if(T==='sent'||T==='confirm')body=`<div class="sentbox">${owlSVG()}<div><h2 style="font-size:1.3rem">${T==='sent'?'Kiểm tra hộp thư nhé!':'Gần xong rồi!'}</h2>
+  if(T==='sent'||T==='confirm')body=`<div class="sentbox">${owlSVG()}<div><h2 style="font-size:1.25rem">${T==='sent'?'Kiểm tra hộp thư nhé!':'Gần xong rồi!'}</h2>
      <p style="font-weight:600;margin-top:6px">${T==='sent'?`Nếu <b>${esc(AUTH_EMAIL)}</b> đã đăng ký, một email chứa liên kết đặt lại mật khẩu vừa được gửi tới. Mở email và bấm vào liên kết để tạo mật khẩu mới.`
        :`Một email xác nhận vừa được gửi tới <b>${esc(AUTH_EMAIL)}</b>. Mở email và bấm vào liên kết để kích hoạt tài khoản, sau đó quay lại đăng nhập.`}</p>
      <p class="muted" style="font-weight:600;margin-top:6px;font-size:.9rem">Không thấy thư? Xem trong mục Spam hoặc Quảng cáo, và đợi 1–2 phút.</p>
      <button class="btn sm" data-tab="in" style="margin-top:12px">Về trang đăng nhập</button></div></div>`;
+  const title=T==='forgot'||T==='sent'?'Quên mật khẩu':T==='up'||T==='confirm'?'Tạo tài khoản':'Đăng nhập';
   app().innerHTML=`<div class="wrap screen"><div class="authwrap"><section class="panel">
-     <div class="authhead">${avatarSVG(MC_AV,'hello','mc')}<div><p class="eyebrow">Chào nhà thám hiểm</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">${T==='forgot'||T==='sent'?'Quên mật khẩu':T==='up'||T==='confirm'?'Tạo tài khoản':'Đăng nhập'}</h1></div></div>
+     <div class="authhead">${avatarSVG(MC_AV,'hello','mc')}<div><p class="eyebrow">Chào nhà thám hiểm</p><h1>${title}</h1></div></div>
      ${CLOUD_ERR?`<div class="notice warn" style="margin-top:12px">${esc(CLOUD_ERR)}</div>`:''}
      ${T==='in'||T==='up'?tabs:''}${body}
-     ${T==='in'||T==='up'?'<div class="row" style="margin-top:16px"><button class="btn sm white" id="guest">Chơi thử không cần tài khoản</button></div>':''}
+     ${T==='in'||T==='up'?'<button class="btn white sm guestbtn" id="guest">Chơi thử không cần tài khoản</button>':''}
+     ${!CLOUD?'<p class="muted devnote">Bản xem thử: tài khoản được lưu trên máy này. Khi website kết nối Supabase, tài khoản sẽ đồng bộ mọi máy và lấy lại được mật khẩu qua email.</p>':''}
    </section></div></div>`;
-  app().querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{AUTH_TAB=b.dataset.tab;renderCloudLogin()});
+  app().querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{AUTH_TAB=b.dataset.tab;renderLogin()});
   app().querySelectorAll('[data-show]').forEach(b=>b.onclick=()=>{const p=$('#'+b.dataset.show);p.type=p.type==='password'?'text':'password';b.textContent=p.type==='password'?'Hiện':'Ẩn'});
   const on=(id,f)=>{const x=$('#'+id);if(x)x.onclick=f};
-  on('guest',()=>go('home'));on('toForgot',()=>{AUTH_TAB='forgot';renderCloudLogin()});
+  on('guest',()=>go('home'));
+  on('toForgot',()=>{const e=$('#ae');if(e)AUTH_EMAIL=e.value.trim();AUTH_TAB='forgot';renderLogin()});
   const f=$('#authForm');if(!f)return;
-  const first=f.querySelector('input');if(first)first.focus();
-  const err=m=>{const x=$('#aerr');x.textContent=m;x.hidden=!m};
+  if(matchMedia('(hover:hover)').matches){const first=f.querySelector('input');if(first)first.focus()}
+  const err=m=>{const x=$('#aerr');x.textContent=m;x.hidden=!m;if(m)x.scrollIntoView({block:'nearest',behavior:'smooth'})};
   f.onsubmit=async e=>{e.preventDefault();err('');
-    if(!SB){err(CLOUD_ERR||'Chưa kết nối được máy chủ đăng nhập.');return}
+    if(CLOUD&&!SB){err(CLOUD_ERR||'Chưa kết nối được máy chủ đăng nhập.');return}
     const email=$('#ae').value.trim().toLowerCase();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err('Địa chỉ email chưa hợp lệ.');return}
+    AUTH_EMAIL=email;
     const btn=$('#abtn'),label=btn.textContent;btn.disabled=true;btn.textContent='Đang xử lý…';
     const done=()=>{btn.disabled=false;btn.textContent=label};
     try{
       if(T==='in'){
-        const pw=$('#ap').value;if(!pw){done();err('Hãy nhập mật khẩu.');return}
-        const {data,error}=await SB.auth.signInWithPassword({email,password:pw});if(error)throw error;
-        await cloudLogin(data.user);SFX.ok();go('home');
+        const p=$('#ap').value;if(!p){done();err('Hãy nhập mật khẩu.');return}
+        await AUTH.signIn(email,p);SFX.ok();go('home');
       }else if(T==='up'){
-        const nick=$('#an').value.trim(),pw=$('#ap').value,pw2=$('#ap2').value;
+        const nick=$('#an').value.trim(),p=$('#ap').value,p2=$('#ap2').value;
         if(!nick){done();err('Hãy đặt một biệt danh cho bé.');return}
-        if(pw.length<6){done();err('Mật khẩu cần ít nhất 6 ký tự.');return}
-        if(pw!==pw2){done();err('Hai lần nhập mật khẩu chưa khớp.');return}
+        if(p.length<6){done();err('Mật khẩu cần ít nhất 6 ký tự.');return}
+        if(p!==p2){done();err('Hai lần nhập mật khẩu chưa khớp.');return}
         if(!$('#aok').checked){done();err('Cần phụ huynh đồng ý trước khi tạo tài khoản.');return}
-        const {data,error}=await SB.auth.signUp({email,password:pw,options:{data:{nickname:nick},emailRedirectTo:location.origin+location.pathname}});
-        if(error)throw error;
-        if(data.user&&Array.isArray(data.user.identities)&&data.user.identities.length===0)throw new Error('User already registered');
-        AUTH_EMAIL=email;
-        if(data.session){await cloudLogin(data.user);SFX.ok();go('home')}else{AUTH_TAB='confirm';renderCloudLogin()}
+        const needConfirm=await AUTH.signUp(email,p,nick);
+        if(needConfirm){AUTH_TAB='confirm';renderLogin()}else{AUTH_TAB='in';SFX.ok();confetti(60);go('home')}
       }else if(T==='forgot'){
-        const {error}=await SB.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
-        if(error)throw error;
-        AUTH_EMAIL=email;AUTH_TAB='sent';renderCloudLogin();
+        await AUTH.forgot(email);AUTH_TAB='sent';renderLogin();
       }
     }catch(ex){done();SFX.bad();err(viErr(ex))}
   };
 }
-let AUTH_EMAIL='';
+/* ---------- Đặt mật khẩu mới (từ email hoặc khi đang đăng nhập) ---------- */
 function renderReset(){
-  if(!CLOUD){go('login');return}
+  const ok=!!USER;
   app().innerHTML=`<div class="wrap screen"><div class="authwrap"><section class="panel">
-    <div class="authhead">${owlSVG()}<div><p class="eyebrow">${RECOVERY?'Lấy lại mật khẩu':'Bảo mật tài khoản'}</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">Đặt mật khẩu mới</h1></div></div>
-    ${CLOUD_USER?`<p style="font-weight:600;margin-top:10px">Tài khoản: <b>${esc(CLOUD_USER.email)}</b></p>`:''}
-    ${!CLOUD_USER&&!RECOVERY?`<div class="notice warn" style="margin-top:12px">Liên kết đặt lại mật khẩu đã hết hạn hoặc đã được dùng. Hãy yêu cầu một liên kết mới.</div><button class="btn sm" id="again" style="margin-top:12px">Gửi lại liên kết</button>`:`
+    <div class="authhead">${owlSVG()}<div><p class="eyebrow">${RECOVERY?'Lấy lại mật khẩu':'Bảo mật tài khoản'}</p><h1>Đặt mật khẩu mới</h1></div></div>
+    ${ok?`<p style="font-weight:600;margin-top:10px;overflow-wrap:anywhere">Tài khoản: <b>${esc(USER.email)}</b></p>
     <form id="rsForm" class="form" novalidate>
       <div class="field"><label for="r1">Mật khẩu mới</label><div class="pwrow"><input type="password" id="r1" autocomplete="new-password"><button type="button" class="btn sm white" id="r1s">Hiện</button></div><small class="muted hint">Ít nhất 6 ký tự.</small></div>
       <div class="field"><label for="r2">Nhập lại mật khẩu mới</label><input type="password" id="r2" autocomplete="new-password"></div>
       <div id="rerr" class="notice warn" hidden></div><div id="rok" class="notice" hidden></div>
       <button class="btn" type="submit" id="rbtn">Lưu mật khẩu mới</button>
-    </form>`}
+      ${RECOVERY?'':'<button type="button" class="linkbtn" id="rcancel">Để sau</button>'}
+    </form>`:`<div class="notice warn" style="margin-top:12px">Liên kết đặt lại mật khẩu đã hết hạn hoặc đã được dùng. Hãy yêu cầu một liên kết mới.</div><button class="btn sm" id="again" style="margin-top:12px">Gửi lại liên kết</button>`}
   </section></div></div>`;
-  const a=$('#again');if(a)a.onclick=()=>{AUTH_TAB='forgot';go('login')};
-  const s=$('#r1s');if(s)s.onclick=()=>{const p=$('#r1');p.type=p.type==='password'?'text':'password';s.textContent=p.type==='password'?'Hiện':'Ẩn'};
-  const f=$('#rsForm');if(!f)return;$('#r1').focus();
+  const on=(id,f)=>{const x=$('#'+id);if(x)x.onclick=f};
+  on('again',()=>{AUTH_TAB='forgot';go('login')});
+  on('rcancel',()=>go('profile'));
+  on('r1s',()=>{const p=$('#r1'),s=$('#r1s');p.type=p.type==='password'?'text':'password';s.textContent=p.type==='password'?'Hiện':'Ẩn'});
+  const f=$('#rsForm');if(!f)return;
   f.onsubmit=async e=>{e.preventDefault();const err=m=>{const x=$('#rerr');x.textContent=m;x.hidden=!m};err('');
     const p1=$('#r1').value,p2=$('#r2').value;
     if(p1.length<6){err('Mật khẩu cần ít nhất 6 ký tự.');return}
     if(p1!==p2){err('Hai lần nhập mật khẩu chưa khớp.');return}
     const b=$('#rbtn');b.disabled=true;b.textContent='Đang lưu…';
-    try{const {data,error}=await SB.auth.updateUser({password:p1});if(error)throw error;
+    try{await AUTH.updatePassword(p1);
       RECOVERY=false;try{history.replaceState(null,'',location.pathname)}catch(_){}
-      await cloudLogin(data.user);SFX.ok();
-      const ok=$('#rok');ok.textContent='Đã đổi mật khẩu! Đang đưa em về bản đồ…';ok.hidden=false;setTimeout(()=>go('home'),1400);
+      SFX.ok();const okb=$('#rok');okb.textContent='Đã đổi mật khẩu! Đang đưa em về bản đồ…';okb.hidden=false;setTimeout(()=>go('home'),1300);
     }catch(ex){b.disabled=false;b.textContent='Lưu mật khẩu mới';err(viErr(ex))}};
-}
-
-function renderLogin(){
-  if(CLOUD){renderCloudLogin();return}
-  if(CUR){go('profile');return}
-  const n=Object.keys(ACC.users).length;
-  app().innerHTML=`<div class="wrap screen"><div class="authwrap">
-   <section class="panel">
-     <div class="authhead">${avatarSVG(MC_AV,'hello','mc')}<div><p class="eyebrow">Chào nhà thám hiểm</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">Đăng nhập</h1></div></div>
-     ${n?'':`<div class="notice" style="margin-top:14px">Máy này chưa có tài khoản nào. Bố mẹ hãy vào <b>Góc phụ huynh</b> để tạo tài khoản cho con.</div>`}
-     <form id="loginForm" class="form" autocomplete="on" novalidate>
-       <div class="field"><label for="lu">Tên đăng nhập</label><input type="text" id="lu" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="16" required></div>
-       <div class="field"><label for="lp">Mật khẩu</label><div class="pwrow"><input type="password" id="lp" autocomplete="current-password" maxlength="40" required><button type="button" class="btn sm white" id="showPw">Hiện</button></div></div>
-       <label class="check"><input type="checkbox" id="lr" checked> Ghi nhớ đăng nhập trên máy này</label>
-       <div id="lerr" class="notice warn" hidden></div>
-       <button class="btn" type="submit" id="lbtn">Đăng nhập</button>
-     </form>
-     <div class="row" style="margin-top:16px;justify-content:space-between">
-       <button class="btn sm white" id="guest">Chơi thử không cần tài khoản</button>
-       <button class="btn sm white" id="toParent">Quên mật khẩu? Nhờ phụ huynh</button>
-     </div>
-   </section>
-  </div></div>`;
-  $('#showPw').onclick=()=>{const p=$('#lp');p.type=p.type==='password'?'text':'password';$('#showPw').textContent=p.type==='password'?'Hiện':'Ẩn'};
-  $('#guest').onclick=()=>go('home');
-  $('#toParent').onclick=()=>go('parent');
-  $('#lu').focus();
-  $('#loginForm').onsubmit=async e=>{e.preventDefault();
-    const err=m=>{const x=$('#lerr');x.textContent=m;x.hidden=!m};
-    if(Date.now()<LOGIN_LOCK){err(`Em đã nhập sai nhiều lần. Hãy thử lại sau ${Math.ceil((LOGIN_LOCK-Date.now())/1000)} giây.`);return}
-    const u=$('#lu').value.trim().toLowerCase(), p=$('#lp').value;
-    if(!u||!p){err('Hãy nhập cả tên đăng nhập và mật khẩu.');return}
-    $('#lbtn').disabled=true;$('#lbtn').textContent='Đang kiểm tra…';
-    const acc=ACC.users[u]; const ok=acc&&(await hashPw(p,acc.salt))===acc.hash;
-    if(!ok){LOGIN_FAILS++;if(LOGIN_FAILS>=5){LOGIN_LOCK=Date.now()+30000;LOGIN_FAILS=0}
-      $('#lbtn').disabled=false;$('#lbtn').textContent='Đăng nhập';SFX.bad();
-      err('Tên đăng nhập hoặc mật khẩu chưa đúng. Kiểm tra lại chữ thường, dấu gạch ngang và chữ số nhé.');return}
-    LOGIN_FAILS=0;setSession(u,$('#lr').checked);SFX.ok();go('home');
-  };
-}
-
-/* ===================== GÓC PHỤ HUYNH ===================== */
-let PSTATE={card:null,del:null,forgot:false,pinChange:false};
-function credCard(c){return `<div class="cred" aria-live="polite"><p class="eyebrow">${c.title}</p>
-  <div class="credrow"><span>Tên đăng nhập</span><code>${esc(c.u)}</code></div>
-  <div class="credrow"><span>Mật khẩu</span><code>${esc(c.p)}</code></div>
-  <div class="row" style="margin-top:10px"><button class="btn sm" id="copyCred">Sao chép</button><button class="btn sm white" id="closeCred">Đã ghi lại</button><span id="copyMsg" class="muted" style="font-weight:700"></span></div>
-  <p class="muted" style="font-size:.85rem;font-weight:600;margin-top:8px">Hãy ghi lại ngay. Vì lý do an toàn, mật khẩu sẽ không hiển thị lại. Nếu quên, bố mẹ có thể đặt lại.</p></div>`}
-function renderParent(){
-  const R=()=>renderParent();
-  const shell=inner=>{app().innerHTML=`<div class="wrap screen"><div class="authwrap" style="max-width:${PARENT_OK?'980px':'560px'}">
-    <div class="row" style="justify-content:space-between"><div><p class="eyebrow">Dành cho bố mẹ</p><h1 style="font-size:clamp(1.7rem,4vw,2.2rem)">Góc phụ huynh</h1></div><button class="btn sm white" id="back">Về bản đồ</button></div>${inner}</div></div>`;
-    $('#back').onclick=()=>go('home')};
-  const errBox='<div id="perr" class="notice warn" hidden></div>';
-  const perr=m=>{const x=$('#perr');if(x){x.textContent=m;x.hidden=!m}};
-  // 1) chưa có PIN
-  if(!ACC.parent){
-    shell(`<section class="panel"><h2 style="font-size:1.3rem">Tạo mã PIN phụ huynh</h2>
-      <p class="muted" style="font-weight:600;margin-top:6px">Mã PIN giúp chỉ bố mẹ mới tạo, đặt lại mật khẩu hoặc xóa tài khoản của con. Dùng 4–8 chữ số, đừng chia sẻ với con.</p>
-      <form id="pinForm" class="form" novalidate>
-        <div class="field"><label for="pin1">Mã PIN mới</label><input type="password" id="pin1" inputmode="numeric" autocomplete="new-password" maxlength="8"></div>
-        <div class="field"><label for="pin2">Nhập lại mã PIN</label><input type="password" id="pin2" inputmode="numeric" autocomplete="new-password" maxlength="8"></div>
-        ${errBox}<button class="btn" type="submit">Lưu mã PIN</button></form></section>`);
-    $('#pin1').focus();
-    $('#pinForm').onsubmit=async e=>{e.preventDefault();const a=$('#pin1').value,b=$('#pin2').value;
-      if(!/^\d{4,8}$/.test(a)){perr('Mã PIN cần 4–8 chữ số.');return}
-      if(a!==b){perr('Hai lần nhập mã PIN chưa khớp.');return}
-      const salt=newSalt();ACC.parent={salt,hash:await hashPw(a,salt)};saveAcc();PARENT_OK=true;R()};
-    return;
-  }
-  // 2) đã có PIN, chưa mở khóa
-  if(!PARENT_OK){
-    shell(`<section class="panel"><h2 style="font-size:1.3rem">Nhập mã PIN phụ huynh</h2>
-      <form id="pinForm" class="form" novalidate>
-        <div class="field"><label for="pin">Mã PIN</label><input type="password" id="pin" inputmode="numeric" autocomplete="current-password" maxlength="8"></div>
-        ${errBox}<button class="btn" type="submit">Mở Góc phụ huynh</button></form>
-      <div style="margin-top:16px">${PSTATE.forgot?`<div class="notice warn" style="display:grid;gap:10px">Máy không thể khôi phục mã PIN đã quên. Cách duy nhất là xóa mã PIN cùng <b>toàn bộ ${Object.keys(ACC.users).length} tài khoản</b> trên máy này rồi tạo lại từ đầu.
-        <div class="row"><button class="btn sm peach" id="wipe">Xóa mã PIN và mọi tài khoản</button><button class="btn sm white" id="noWipe">Giữ nguyên</button></div></div>`
-        :`<button class="btn sm white" id="forgot">Quên mã PIN?</button>`}</div></section>`);
-    $('#pin').focus();
-    $('#pinForm').onsubmit=async e=>{e.preventDefault();
-      if(Date.now()<LOGIN_LOCK){perr(`Nhập sai nhiều lần. Thử lại sau ${Math.ceil((LOGIN_LOCK-Date.now())/1000)} giây.`);return}
-      const ok=(await hashPw($('#pin').value,ACC.parent.salt))===ACC.parent.hash;
-      if(!ok){LOGIN_FAILS++;if(LOGIN_FAILS>=5){LOGIN_LOCK=Date.now()+30000;LOGIN_FAILS=0}perr('Mã PIN chưa đúng.');return}
-      LOGIN_FAILS=0;PARENT_OK=true;R()};
-    const on=(id,f)=>{const x=$('#'+id);if(x)x.onclick=f};
-    on('forgot',()=>{PSTATE.forgot=true;R()});on('noWipe',()=>{PSTATE.forgot=false;R()});
-    on('wipe',()=>{ACC={parent:null,users:{}};saveAcc();setSession(null);PSTATE.forgot=false;R()});
-    return;
-  }
-  // 3) bảng điều khiển
-  const users=Object.entries(ACC.users).sort((a,b)=>a[1].createdAt-b[1].createdAt);
-  const guestHas=(store.get('profile',null)||{}).games>0;
-  const d=t=>t?new Date(t).toLocaleDateString('vi-VN'):'chưa chơi';
-  shell(`
-   ${PSTATE.card?credCard(PSTATE.card):''}
-   <div class="pgrid">
-    <section class="panel">
-      <h2 style="font-size:1.3rem">Tạo tài khoản cho con</h2>
-      <form id="newForm" class="form" novalidate>
-        <div class="field"><label for="nu">Tên đăng nhập</label><div class="pwrow"><input type="text" id="nu" autocapitalize="none" spellcheck="false" maxlength="16" value="${genUser()}"><button type="button" class="btn sm white" id="sugU">Gợi ý khác</button></div>
-          <small class="muted hint">3–16 ký tự: chữ thường không dấu, số, dấu gạch dưới. Không dùng tên thật hay ngày sinh.</small></div>
-        <div class="field"><label for="nn">Biệt danh hiển thị</label><input type="text" id="nn" maxlength="16" placeholder="Ví dụ: Cú Nhỏ"></div>
-        <div class="field"><label for="np">Mật khẩu</label><div class="pwrow"><input type="text" id="np" maxlength="40" value="${genPass()}" spellcheck="false" autocomplete="new-password"><button type="button" class="btn sm white" id="sugP">Tạo mật khẩu khác</button></div>
-          <small class="muted hint">Ít nhất 6 ký tự. Mật khẩu gợi ý dễ nhớ cho trẻ, có thể tự sửa.</small></div>
-        ${guestHas?'<label class="check"><input type="checkbox" id="ng"> Chuyển tiến trình chơi khách hiện có vào tài khoản này</label>':''}
-        ${errBox}
-        <button class="btn" type="submit">Tạo tài khoản</button>
-      </form>
-    </section>
-    <section class="panel">
-      <div class="row" style="justify-content:space-between"><h2 style="font-size:1.3rem">Tài khoản trên máy này (${users.length})</h2></div>
-      ${users.length?`<div class="acclist">${users.map(([u,a])=>{const P=a.profile,acc=P.answered?Math.round(P.correct/P.answered*100):0;return `<article class="acc">
-        ${avatarSVG(P.av)}
-        <div class="accinfo"><b>${esc(P.nick)}</b><code>${esc(u)}</code>
-          <span class="muted">Cấp ${level(P.xp)} · ${fmt(P.answered)} câu · đúng ${acc}% · ${P.badges.length} huy hiệu</span>
-          <span class="muted">Tạo ${d(a.createdAt)} · chơi gần nhất ${d(a.lastPlayed)}</span></div>
-        <div class="accact">${PSTATE.del===u?`<span style="font-weight:800">Xóa vĩnh viễn?</span><button class="btn sm peach" data-delyes="${u}">Xóa</button><button class="btn sm white" data-delno="1">Không</button>`
-          :`<button class="btn sm white" data-reset="${u}">Đặt lại mật khẩu</button><button class="btn sm white" data-del="${u}">Xóa</button>`}</div>
-      </article>`}).join('')}</div>`:'<p class="muted" style="font-weight:700;margin-top:10px">Chưa có tài khoản nào. Tạo tài khoản đầu tiên ở khung bên cạnh.</p>'}
-    </section>
-   </div>
-   <section class="panel">
-     <h2 style="font-size:1.1rem">Bảo mật & quyền riêng tư</h2>
-     <ul class="plist">
-       <li>Tài khoản và tiến trình chỉ lưu trong trình duyệt của máy này, không gửi lên máy chủ nào. Trên máy hoặc trình duyệt khác cần tạo lại tài khoản.</li>
-       <li>Mật khẩu và mã PIN được mã hóa một chiều; ngay cả bố mẹ cũng không xem lại được, chỉ đặt lại được.</li>
-       <li>Xóa dữ liệu trình duyệt sẽ xóa luôn các tài khoản này.</li>
-     </ul>
-     <div class="row" style="margin-top:12px">
-       ${PSTATE.pinChange?`<form id="pinChg" class="row" novalidate><div class="field"><label for="pc1">Mã PIN mới (4–8 số)</label><input type="password" id="pc1" inputmode="numeric" maxlength="8"></div><button class="btn sm" type="submit">Lưu</button><button class="btn sm white" type="button" id="pcNo">Hủy</button></form>`
-       :'<button class="btn sm white" id="pinChange">Đổi mã PIN</button>'}
-       <button class="btn sm lav" id="lockP">Khóa Góc phụ huynh</button>
-     </div>
-   </section>`);
-  const on=(id,f)=>{const x=$('#'+id);if(x)x.onclick=f};
-  on('sugU',()=>{$('#nu').value=genUser()});
-  on('sugP',()=>{$('#np').value=genPass()});
-  on('closeCred',()=>{PSTATE.card=null;R()});
-  on('copyCred',async()=>{const c=PSTATE.card;const t=`Ai là triệu phú Chibi\nTên đăng nhập: ${c.u}\nMật khẩu: ${c.p}`;
-    try{await navigator.clipboard.writeText(t);$('#copyMsg').textContent='Đã sao chép'}catch(e){$('#copyMsg').textContent='Không sao chép được, hãy chép tay'}});
-  on('lockP',()=>{PARENT_OK=false;PSTATE={card:null,del:null,forgot:false,pinChange:false};go('home')});
-  on('pinChange',()=>{PSTATE.pinChange=true;R()});
-  on('pcNo',()=>{PSTATE.pinChange=false;R()});
-  const pc=$('#pinChg');if(pc)pc.onsubmit=async e=>{e.preventDefault();const v=$('#pc1').value;if(!/^\d{4,8}$/.test(v)){$('#pc1').focus();return}
-    const salt=newSalt();ACC.parent={salt,hash:await hashPw(v,salt)};saveAcc();PSTATE.pinChange=false;R()};
-  app().querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{PSTATE.del=b.dataset.del;R()});
-  app().querySelectorAll('[data-delno]').forEach(b=>b.onclick=()=>{PSTATE.del=null;R()});
-  app().querySelectorAll('[data-delyes]').forEach(b=>b.onclick=()=>{const u=b.dataset.delyes;delete ACC.users[u];saveAcc();if(CUR===u)setSession(null);PSTATE.del=null;R()});
-  app().querySelectorAll('[data-reset]').forEach(b=>b.onclick=async()=>{const u=b.dataset.reset,p=genPass(),salt=newSalt();
-    ACC.users[u].salt=salt;ACC.users[u].hash=await hashPw(p,salt);saveAcc();PSTATE.card={title:'Mật khẩu mới đã được đặt',u,p};R();window.scrollTo({top:0})});
-  $('#newForm').onsubmit=async e=>{e.preventDefault();
-    const u=$('#nu').value.trim().toLowerCase(), p=$('#np').value, nick=$('#nn').value.trim();
-    if(!USER_RE.test(u)){perr('Tên đăng nhập cần 3–16 ký tự gồm chữ thường không dấu, số hoặc dấu gạch dưới.');return}
-    if(ACC.users[u]){perr('Tên đăng nhập này đã có trên máy. Hãy chọn tên khác.');return}
-    if(p.length<6){perr('Mật khẩu cần ít nhất 6 ký tự.');return}
-    const salt=newSalt();
-    let prof=NEWPROFILE();
-    if($('#ng')&&$('#ng').checked){prof=store.get('profile',null)||prof;store.set('profile',NEWPROFILE())}
-    if(nick)prof.nick=nick; else if(prof.nick==='Nhà thám hiểm')prof.nick=u;
-    ACC.users[u]={salt,hash:await hashPw(p,salt),profile:prof,createdAt:Date.now(),lastPlayed:0};saveAcc();
-    if(!CUR)loadProfile();
-    PSTATE.card={title:'Đã tạo tài khoản',u,p};SFX.ok();R();window.scrollTo({top:0})};
 }
 
 function renderFoot(){
@@ -1467,11 +1530,12 @@ function renderFoot(){
 }
 
 /* ===================== global controls ===================== */
-function applyPref(){document.documentElement.classList.toggle('rm',PREF.rm);$('#soundBtn').setAttribute('aria-pressed',PREF.sound);$('#soundBtn').textContent=PREF.sound?'Âm thanh: bật':'Âm thanh: tắt';$('#motionBtn').setAttribute('aria-pressed',PREF.rm);store.set('pref',PREF)}
+function applyPref(){document.documentElement.classList.toggle('rm',PREF.rm);$('#soundBtn').setAttribute('aria-pressed',PREF.sound);$('#soundBtn').innerHTML=(PREF.sound?ICO.soundOn:ICO.soundOff)+`<span class="lbl">${PREF.sound?'Âm thanh bật':'Âm thanh tắt'}</span>`;$('#soundBtn').setAttribute('aria-label',PREF.sound?'Tắt âm thanh':'Bật âm thanh');$('#motionBtn').setAttribute('aria-pressed',PREF.rm);$('#motionBtn').innerHTML=(PREF.rm?ICO.still:ICO.motion)+`<span class="lbl">${PREF.rm?'Đã giảm chuyển động':'Giảm chuyển động'}</span>`;$('#motionBtn').setAttribute('aria-label',PREF.rm?'Bật lại chuyển động':'Giảm chuyển động');store.set('pref',PREF)}
 $('#soundBtn').onclick=()=>{PREF.sound=!PREF.sound;applyPref();SFX.tap()};
 $('#motionBtn').onclick=()=>{PREF.rm=!PREF.rm;applyPref()};
 $('#logoBtn').onclick=()=>{if(G){stopTimer();G=null}go('home')};
-document.querySelectorAll('.nav [data-go]').forEach(b=>b.onclick=()=>{if(G){stopTimer();G=null}go(b.dataset.go)});
+document.querySelectorAll('.nav [data-go],.tabbar [data-go]').forEach(b=>b.onclick=()=>{if(G){stopTimer();G=null}go(b.dataset.go)});
+document.querySelectorAll('[data-ico]').forEach(e=>e.innerHTML=ICO[e.dataset.ico]);
 document.addEventListener('keydown',e=>{
   if(screen!=='play'||!G||e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;
   const k=e.key.toUpperCase();const map={A:0,B:1,C:2,D:3,'1':0,'2':1,'3':2,'4':3};
@@ -1479,8 +1543,7 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='Enter'){const n=$('#next')||$('#lock');if(n&&!n.disabled&&document.activeElement!==n){n.click();e.preventDefault()}}
 });
 applyPref();
-if(CLOUD){const pb=document.querySelector('.nav [data-go="parent"]');if(pb)pb.hidden=true}
-Promise.all([loadData(),initCloud()]).then(()=>{DATA_READY=true;go(RECOVERY?'reset':'home')}).catch(e=>{app().innerHTML=`<div class="wrap screen"><div class="notice warn">Không tải được dữ liệu câu hỏi: ${esc(e.message)}</div></div>`});
+Promise.all([loadData(),initAuth()]).then(()=>{DATA_READY=true;go(RECOVERY?'reset':'home')}).catch(e=>{app().innerHTML=`<div class="wrap screen"><div class="notice warn">Không tải được dữ liệu câu hỏi: ${esc(e.message)}</div></div>`});
 </script>
 
 </body>
