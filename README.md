@@ -8,7 +8,7 @@ HTML/CSS/JS thuần, không cần build. Đăng nhập bằng email + mật kh�
 ```
 index.html            Toàn bộ giao diện + logic game
 config.js             ← CHỈ CẦN SỬA FILE NÀY: URL và anon key của Supabase
-data/                 11 ngân hàng câu hỏi JSON (01_… đến 11_…)
+data/                 28 ngân hàng câu hỏi JSON (01_… đến 28_…)
 supabase/schema.sql   Bảng profiles + chính sách bảo mật (RLS), chạy 1 lần
 README.md
 ```
@@ -84,12 +84,48 @@ Khi dùng thật, vào **Project Settings → Authentication → SMTP Settings**
 - Vẫn có **“Chơi thử không cần tài khoản”**.
 
 Khi `config.js` để trống (ví dụ bản xem trước trên Claude), website tự chuyển sang **chế độ tài khoản trên thiết bị**:
-Góc phụ huynh có mã PIN, bố mẹ tạo tên đăng nhập + mật khẩu cho con, đặt lại mật khẩu thủ công; không gửi email,
-không đồng bộ giữa các máy.
+giao diện tạo tài khoản / đăng nhập bằng email giống hệt, nhưng tài khoản chỉ lưu trong trình duyệt của máy đó
+(mật khẩu được băm PBKDF2), không gửi email, không lấy lại mật khẩu qua email, không đồng bộ giữa các máy.
+
+Nếu chưa cài SMTP riêng, Supabase chỉ gửi email tới địa chỉ thuộc tổ chức Supabase của bạn. Khi đó có thể tắt
+**Authentication → Sign In / Providers → Email → Confirm email** để tạo tài khoản xong là vào được ngay.
 
 Xóa hẳn một tài khoản: Supabase → **Authentication → Users** → chọn → Delete (hồ sơ tự xóa theo, nhờ `on delete cascade`).
 
 ---
+
+
+## Ngôn ngữ (Tiếng Việt / English / 中文) và giọng đọc
+
+- Nút **⚙ VI / EN / 中** trên thanh trên cùng mở bảng Cài đặt: chọn ngôn ngữ, bật/tắt **đọc câu hỏi và đáp án**,
+  tốc độ đọc, âm thanh hiệu ứng, giảm chuyển động. Lựa chọn được nhớ trên máy.
+- Toàn bộ giao diện, nút bấm, lời MC, huy hiệu, tên chủ đề đã có đủ 3 thứ tiếng (bảng `I18N` trong `index.html`).
+- **Giọng đọc** dùng giọng có sẵn của điện thoại/máy tính (Web Speech API): MC đọc “Câu hỏi số…, trị giá…”, đọc câu hỏi,
+  lần lượt từng đáp án (đáp án đang đọc được tô sáng), sau khi chốt thì công bố đáp án đúng; có nút “Nghe giải thích”.
+  Nếu máy thiếu giọng tiếng Việt/Trung, bảng Cài đặt sẽ báo; cài thêm trong phần Ngôn ngữ & giọng nói của máy.
+
+### Thêm bản dịch câu hỏi
+
+Đặt file dịch vào `data/en/` (tiếng Anh) và `data/zh/` (tiếng Trung), **cùng tên file** với bản tiếng Việt:
+
+```
+data/en/01_Lich_su_chau_Au.json
+data/zh/01_Lich_su_chau_Au.json
+```
+
+Mỗi câu giữ **nguyên `id`** và **nguyên thứ tự 4 phương án** (A/B/C/D) như bản tiếng Việt, vì đáp án đúng luôn lấy theo bản tiếng Việt:
+
+```json
+[
+  {"id":"LSCA-001","cau_hoi":"In which country is ancient Rome located today?",
+   "A":"France","B":"Greece","C":"Spain","D":"Italy",
+   "giai_thich":"Rome is the capital of Italy today..."}
+]
+```
+
+- Có thể dịch dần từng chủ đề, thậm chí từng phần của một chủ đề: câu nào chưa có bản dịch sẽ hiện tiếng Việt
+  kèm nhãn “Câu hỏi này chưa có bản dịch”, và được đọc bằng giọng tiếng Việt.
+- Không cần sửa code: website tự tìm file trong `data/en/` và `data/zh/` khi người chơi chọn ngôn ngữ đó.
 
 ## Chạy thử trên máy
 
@@ -102,7 +138,8 @@ python3 -m http.server 8000
 ## Thêm hoặc thay ngân hàng câu hỏi
 
 1. Đặt tệp vào `data/` đúng tên như cấu hình, ví dụ `data/05_The_gioi_co_dai.json`.
-2. Danh sách chủ đề là hằng `TOPICS` trong `index.html`; thêm chủ đề = thêm một dòng `{file, name, place, icon, bg}`.
+2. Danh sách chủ đề là hằng `TOPICS` trong `index.html`; thêm chủ đề = thêm một dòng `{file, name, field, place, icon, bg}`.
+   `field` là một trong 7 lĩnh vực của hằng `FIELDS` (Lịch sử, Địa lý, Sinh học, Khoa học, Văn hóa, Nghệ thuật, Thể thao); bản đồ tự nhóm theo lĩnh vực.
 3. Tệp thiếu hoặc rỗng tự hiện “Sắp mở khóa”.
 
 Mỗi bản ghi: `id, chu_de, linh_vuc, muc_do, cau_hoi, A, B, C, D, dap_an, giai_thich`.
